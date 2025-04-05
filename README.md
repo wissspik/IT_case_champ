@@ -1,92 +1,70 @@
-# 🛠 **Задачи для команды** - **Gazprom-Tex**
+# Getting Started with Create React App
 
-## 👨‍💻 **Задачи для Артура:**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-1. **Разработать концепцию парсинга**
-   - Создать архитектуру парсера данных.
-   - Определить формат входных данных и способы их обработки.
+## Available Scripts
 
-2. **Интеграция с бэком**
-   - Настроить взаимодействие фронта с сервером.
-   - Обеспечить корректную передачу данных и взаимодействие через API.
+In the project directory, you can run:
 
-3. **Стратегия выгодных условий**
-   - Разработать алгоритм для выявления выгодных условий.
-   - Внедрить логику расчёта выгодности условий для разных вариантов.
+### `npm start`
 
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## 👨‍💻 **Задачи для Руслана:**
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-1. **Разработать API для расчета комиссии**
-   - Написать API для вычисления комиссионных сборов.
+### `npm test`
 
-2. **Сервер на FastAPI**
-   - Настроить сервер на FastAPI для быстрой обработки запросов.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-3. **Написать эндпоинт**
-   - Разработать необходимые эндпоинты для расчета комиссии.
+### `npm run build`
 
-4. **Интегрировать с нейросетью для расчета комиссии**
-   - Подключить нейросеть для более точных и умных расчетов.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-5. **Реализовать обработку запросов**
-   - Обработать входящие запросы и возвращать корректные ответы.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-6. **Валидировать входные данные**
-   - Провести проверку данных перед обработкой.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-7. **Обрабатывать ошибки**
-   - Реализовать обработку ошибок для повышения надежности.
+### `npm run eject`
 
-8. **Настроить работу с моделью**
-   - Подключить и настроить модель для работы с нейросетью.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-9. **Подгрузить обученную нейросеть**
-   - Подключить обученную модель для расчетов.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-10. **Оптимизировать вычисления**
-    - Повысить скорость вычислений и оптимизировать ресурсы.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-11. **Добавить логирование и мониторинг**
-    - Записывать логи запросов API.
-    - Настроить метрики для мониторинга.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-12. **Хранить историю расчетов**
-    - Реализовать хранение истории вычислений.
+## Learn More
 
-13. **Хранить актуальные комиссии для банков**
-    - Сохранить актуальные данные по комиссиям для различных банков.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
----
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## 👨‍💻 **Задачи для Дениса:**
+### Code Splitting
 
-1. **Создать интерфейс для расчета комиссии**
-   - Разработать UI для ввода данных и отображения результата.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-2. **Интеграция нейросети в веб**
-   - Интегрировать нейросеть в веб-приложение для расчетов.
+### Analyzing the Bundle Size
 
-3. **Отображение рассчитанной комиссии**
-   - Выводить информацию о комиссии после расчета.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-4. **Настроить взаимодействие с API**
-   - Реализовать интеграцию с сервером через API.
+### Making a Progressive Web App
 
-5. **Отправлять запрос на бэкенд**
-   - Настроить отправку запросов на сервер для расчета.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-6. **Обрабатывать ответы и ошибки**
-   - Реализовать обработку ответов от API и ошибки.
+### Advanced Configuration
 
-7. **Реализовать адаптивность**
-   - Сделать интерфейс адаптивным для мобильных и десктопных устройств.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-8. **Сделать интерфейс удобным для мобильных и десктопов**
-   - Обеспечить корректное отображение интерфейса на всех устройствах.
+### Deployment
 
-9. **Добавить валидацию формы**
-   - Реализовать проверку введенных данных в форму.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
----
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

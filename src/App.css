@@ -1,0 +1,43 @@
+
+.Header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu {
+    font-family: "Gilroy", sans-serif;
+    font-size: 19px;
+    font-weight: 450;
+    display: flex;
+    padding: 0px 60px;
+    gap: 20px;
+}
+
+.Textformain {
+
+}
+
+.App-main {
+    min-height: 100vh;
+    padding-top: 300px;
+    text-align: center;
+    font-family: 'Gilroy-light', sans-serif;
+    font-weight: 50;
+    font-size: 50px;
+}
+.forma{
+    margin-top:40px;
+    width: 670px;
+    height: 100px;
+    border: 2px solid #3498db;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+
