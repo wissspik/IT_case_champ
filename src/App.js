@@ -5,15 +5,40 @@ import Header from './components/Header';
 
 function App() {
     const [message, setMessage] = useState('');
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+    if (!message.trim()) return;
+
+    try {
+        const response = await fetch("http://localhost:5000/api/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Ошибка при отправке сообщения");
+        }
+
+        const data = await response.json();
+        alert(`Ответ сервера: ${data.response}`);
+
+    } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Не удалось отправить сообщение.");
+    }
         event.preventDefault(); // Предотвращает перезагрузку страницы при отправке формы
-        alert(`Чо ты написал: ${message}`);
+        alert(`Что же ты написал ты написал: ${message}`);
     };
+
     return (
         <>
             <Header/>
-            <div className={'App-main text-center'}>
-                <span>Чем я могу помочь?</span>
+            <div className={'App-main'}>
+                <span className={'txt'}>Чем я могу помочь?</span>
                 <div className={''}>
                     <form onSubmit={handleSubmit}>
                         <div>
@@ -22,14 +47,10 @@ function App() {
                                        placeholder={'Введите ваше сообщение'}
                                 />
                             </label>
-
                         </div>
                     </form>
-
                 </div>
-
             </div>
-
         </>
 
 
