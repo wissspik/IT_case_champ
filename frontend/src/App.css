@@ -1,3 +1,4 @@
+
 .Header {
     top: 0;
     left: 0;
@@ -46,10 +47,12 @@
     font-size: 50px;
 
 }
+
 .txt {
     opacity: 80%;
 
 }
+
 .forma {
     padding-bottom: 40px;
     padding-left: 5px;
@@ -68,16 +71,78 @@
     font-family: "Gilroy-light", sans-serif;
     font-size: 23px;
 }
+
 .user {
+    text-align: right;
     font-family: "Gilroy-light", sans-serif;
     padding-top: 50px;
-    padding-left: 1300px;
-    font-size: 23px;
-
+    padding-right: 26%;
+    font-size: 21px;
 }
-.bot{
+
+.bot {
     padding-top: 5%;
     font-family: "Gilroy-light", sans-serif;
-    padding-left: 400px;
-    font-size: 23px;
+    padding-left: 30%;
+    font-size: 21px;
+    gap: 20px;
 }
+
+.forma2 {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 30%;
+    padding-bottom: 40px;
+    padding-left: 5px;
+    font-family: 'Gilroy-light', sans-serif;
+    font-size: 25px;
+    width: 850px;
+    height: 100px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    z-index: 10;
+
+}
+
+.textbot {
+    bottom: 0px;
+    text-align: center;
+    position: fixed;
+    font-family: 'Gilroy-light', sans-serif;
+}
+
+.chat-container {
+    flex: 1;
+    padding-bottom: 120px; /* Отступ под фиксированную форму */
+    overflow-y: auto; /* Включаем вертикальный скролл внутри */
+    max-height: calc(100vh - 120px); /* Ограничиваем высоту */
+}
+
+.button {
+    margin-right: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    background-color: #007bff;
+    transform: scale(1.05);
+}
+
+.button:active {
+    background-color: #004494;
+    transform: scale(0.98);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+

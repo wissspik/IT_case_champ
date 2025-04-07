@@ -16,7 +16,10 @@ export default function App() {
         <>
             <Header/>
             {submittedMessage.trim() ?
-                <Dialog yourmessage={submittedMessage}/> :
+                <>
+                    <Dialog yourmessage={submittedMessage}/>
+                </>
+                 :
                 <Start message={message} setMessage={setMessage} handleSubmit={handleSubmit}/> }
         </>
 
