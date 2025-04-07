@@ -18,7 +18,6 @@
     display: flex;
     padding: 0px 60px;
     gap: 20px
-
 }
 
 .nav-menu a {
@@ -46,15 +45,11 @@
     font-weight: 0;
     font-size: 50px;
 
-
-
 }
-
 .txt {
     opacity: 80%;
 
 }
-
 .forma {
     padding-bottom: 40px;
     padding-left: 5px;
@@ -71,5 +66,18 @@
     color: black;
     text-align: left;
     font-family: "Gilroy-light", sans-serif;
+    font-size: 23px;
+}
+.user {
+    font-family: "Gilroy-light", sans-serif;
+    padding-top: 50px;
+    padding-left: 1300px;
+    font-size: 23px;
+
+}
+.bot{
+    padding-top: 5%;
+    font-family: "Gilroy-light", sans-serif;
+    padding-left: 400px;
     font-size: 23px;
 }

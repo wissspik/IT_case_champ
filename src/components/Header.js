@@ -1,5 +1,5 @@
 import React from "react";
-function Header() {
+export default function Header() {
     return (
         <div className={'Header'}>
             <a href="https://www.gazprombank.ru/"><img src="/img/gaziz.png" alt="" width={'290'} height={'61'}/></a>
@@ -18,4 +18,3 @@ function Header() {
     );
 }
 
-export default Header;
