@@ -1,7 +1,8 @@
-from tkinter import BooleanVar
-
 from pydantic import BaseModel
 from typing_extensions import Literal
+
+class hello_message(BaseModel):
+    message: str
 
 
 class Application(BaseModel):
