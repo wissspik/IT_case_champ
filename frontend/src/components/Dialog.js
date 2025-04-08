@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Soobchenie from "./Soobchenie";
+import axios from "axios";
 
 export default function Dialog({yourmessage}) {
     const [flag, setFlag] = useState(false);
@@ -7,7 +8,6 @@ export default function Dialog({yourmessage}) {
     const [flag3, setFlag3] = useState(false);
     const [valutate, setValutate] = useState('');
     const [banker, setBank] = useState('');
-
     const [message, setMessage] = useState('');
     const [submittedMessage, setSubmittedMessage] = useState('');
     const handleSubmit = async (event) => {
@@ -40,6 +40,22 @@ export default function Dialog({yourmessage}) {
             setBank(bankik)
             setFlag3(true);
         }
+    }
+
+    const Sendtoback = async () => {
+        const data = {
+            valutate, banker, submittedMessage
+        };
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/", data, {
+                headers: {"Content-Type": "application/json"}
+            });
+
+            console.log("Успешный ответ:", response.data);
+        } catch (error) {
+            console.error("Ошибка при отправке данных:", error);
+        }
+
 
     }
 
@@ -98,6 +114,13 @@ export default function Dialog({yourmessage}) {
                 {flag3 ?
                     <>
                         <div className={'user'}>{banker}</div>
+                        <div className={'bot'}>
+                            <p>Давайте полностью проверим информацию</p>
+                            <p>Валюта :{valutate} </p>
+                            <p>Сумма :{submittedMessage}</p>
+                            <p>Банк: {banker} </p>
+                            <button className={'button'} onClick={Sendtoback}>Все верно</button>
+                        </div>
                     </> : null
                 }
 
