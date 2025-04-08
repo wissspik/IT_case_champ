@@ -37,6 +37,7 @@
 }
 
 .App-main {
+    overflow-x: hidden;
     min-height: 100vh;
     padding-top: 300px;
     text-align: center;
@@ -89,6 +90,7 @@
 }
 
 .forma2 {
+    overflow-x: hidden;
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -115,6 +117,7 @@
 }
 
 .chat-container {
+    overflow-x: hidden;
     flex: 1;
     padding-bottom: 120px; /* Отступ под фиксированную форму */
     overflow-y: auto; /* Включаем вертикальный скролл внутри */
