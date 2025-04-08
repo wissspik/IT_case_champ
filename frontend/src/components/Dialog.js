@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Soobchenie from "./Soobchenie";
 import axios from "axios";
+import Buttoni from "./Buttoni"
 
 export default function Dialog({yourmessage}) {
     const [flag, setFlag] = useState(false);
@@ -16,7 +17,7 @@ export default function Dialog({yourmessage}) {
         setMessage('');
     };
 
-    function comissia() {
+    function comissia(text) {
         if (flag) {
             console.log('Уже нажато');
         } else {
@@ -55,8 +56,6 @@ export default function Dialog({yourmessage}) {
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
         }
-
-
     }
 
     return (
@@ -66,67 +65,55 @@ export default function Dialog({yourmessage}) {
                 <div className={'user'}>
                     <p>{yourmessage}</p>
                 </div>
-                <div className={'bot'}>
-                    <p>Привет дорогой пользователь ты очень крут <br/> пожалуйста выбери одну из этих кнопочек</p>
-                    <button className={'button'} onClick={comissia}>Коммисия</button>
-                    <button className={'button'}>Обмен валюты</button>
-                    <button className={'button'}>Че то еще</button>
-                </div>
+                <Buttoni
+                    first="Привет дорогой пользователь ты очень крут"
+                    buttons={["Комиссия", "Обмен валюты", "Че-то еще"]}
+                    onClickHandler={comissia}
+                />
                 {flag ? <>
                         <div className={'user'}>Рассчитай комиссию</div>
-                        <div className={'bot'}>
-                            <p>Выбери валюту</p>
-                            <button className={'button'} onClick={() => valuta('Рубли')}>Рубли</button>
-                            <button className={'button'} onClick={() => valuta('Евро')}>Евро</button>
-                            <button className={'button'} onClick={() => valuta('Доллары')}>Доллары</button>
-
-
-                        </div>
-
-                    </>
-                    : null}
-                {flag2 ? <>
-                        <div className={'user'}>{valutate}</div>
-                        <div className={'bot'}>Напиши сумму которую ты хочешь перевести</div>
-                        <div className={'user'}>{submittedMessage}</div>
-                    </>
-                    : null}
-                {submittedMessage.trim() ?
-                    <>
-                        {!isNaN(submittedMessage) && isFinite(submittedMessage) ?
-                            <>
-                                <div className={'bot'}>
-                                    <p>Выбери банк</p>
-                                    <button className={'button'} onClick={() => bank('Сбербанк')}>Сбербанк</button>
-                                    <button className={'button'} onClick={() => bank('Т-банк')}>Т-банк</button>
-                                    <button className={'button'} onClick={() => bank('Совкомбанк')}>Совкомбанк</button>
-                                </div>
+                        <Buttoni
+                            first="Выбери валюту"
+                            buttons={["Рубли", "Евро", "Доллары"]}
+                            onClickHandler={valuta}
+                        />
+                        {flag2 ? <>
+                                <div className={'user'}>{valutate}</div>
+                                <div className={'bot'}>Напиши сумму которую ты хочешь перевести</div>
+                                <div className={'user'}>{submittedMessage}</div>
+                                {submittedMessage.trim() ?
+                                    <>
+                                        {!isNaN(submittedMessage) && isFinite(submittedMessage) && Number(submittedMessage) > 0 ?
+                                            <Buttoni
+                                                first="Выбери банк"
+                                                buttons={["Сбербанк", "Т-банк", "Совкомбанк"]}
+                                                onClickHandler={bank}
+                                            />
+                                            : <div className="bot">
+                                                <span>Ты ввел неверное число</span>
+                                            </div>
+                                        }
+                                    </>
+                                    : null
+                                }
+                                {flag3 ?
+                                    <>
+                                        <div className={'user'}>{banker}</div>
+                                        <div className={'bot'}>
+                                            <p>Давайте полностью проверим информацию</p>
+                                            <p>Валюта : {valutate} </p>
+                                            <p>Сумма : {submittedMessage}</p>
+                                            <p>Банк: {banker} </p>
+                                            <button className={'button'} onClick={Sendtoback}>Все верно</button>
+                                        </div>
+                                    </>
+                                    : null
+                                }
                             </>
-                            : <div className="bot">
-                                <span>Ты ввел не число</span>
-                            </div>
-
-                        }
+                            : null}
                     </>
-                    : null
-
-                }
-                {flag3 ?
-                    <>
-                        <div className={'user'}>{banker}</div>
-                        <div className={'bot'}>
-                            <p>Давайте полностью проверим информацию</p>
-                            <p>Валюта :{valutate} </p>
-                            <p>Сумма :{submittedMessage}</p>
-                            <p>Банк: {banker} </p>
-                            <button className={'button'} onClick={Sendtoback}>Все верно</button>
-                        </div>
-                    </> : null
-                }
-
+                    : null}
             </div>
-
-
         </>
 
 
