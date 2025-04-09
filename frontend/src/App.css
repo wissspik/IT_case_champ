@@ -1,3 +1,9 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
 
 .Header {
     top: 0;
@@ -37,7 +43,7 @@
 }
 
 .App-main {
-    overflow-x: hidden;
+    overflow: hidden;
     min-height: 100vh;
     padding-top: 300px;
     text-align: center;
@@ -117,11 +123,12 @@
 }
 
 .chat-container {
+
     overflow-x: hidden;
     flex: 1;
-    padding-bottom: 120px; /* Отступ под фиксированную форму */
-    overflow-y: auto; /* Включаем вертикальный скролл внутри */
-    max-height: calc(100vh - 120px); /* Ограничиваем высоту */
+    padding-bottom: 120px;
+    overflow-y: auto;
+    max-height: 75vh;
 }
 
 .button {

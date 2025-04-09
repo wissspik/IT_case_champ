@@ -1,21 +1,28 @@
 import React, {useState} from 'react'
-import Soobchenie from "./Soobchenie";
 import axios from "axios";
-import Buttoni from "./Buttoni"
+import Buttoni from "./Buttoni";
+import Smska from "./Smska";
+import Bot from "./Bot";
 
 export default function Dialog({yourmessage}) {
     const [flag, setFlag] = useState(false);
     const [flag2, setFlag2] = useState(false);
     const [flag3, setFlag3] = useState(false);
     const [valutate, setValutate] = useState('');
-    const [banker, setBank] = useState('');
     const [message, setMessage] = useState('');
-    const [submittedMessage, setSubmittedMessage] = useState('');
-    const handleSubmit = async (event) => {
+    const [banker, setBank] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState("");
+
+    const handleSend = async(event) => {
         event.preventDefault();
-        setSubmittedMessage(message);
-        setMessage('');
+        if (input.trim() === "") return;
+        setMessages([...messages, {text: input, sender: "user"}]);
+        setMessage(input)
+        setInput("");
+
     };
+
 
     function comissia(text) {
         if (flag) {
@@ -45,7 +52,7 @@ export default function Dialog({yourmessage}) {
 
     const Sendtoback = async () => {
         const data = {
-            valutate, banker, submittedMessage
+            valutate, banker
         };
         try {
             const response = await axios.post("http://127.0.0.1:8000/", data, {
@@ -61,7 +68,6 @@ export default function Dialog({yourmessage}) {
     return (
         <>
             <div className={'chat-container'}>
-                <Soobchenie message={message} setMessage={setMessage} handleSubmit={handleSubmit}/>
                 <div className={'user'}>
                     <p>{yourmessage}</p>
                 </div>
@@ -70,6 +76,7 @@ export default function Dialog({yourmessage}) {
                     buttons={["Комиссия", "Обмен валюты", "Че-то еще"]}
                     onClickHandler={comissia}
                 />
+                <Smska input={input} handleSend={handleSend} setInput={setInput} messages={messages} />
                 {flag ? <>
                         <div className={'user'}>Рассчитай комиссию</div>
                         <Buttoni
@@ -80,10 +87,10 @@ export default function Dialog({yourmessage}) {
                         {flag2 ? <>
                                 <div className={'user'}>{valutate}</div>
                                 <div className={'bot'}>Напиши сумму которую ты хочешь перевести</div>
-                                <div className={'user'}>{submittedMessage}</div>
-                                {submittedMessage.trim() ?
+                                <div className={'user'}>{message}</div>
+                                {message.trim() ?
                                     <>
-                                        {!isNaN(submittedMessage) && isFinite(submittedMessage) && Number(submittedMessage) > 0 ?
+                                        {!isNaN(message) && isFinite(message) && Number(message) > 0 ?
                                             <Buttoni
                                                 first="Выбери банк"
                                                 buttons={["Сбербанк", "Т-банк", "Совкомбанк"]}
@@ -102,7 +109,7 @@ export default function Dialog({yourmessage}) {
                                         <div className={'bot'}>
                                             <p>Давайте полностью проверим информацию</p>
                                             <p>Валюта : {valutate} </p>
-                                            <p>Сумма : {submittedMessage}</p>
+                                            <p>Сумма : {message}</p>
                                             <p>Банк: {banker} </p>
                                             <button className={'button'} onClick={Sendtoback}>Все верно</button>
                                         </div>
@@ -115,7 +122,5 @@ export default function Dialog({yourmessage}) {
                     : null}
             </div>
         </>
-
-
     )
 }

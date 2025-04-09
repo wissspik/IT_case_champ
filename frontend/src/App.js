@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Start from './components/Start';
 import Dialog from './components/Dialog';
 
+
 export default function App() {
     const [message, setMessage] = useState('');
     const [submittedMessage, setSubmittedMessage] = useState('');
