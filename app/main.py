@@ -1,9 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers.main_handler import app as main_handler
+from app.routers.banks import app as banks
+from app.routers.countries import app as countries
+from app.database.base import app as base_handler
 
 
 app = FastAPI()
+app.include_router(banks,tags=['banks'])
+app.include_router(countries,tags=['countries'])
+app.include_router(base_handler,tags=['base_handler'])
+
+
 
 
 origins = [ # нужно скрыть в env
@@ -17,5 +24,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-app.include_router(main_handler,tags=['main_handler'])
