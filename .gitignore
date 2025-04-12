@@ -5,7 +5,7 @@
 .pnp.js
 node_modules/.cache/
 # testing
-/coverage
+/coverageg
 
 # production
 /build

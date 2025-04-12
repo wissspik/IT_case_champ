@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.banks import app as banks
-from app.routers.countries import app as countries
+from app.routers.commision import app as countries
 from app.database.base import app as base_handler
 
 
