@@ -7,9 +7,9 @@ export default function Header() {
                 <div className={'a'}>
                     <a href={'https://www.gazprombank.ru/personal/courses/'}>Обмен валют</a>
                     <a href={'https://www.gazprombank.ru/personal/privileges/'}>Привилегии</a>
-                    <a href={'https://www.gazprombank.ru/personal/courses/'}>Инвестиции</a>
-                    <a href={'https://www.gazprombank.ru/personal/courses/'}>Вклады и счета</a>
-                    <a href={'https://www.gazprombank.ru/personal/courses/'}>Карты</a>
+                    <a href={'https://www.gazprombank.ru/personal/page/individual-investment-account-main/'}>Инвестиции</a>
+                    <a href={'https://www.gazprombank.ru/personal/increase/deposits/'}>Вклады и счета</a>
+                    <a href={'https://www.gazprombank.ru/personal/cards/'}>Карты</a>
                 </div>
             </nav>
         </div>
