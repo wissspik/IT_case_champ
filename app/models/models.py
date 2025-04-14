@@ -8,34 +8,42 @@ class Base(DeclarativeBase):
 class exchange_rates_mobile_app(Base):
     __tablename__ = 'exchange_rates_mobile_app'
     id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
 class exchange_rates_internet_bank(Base):
     __tablename__ = 'exchange_rates_internet_bank'
     id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
 class exchange_rates_office_cash(Base):
     __tablename__ = 'exchange_rates_office_cash'
     id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
 class exchange_rates_office_cashless(Base):
     __tablename__ = 'exchange_rates_office_cashless'
     id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
 class exchange_rates_cards(Base):
     __tablename__ = 'exchange_rates_cards'
     id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
-
+class countries(Base):
+    __tablename__ = 'countries'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    country:Mapped[str] = mapped_column(String,index = True,unique= True)
 
 
 '''

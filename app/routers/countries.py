@@ -58,6 +58,6 @@ async def skopka(data : Application):
             print(f"{currency_code:<10} {currency_name:<20} {str(units):<7} {str(sell_rate):<7} {str(buy_rate):<7}")
 
 
-        last_updated_info
+        last_updated_info = ...
         # сделай так,чтобы человек мог обменитьвать валюту из таблицы
 
