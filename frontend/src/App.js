@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import Header from './components/Header';
 import Start from './components/Start';
 import Dialog from './components/Dialog';
+import Startback from './components/Startbg';
 
 
 export default function App() {
@@ -20,8 +21,12 @@ export default function App() {
                 <>
                     <Dialog yourmessage={submittedMessage}/>
                 </>
-                 :
-                <Start message={message} setMessage={setMessage} handleSubmit={handleSubmit}/> }
+                : <>
+                    <Start message={message} setMessage={setMessage} handleSubmit={handleSubmit}/>
+                    <Startback/>
+                </>
+
+            }
         </>
 
 

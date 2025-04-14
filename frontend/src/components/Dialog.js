@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import axios from "axios";
 import Buttoni from "./Buttoni";
 import Smska from "./Smska";
-import Bot from "./Bot";
 
 export default function Dialog({yourmessage}) {
     const [flag, setFlag] = useState(false);
@@ -13,15 +12,6 @@ export default function Dialog({yourmessage}) {
     const [banker, setBank] = useState('');
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
-
-    const handleSend = async(event) => {
-        event.preventDefault();
-        if (input.trim() === "") return;
-        setMessages([...messages, {text: input, sender: "user"}]);
-        setMessage(input)
-        setInput("");
-
-    };
 
 
     function comissia(text) {
@@ -59,24 +49,35 @@ export default function Dialog({yourmessage}) {
                 headers: {"Content-Type": "application/json"}
             });
 
-            console.log("Успешный ответ:", response.data);
+            console.log("Успешный ответ и данные отправлены", response.data);
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
         }
-    }
 
+    }
+     const handleSend = async(event) => {
+        event.preventDefault();
+        if (input.trim() === "") return;
+        setMessages([...messages, {text: input, sender: "user"}]);
+        if (flag2) {
+            setMessage(input)
+        }
+
+        setInput("");
+
+    };
     return (
         <>
+            <img className={'fon2'} src="/img/fon2.png" alt="" />
             <div className={'chat-container'}>
                 <div className={'user'}>
                     <p>{yourmessage}</p>
                 </div>
                 <Buttoni
-                    first="Привет дорогой пользователь ты очень крут"
+                    first="Привет, с чем конкретно тебе помочь?"
                     buttons={["Комиссия", "Обмен валюты", "Че-то еще"]}
                     onClickHandler={comissia}
                 />
-                <Smska input={input} handleSend={handleSend} setInput={setInput} messages={messages} />
                 {flag ? <>
                         <div className={'user'}>Рассчитай комиссию</div>
                         <Buttoni
@@ -120,6 +121,7 @@ export default function Dialog({yourmessage}) {
                             : null}
                     </>
                     : null}
+                <Smska input={input} handleSend={handleSend} setInput={setInput} messages={messages} />
             </div>
         </>
     )

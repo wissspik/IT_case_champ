@@ -52,7 +52,6 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 0;
     font-size: 50px;
-
 }
 
 .txt {
@@ -61,12 +60,13 @@ html, body {
 }
 
 .forma {
+    background-color: #E8E8E8;
     padding-bottom: 40px;
     padding-left: 5px;
     font-family: 'Gilroy-light', sans-serif;
     font-size: 25px;
-    margin-top: 45px;
-    width: 700px;
+    margin-top: 50px;
+    width: 650px;
     height: 130px;
     border-radius: 20px;
     box-sizing: border-box;
@@ -74,7 +74,7 @@ html, body {
 
 .forma::placeholder {
     color: black;
-    text-align: left;
+    text-align: center;
     font-family: "Gilroy-light", sans-serif;
     font-size: 23px;
 }
@@ -123,7 +123,6 @@ html, body {
 }
 
 .chat-container {
-
     overflow-x: hidden;
     flex: 1;
     padding-bottom: 120px;
@@ -156,3 +155,58 @@ html, body {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.line1 {
+    position: fixed;
+    top: 5px;
+    right: 220px;
+}
+
+.line2 {
+    position: fixed;
+    left: 450px;
+    top: 60%;
+}
+
+.card1 {
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    position: fixed;
+    right: 0px;
+    top: 120px
+}
+
+.card2 {
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    position: fixed;
+    right: 0px;
+    top: 450px
+}
+
+.card3 {
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    position: fixed;
+    left: 0px;
+    top: 185px
+}
+
+.card4 {
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    position: fixed;
+    left: 0px;
+    top: 490px
+}
+
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover {
+    transform: scale(1.1) rotate(-15deg);
+}
+.fon2{
+    position: fixed;
+    left: 20px;
+    top: 250px;
+}
