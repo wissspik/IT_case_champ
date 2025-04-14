@@ -68,6 +68,7 @@ export default function Dialog({yourmessage}) {
     };
     return (
         <>
+            <img className={'fon2'} src="/img/fon2.png" alt="" />
             <div className={'chat-container'}>
                 <div className={'user'}>
                     <p>{yourmessage}</p>
