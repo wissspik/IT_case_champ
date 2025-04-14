@@ -4,14 +4,38 @@ from sqlalchemy import Integer, String, ForeignKey
 
 class Base(DeclarativeBase):
     pass
-
-class point_countris(Base):
-    __tablename__ = 'point_countries'
+# 1)'exchange_rates_mobile_app' 2)'exchange_rates_internet_bank' 3)'exchange_rates_office_cash' 4)exchange_rates_office_cashless 5)exchange_rates_cards
+class exchange_rates_mobile_app(Base):
+    __tablename__ = 'exchange_rates_mobile_app'
     id: Mapped[int] = mapped_column(primary_key=True)
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
-    hh: Mapped[float]
+class exchange_rates_internet_bank(Base):
+    __tablename__ = 'exchange_rates_internet_bank'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    currency: Mapped[str]
+    buy:Mapped[float]
+    sell:Mapped[float]
+class exchange_rates_office_cash(Base):
+    __tablename__ = 'exchange_rates_office_cash'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    currency: Mapped[str]
+    buy:Mapped[float]
+    sell:Mapped[float]
+class exchange_rates_office_cashless(Base):
+    __tablename__ = 'exchange_rates_office_cashless'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    currency: Mapped[str]
+    buy:Mapped[float]
+    sell:Mapped[float]
+class exchange_rates_cards(Base):
+    __tablename__ = 'exchange_rates_cards'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    currency: Mapped[str]
+    buy:Mapped[float]
+    sell:Mapped[float]
+
 
 
 '''
