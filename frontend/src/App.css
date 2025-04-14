@@ -52,7 +52,6 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 0;
     font-size: 50px;
-
 }
 
 .txt {
@@ -61,12 +60,13 @@ html, body {
 }
 
 .forma {
+    background-color: #E8E8E8;
     padding-bottom: 40px;
     padding-left: 5px;
     font-family: 'Gilroy-light', sans-serif;
     font-size: 25px;
-    margin-top: 45px;
-    width: 700px;
+    margin-top: 50px;
+    width: 650px;
     height: 130px;
     border-radius: 20px;
     box-sizing: border-box;
@@ -74,7 +74,7 @@ html, body {
 
 .forma::placeholder {
     color: black;
-    text-align: left;
+    text-align: center;
     font-family: "Gilroy-light", sans-serif;
     font-size: 23px;
 }
@@ -123,7 +123,6 @@ html, body {
 }
 
 .chat-container {
-
     overflow-x: hidden;
     flex: 1;
     padding-bottom: 120px;
