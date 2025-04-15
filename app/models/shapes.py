@@ -1,9 +1,6 @@
 from pydantic import BaseModel
 from typing import Literal
 
-class hello_message(BaseModel):
-    message: str
-
 
 class Application(BaseModel):
     banker: str
@@ -13,13 +10,13 @@ class Application(BaseModel):
 
 class Countries(BaseModel):
     exchange_methods: Literal[
-        'Курсы в мобильном приложении',
-        'Курсы в интернет банке',
-        'В отделении (наличные)',
-        'В отделении (безналичные)',
-        'Конвертация по картам'
+        'exchange_rates_internet_bank',
+        'exchange_rates_mobile_app',
+        'exchange_rates_cards',
+        'exchange_rates_office_cash',
+        'exchange_rates_office_cashless'
     ]
-    amount: int
+    amount: int # тут float,но 2 числа после запятой может быть.я сделаю чуток позже
     currency_in:str
     currency_out:str
 

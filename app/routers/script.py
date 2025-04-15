@@ -1,10 +1,13 @@
 from fastapi import APIRouter
 import requests
+from datetime import datetime
 from app.database.base import SessionDep
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = APIRouter(tags=['script'])
 
 async def update_data(session:SessionDep):
+    array_methods = ['exchange_rates_mobile_app','exchange_rates_internet_bank','exchange_rates_office_cash','exchange_rates_office_cashless' ,'exchange_rates_cards']
     headers = {
         'accept': '*/*',
         'accept-language': 'ru,en;q=0.9',
@@ -18,25 +21,21 @@ async def update_data(session:SessionDep):
         'sec-fetch-site': 'same-origin',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 YaBrowser/25.2.0.0 Safari/537.36',
     }
-
     params = {
         'ab_segment': 'segment08',
         'cityId': '617',
         'version': '3',
         'lang': 'ru',
     }
-
     api_url = 'https://www.gazprombank.ru/rest/exchange/rate'
 
-    try:
-        response = requests.get(api_url, params=params, headers=headers, impersonate="chrome110")
-        response.raise_for_status()
-
-        all_exchange_data = response.json()
-
-        internet_bank_section = None
+    response = requests.get(api_url, params=params, headers=headers, impersonate="chrome110")
+    response.raise_for_status()
+    all_exchange_data = response.json()
+    internet_bank_section = None
+    for methods in array_methods:
         for section in all_exchange_data:
-            if section.get("code") == "exchange_rates_internet_bank":
+            if section.get("code") == methods:
                 internet_bank_section = section
                 break
 
@@ -53,5 +52,8 @@ async def update_data(session:SessionDep):
             buy_rate = rate_info.get('sell', 'N/A')  # Клиент покупает у банка
 
             print(f"{currency_code:<10} {currency_name:<20} {str(units):<7} {str(sell_rate):<7} {str(buy_rate):<7}")
+scheduler = BlockingScheduler()
 
-    l = 0
+
+# Добавляем задачу, которая будет выполняться каждые 10 секунд
+scheduler.add_job(update_data, 'interval', seconds=15, next_run_time=datetime.now())
