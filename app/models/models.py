@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase,declarative_base, relationship
+from sqlalchemy import String, LargeBinary, text
+from sqlalchemy import Integer, String, ForeignKey, LargeBinary
 
-from sqlalchemy import Integer, String, ForeignKey
 
 class Base(DeclarativeBase):
     pass
@@ -44,7 +45,7 @@ class countries(Base):
     __tablename__ = 'countries'
     id: Mapped[int] = mapped_column(primary_key=True)
     country:Mapped[str] = mapped_column(String,index = True,unique= True)
-
+    picture: Mapped[str] = mapped_column(String)
 
 '''
 class Banks(Base):

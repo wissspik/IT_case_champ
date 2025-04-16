@@ -6,6 +6,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = APIRouter(tags=['script'])
 
+@app.post('/script')
 async def update_data(session:SessionDep):
     array_methods = ['exchange_rates_mobile_app','exchange_rates_internet_bank','exchange_rates_office_cash','exchange_rates_office_cashless' ,'exchange_rates_cards']
     headers = {
@@ -52,8 +53,3 @@ async def update_data(session:SessionDep):
             buy_rate = rate_info.get('sell', 'N/A')  # Клиент покупает у банка
 
             print(f"{currency_code:<10} {currency_name:<20} {str(units):<7} {str(sell_rate):<7} {str(buy_rate):<7}")
-scheduler = BlockingScheduler()
-
-
-# Добавляем задачу, которая будет выполняться каждые 10 секунд
-scheduler.add_job(update_data, 'interval', seconds=15, next_run_time=datetime.now())
