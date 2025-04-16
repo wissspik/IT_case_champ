@@ -205,8 +205,16 @@ html, body {
 .card4:hover {
     transform: scale(1.1) rotate(-15deg);
 }
-.fon2{
+
+.fon2 {
     position: fixed;
     left: 20px;
     top: 250px;
+}
+.cleaning {
+    position: fixed;
+    left:1450px;
+    top: 880px;
+    width: 120px;
+    height: 50px;
 }

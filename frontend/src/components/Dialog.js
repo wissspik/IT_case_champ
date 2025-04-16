@@ -13,7 +13,6 @@ export default function Dialog({yourmessage}) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
 
-
     function comissia(text) {
         if (flag) {
             console.log('Уже нажато');
@@ -42,7 +41,7 @@ export default function Dialog({yourmessage}) {
 
     const Sendtoback = async () => {
         const data = {
-            valutate, banker
+            valutate, banker,message
         };
         try {
             const response = await axios.post("http://127.0.0.1:8000/", data, {
@@ -68,7 +67,8 @@ export default function Dialog({yourmessage}) {
     };
     return (
         <>
-            <img className={'fon2'} src="/img/fon2.png" alt="" />
+
+            <img className={'fon2'} src="/img/font2.png" alt=""/>
             <div className={'chat-container'}>
                 <div className={'user'}>
                     <p>{yourmessage}</p>
@@ -121,8 +121,10 @@ export default function Dialog({yourmessage}) {
                             : null}
                     </>
                     : null}
-                <Smska input={input} handleSend={handleSend} setInput={setInput} messages={messages} />
+
+                <Smska input={input} handleSend={handleSend} setInput={setInput} messages={messages}/>
             </div>
+            <button onClick={() => window.location.reload()} className={'cleaning'}>Очистить все нах</button>
         </>
     )
 }

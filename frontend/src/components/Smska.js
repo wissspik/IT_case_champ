@@ -23,8 +23,8 @@ export default function Chat ({input,messages,handleSend,setInput})  {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder={'Введите сообщение'}
-
                         />
+
                     </label>
                 </div>
             </form>
