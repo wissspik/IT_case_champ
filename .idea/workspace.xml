@@ -4,24 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/routers/script_service/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routers/script_service/script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routers/script_service/script_def_support.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routers/script_service/script_service.py" afterDir="false" />
+    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="Добавил формы для JSON-ов (ручек)">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/shapes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/shapes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/commision.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/commision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/script.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/countries_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/script_service/countries_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/test_service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/banks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/banks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/countries.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/script_service/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/script_service/countries_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/script_service/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/countries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/script_service/script_def_support.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/countries_def_support.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/script_service/script_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/countries_background_task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/service/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
     </list>
@@ -104,8 +101,18 @@
       <workItem from="1744768734026" duration="2608000" />
       <workItem from="1744796094589" duration="5102000" />
       <workItem from="1744962997310" duration="94000" />
-      <workItem from="1744963121406" duration="2611000" />
+      <workItem from="1744963121406" duration="6406000" />
+      <workItem from="1744969962405" duration="1475000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
+      <option name="closed" value="true" />
+      <created>1744965847545</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744965847545</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,5 +128,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавил формы для JSON-ов (ручек)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил формы для JSON-ов (ручек)" />
   </component>
 </project>

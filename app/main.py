@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.banks import app as banks
 from app.routers.commision import app as commision
 from app.database.base import app as base_handler
-from app.routers.script_service.script import app as script_handler
-from app.routers.script_service.script import app as countries
+from app.routers.countries.countries import app as script_handler
+from app.routers.countries.countries import app as countries
 from app.routers.test import app as test
 
 app = FastAPI()

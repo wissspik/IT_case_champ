@@ -1,22 +1,40 @@
 from fastapi import APIRouter
-from apscheduler.schedulers.background import BackgroundScheduler
-from app.routers.script_service.script_service import update_data
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from app.routers.countries.countries_background_task import update_data
 from decimal import Decimal, ROUND_DOWN
 from fastapi import HTTPException
 from app.models.shapes import Countries
 from app.database.base import SessionDep
 from sqlalchemy import select
-app = APIRouter(tags=['script'])
+app = APIRouter(tags=['currency'])
 
-scheduler = BackgroundScheduler()
-# Добавляем задачу: каждые 12 часов будет вызываться функция periodic_task
-scheduler.add_job(update_data, trigger='interval', seconds=30)
-# Запускаем планировщик
-scheduler.start()
+scheduler = AsyncIOScheduler()
 
+@app.on_event("startup")
+async def start_scheduler():
+    # Регистрируем задачу один раз
+    if not scheduler.get_job('update_data_job'):
+        scheduler.add_job(
+            update_data,
+            'interval',
+            seconds=15,
+            id='update_data_job',
+            replace_existing=True
+        )
+    # Запускаем только если ещё не запущен
+    if not scheduler.running:
+        scheduler.start()
+
+@app.on_event("shutdown")
+async def shutdown_scheduler():
+    if scheduler.running:
+        scheduler.shutdown()
+
+'''
+Ручка требует доработки
 @app.post("/currency_calculation")
 async def currency_calculation(data: Countries, session: SessionDep):
-    table = data.exchange_methods
+    table = data.exchange_methods.__table__
 
     async def fetch_rate(currency: str) -> tuple[Decimal, Decimal]:
         query = select(table.c.buy, table.c.sell).where(table.c.currency == currency)
@@ -46,3 +64,4 @@ async def currency_calculation(data: Countries, session: SessionDep):
 
     # округляем "вниз" до двух знаков
     return float(converted.quantize(Decimal('0.01'), rounding=ROUND_DOWN))
+'''

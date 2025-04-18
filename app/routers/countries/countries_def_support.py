@@ -71,8 +71,6 @@ def exchange_rates_office_cashless_done():
                     result.append([t, u, buy, sell])
 
                 # выводим время обновления, если нужно
-                updated = block.get('updated') or block.get('items', [{}])[0].get('rateDate')
-                if updated:
-                    print(f"Обновлено: {updated}")
+
 
     return result

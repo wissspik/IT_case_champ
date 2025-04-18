@@ -4,7 +4,7 @@ from curl_cffi import requests
 from app.models.models import exchange_rates_internet_bank, exchange_rates_office_cashless, \
     exchange_rates_office_cashless_premium, exchange_rates_cards,exchange_rates_office_cash
 from app.database.base import get_session
-from app.routers.script_service.script_def_support import exchange_rates_office_cashless_done
+from app.routers.countries.countries_def_support import exchange_rates_office_cashless_done
 
 async def update_data():
     async with get_session() as session:
@@ -96,7 +96,8 @@ async def update_data():
                 else:
                     Model = exchange_rates_office_cash
                 table_name = Model.__tablename__
-                await session.execute(text(f"TRUNCATE TABLE {table_name} "))
+                await session.execute(text(f"DELETE FROM  {table_name} "))
+                # !!! id в таблице будут увеличиватьс
                 session.add(Model(
                     quantity=quantity,
                     currency=rate_info.get("ticker", "N/A"),
