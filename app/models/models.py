@@ -45,7 +45,15 @@ class countries(Base):
     __tablename__ = 'countries'
     id: Mapped[int] = mapped_column(primary_key=True)
     country:Mapped[str] = mapped_column(String,index = True,unique= True)
-    picture: Mapped[str] = mapped_column(String)
+    picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
+
+class exchange_rates_office_cashless_premium(Base):
+    __tablename__ = 'exchange_rates_office_cashless_premium'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    quantity: Mapped[int]
+    currency: Mapped[str]
+    buy:Mapped[float]
+    sell:Mapped[float]
 
 '''
 class Banks(Base):
@@ -80,3 +88,5 @@ class Commission(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 '''
+
+

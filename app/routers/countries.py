@@ -2,8 +2,7 @@ from fastapi import APIRouter
 from app.models.shapes import Countries
 from sqlalchemy import select
 from app.database.base import SessionDep
-from app.models.models import exchange_rates_internet_bank,exchange_rates_mobile_app,exchange_rates_cards,exchange_rates_office_cash,exchange_rates_office_cashless
-from app.service.countries_service import support_in_rub,support_out_rub
+
 app = APIRouter(tags=['countries'])
 
 @app.post("/")

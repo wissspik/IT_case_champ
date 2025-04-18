@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,condecimal
 from typing import Literal
 
 
@@ -16,7 +16,7 @@ class Countries(BaseModel):
         'exchange_rates_office_cash',
         'exchange_rates_office_cashless'
     ]
-    amount: int # тут float,но 2 числа после запятой может быть.я сделаю чуток позже
+    amount: condecimal(max_digits=12, decimal_places=2)
     currency_in:str
     currency_out:str
 
