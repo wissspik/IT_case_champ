@@ -4,25 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/routers/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/service/test_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/moisha.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/moisha.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/untitled4.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/commision.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/commision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/script.py" afterDir="false" />
+    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="f">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/countries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/countries/countries_background_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/countries/countries_background_task.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/2.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/3.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/4.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/5.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/6.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
     </list>
@@ -50,7 +43,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/wissspik/avavava.git&quot;,
-    &quot;accountId&quot;: &quot;b44b8c12-2c1d-4e7d-9306-95b3548d158e&quot;
+    &quot;accountId&quot;: &quot;7350da58-a266-41c9-ab22-ab042d017757&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -76,6 +69,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\moisha\app\routers\script_service" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -99,7 +97,31 @@
       <workItem from="1744733315413" duration="1998000" />
       <workItem from="1744768734026" duration="2608000" />
       <workItem from="1744796094589" duration="5102000" />
+      <workItem from="1744962997310" duration="94000" />
+      <workItem from="1744963121406" duration="6406000" />
+      <workItem from="1744969962405" duration="1786000" />
+      <workItem from="1744972397753" duration="975000" />
+      <workItem from="1744984644072" duration="4286000" />
+      <workItem from="1745033157535" duration="1087000" />
+      <workItem from="1745034392299" duration="1054000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
+      <option name="closed" value="true" />
+      <created>1744965847545</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744965847545</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Добавил формы для JSON-ов (ручек)">
+      <option name="closed" value="true" />
+      <created>1744971450580</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744971450580</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,5 +137,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавил формы для JSON-ов (ручек)" />
+    <MESSAGE value="f" />
+    <option name="LAST_COMMIT_MESSAGE" value="f" />
   </component>
 </project>

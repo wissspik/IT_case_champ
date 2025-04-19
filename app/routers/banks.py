@@ -2,8 +2,6 @@ from  fastapi import APIRouter
 
 
 from app.database.base import SessionDep
-
-
 app = APIRouter(tags=['banks'])
 
 

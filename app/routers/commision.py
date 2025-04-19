@@ -1,3 +1,4 @@
+from curl_cffi import Session
 from fastapi import APIRouter
 from app.models.shapes import Countries
 import requests
@@ -9,9 +10,6 @@ from app.models.models import countries
 
 app = APIRouter(tags=['countries'])
 
-@app.post('/countries_handler')
-async def currency_calculation(data : Countries):
-    ...
 @app.post("/take_countries")
 async def take_countries(session: SessionDep):
     array_country,array_picture = [],[]
@@ -20,15 +18,8 @@ async def take_countries(session: SessionDep):
     for i, country in enumerate(countries_list):
         array_country.append(country.country)
         array_picture.append(country.picture)
-
     return {'country_array': array_country, 'picture_array': array_picture}
-    '''
-     stml = select(countries)
-     result = await session.execute(stml)
-     countries_list = result.scalars().all()
-     result_list = []
-     for country in countries_list:
-         result_list.append(country.country)
-         print(result_list)
-    '''
-     #return result_list
+'''
+Здесь нужно добавить ручку по
+
+'''
