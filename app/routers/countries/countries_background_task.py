@@ -97,7 +97,7 @@ async def update_data():
                     Model = exchange_rates_office_cash
                 table_name = Model.__tablename__
                 await session.execute(text(f"DELETE FROM  {table_name} "))
-                # !!! id в таблице будут увеличиватьс
+                # !!! id в таблице будут увеличиваться
                 session.add(Model(
                     quantity=quantity,
                     currency=rate_info.get("ticker", "N/A"),
