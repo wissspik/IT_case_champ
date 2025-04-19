@@ -1,0 +1,38 @@
+.faq {
+    margin-top:4vh;
+    margin-left:3vh;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    width: 260px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.faq h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #1d4ed8;
+}
+
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    margin-bottom: 12px;
+}
+
+.faq-question {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.faq-answer {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555555;
+}

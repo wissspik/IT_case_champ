@@ -1,0 +1,28 @@
+.finance-tip {
+    position: absolute;
+    margin-left: 3vh;
+    margin-top: 1vh;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 35vh;
+    font-family: sans-serif;
+}
+
+.finance-tip__title {
+    font-size: 18px;
+    color: #1a3d8f;
+    margin-bottom: 10px;
+}
+
+.finance-tip__text {
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.finance-tip:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}

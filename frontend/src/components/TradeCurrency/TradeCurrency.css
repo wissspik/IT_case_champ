@@ -1,0 +1,82 @@
+.trade-currency {
+    position: relative;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 90vh;
+    height: 45vh;
+}
+
+.dynamic-text {
+    color: #3F52B2;
+}
+
+.header-text-currency {
+    font-weight: 600;
+    margin: 1vh;
+    text-align: center;
+    color: #3F52B2;
+    font-size: 40px;
+}
+
+.trade-currency-have {
+    margin-top: 30px;
+    position: absolute;
+    width: 50%;
+    height: 80%;
+}
+
+.trade-currency-form {
+    width: 90%;
+    height: 30%;
+    margin-top: 4vh;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0, 0.3)
+}
+
+.trade-currency-form p {
+    margin: 15px;
+    font-size: 19px;
+}
+
+.trade-currency button {
+    width: 55px;
+    height: 45px;
+    background-color: white;
+    border: 1px solid rgb(0, 0, 0, 0.3)
+}
+
+.trade-currency button:hover {
+    background-color: #EFEEEE;
+
+}
+
+.trade-currency button:active {
+    background-color: #7F93F5;
+    color: white;
+
+}
+
+.trade-currency-need {
+    margin-top: 30px;
+    right: 4px;
+    position: absolute;
+    width: 50%;
+    height: 80%;
+
+}
+
+.trade-currency input {
+    font-size: 125%;
+    border: none;
+    outline: none;
+    margin-left: 8px;
+    width: 40%;
+    height: 20%;
+}
+
+button.active-button {
+    background-color: #7F93F5;
+    color: white;
+    border: none;
+    transition: background-color 0.2s ease;
+}
