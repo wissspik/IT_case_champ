@@ -1,11 +1,23 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase,declarative_base, relationship
-from sqlalchemy import String, LargeBinary, text
-from sqlalchemy import Integer, String, ForeignKey, LargeBinary
+from sqlalchemy import String, LargeBinary, text, Integer, String, ForeignKey, LargeBinary,JSON
+from typing import List
+import json
+from sqlalchemy.types import TypeDecorator, TEXT
+class JSONText(TypeDecorator):
+    impl = TEXT
 
+    def process_bind_param(self, value, dialect):
+        # Сериализуем в JSON с ensure_ascii=False, чтобы не эскейпить кириллицу
+        return json.dumps(value, ensure_ascii=False)
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return None
+        return json.loads(value)
 
 class Base(DeclarativeBase):
     pass
-# 1)'exchange_rates_mobile_app' 2)'exchange_rates_internet_bank' 3)'exchange_rates_office_cash' 4)exchange_rates_office_cashless 5)exchange_rates_cards
+#
 class exchange_rates_mobile_app(Base):
     __tablename__ = 'exchange_rates_mobile_app'
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -41,11 +53,6 @@ class exchange_rates_cards(Base):
     currency: Mapped[str]
     buy:Mapped[float]
     sell:Mapped[float]
-class countries(Base):
-    __tablename__ = 'countries'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    country:Mapped[str] = mapped_column(String,index = True,unique= True)
-    picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
 
 class exchange_rates_office_cashless_premium(Base):
     __tablename__ = 'exchange_rates_office_cashless_premium'
@@ -55,6 +62,27 @@ class exchange_rates_office_cashless_premium(Base):
     buy:Mapped[float]
     sell:Mapped[float]
 
+class countries(Base):
+    __tablename__ = 'countries'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    country:Mapped[str] = mapped_column(String,index = True,unique= True)
+    picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
+
+class servis_fitbacks(Base):
+    __tablename__ = 'servis_fitbacks'
+    id:         Mapped[int] = mapped_column(Integer,primary_key=True)
+    score:      Mapped[int] = mapped_column(Integer,nullable=True)
+    category:   Mapped[str] = mapped_column(String(255),nullable=True,index=True,unique=True)
+    question:   Mapped[list[str]] = mapped_column(
+        JSONText,
+        nullable=True,
+        server_default="[]"
+    )
+    answer:     Mapped[list[str]] = mapped_column(
+    JSONText,
+        nullable=True,
+        server_default="[]"
+    )
 '''
 class Banks(Base):
     __tablename__ = 'Banks'

@@ -8,6 +8,7 @@ from app.models.shapes import Countries
 from app.database.base import SessionDep
 from sqlalchemy import select
 from app.models.models import exchange_rates_office_cash,exchange_rates_office_cashless,exchange_rates_cards,exchange_rates_internet_bank,exchange_rates_office_cashless_premium
+
 app = APIRouter(tags=['currency'])
 
 scheduler = AsyncIOScheduler()
@@ -39,7 +40,6 @@ async def currency_calculation(data: Countries, session : SessionDep):
     table = Base.metadata.tables.get(table_name)
     async def fetch_rate(currency: str) -> tuple[Decimal, Decimal]:
         query = select(table.c.buy, table.c.sell).where(table.c.currency == currency)
-        print(query,'123123')
         result = await session.execute(query)
         row = result.first()
         if row is None:
@@ -56,8 +56,7 @@ async def currency_calculation(data: Countries, session : SessionDep):
     elif data.currency_out == 'RUB':
         _, sell_source = await fetch_rate(data.currency_in)
         converted = sell_source * amt
-# old : 1 - 22
-# сербия
+
     else:
         # OTH -> OTH: сначала в RUB, потом в целевую валюту
         _, sell_source = await fetch_rate(data.currency_in)
@@ -67,3 +66,4 @@ async def currency_calculation(data: Countries, session : SessionDep):
 
     # округляем "вниз" до двух знаков
     return float(converted.quantize(Decimal('0.01'), rounding=ROUND_DOWN))
+

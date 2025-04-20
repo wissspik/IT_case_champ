@@ -19,6 +19,7 @@ class Countries(BaseModel):
     amount: condecimal(max_digits=12, decimal_places=2)
     currency_in:str
     currency_out:str
-
-
-
+class fitback_chat(BaseModel):
+    score: int
+class delivery_question(BaseModel):
+    category : Literal['exchange','currency'] # доступные категории для вопросов

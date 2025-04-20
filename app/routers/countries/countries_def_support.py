@@ -60,7 +60,6 @@ def exchange_rates_office_cashless_done():
     for section in data:
         if section.get('code') != 'exchange_rates_office_cashless':
             continue
-
         content = section.get('content', {})
         for segment_name in ('segment_regular', 'segment_premium'):
             seg_list = content.get(segment_name, [])
@@ -69,8 +68,4 @@ def exchange_rates_office_cashless_done():
                 # собираем результат
                 for t, name, u, buy, sell in rates:
                     result.append([t, u, buy, sell])
-
-                # выводим время обновления, если нужно
-
-
     return result

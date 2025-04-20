@@ -11,14 +11,15 @@ engine = create_async_engine('sqlite+aiosqlite:///database.db?async_fallback=Tru
 
 new_session = async_sessionmaker(engine,expire_on_commit= False)
 
+
 @asynccontextmanager
 async def get_session():
     async with new_session() as session:
         yield session
-
+# переменная,для выдачи сессий
 SessionDep = Annotated[AsyncSession,Depends(get_session)]
 app = APIRouter(tags=['base'])
-
+# ручка для добавлений таблиц в бд
 @app.post("/GO")
 async def setup_database():
     async with engine.begin() as conn:

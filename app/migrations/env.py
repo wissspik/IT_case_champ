@@ -8,7 +8,6 @@ from app.models.models import Base
 
 config = context.config
 
-# Подменяем sqlalchemy.url на обычный SQLite:
 config.set_main_option("sqlalchemy.url", "sqlite:///database.db?async_fallback=True")
 
 if config.config_file_name is not None:
