@@ -1,6 +1,7 @@
-import {useState} from 'react'
+
 import './Export.css'
-export default function Show() {
+import CustomDropdown from "../CustomDropdown/CustomDropdown";
+export default function Show({func}) {
     const country =     {
         "country_array": [
             "Австралия",
@@ -395,36 +396,10 @@ export default function Show() {
     }
     const arcountry = country.country_array
     const imgcountry = country.picture_array
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [open, setOpen] = useState(false);
-
-
     return (
-        <div className="relative w-64">
-            <div
-                className="border p-2 flex items-center gap-2 cursor-pointer"
-                onClick={() => setOpen(!open)}
-            >
-                <img src={imgcountry[selectedIndex]} alt="" className="w-6 h-4 object-cover"/>
-                <span className={'ml-5'}>{arcountry[selectedIndex]}</span>
-            </div>
-            {open && (
-                <ul className="absolute z-10 bg-white border w-full max-h-60 overflow-auto">
-                    {arcountry.map((item, index) => (
-                        <li
-                            key={index}
-                            className="p-2 flex items-center gap-2 hover:bg-gray-200 cursor-pointer"
-                            onClick={() => {
-                                setSelectedIndex(index);
-                                setOpen(false);
-                            }}
-                        >
-                            <img src={imgcountry[index]} alt="" className="w-6 h-4 object-cover"/>
-                            <span>{item}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+        <>
+            <CustomDropdown photos={imgcountry} onSelect={(val) => func(val)} options={arcountry}/>
+        </>
+
     );
 }

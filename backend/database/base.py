@@ -8,7 +8,6 @@ from contextlib import asynccontextmanager
 
 
 engine = create_async_engine('sqlite+aiosqlite:///database.db?async_fallback=True')
-
 new_session = async_sessionmaker(engine,expire_on_commit= False)
 
 
