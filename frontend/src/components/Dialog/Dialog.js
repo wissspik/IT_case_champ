@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Buttoni from "../Buttoni/Buttoni";
 import Smska from "../Smska/Smska";
@@ -8,24 +8,25 @@ import ButtonsForAccept from "../ButtonsForAccept/ButtonsForAccept";
 import TradeCurrency from "../TradeCurrency/TradeCurrency";
 import './Dialog.css'
 
-export default function Dialog({ yourmessage }) {
+export default function Dialog({yourmessage}) {
     const [valutate, setValutate] = useState('');
     const [message, setMessage] = useState('');
     const [banker, setBank] = useState('');
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
+    const [country, setCountry] = useState('');
 
     const comissia = () => {
         setMessages(prev => [
             ...prev,
-            { sender: 'user-message', text: 'Рассчитай комиссию' },
+            {sender: 'user-message', text: 'Рассчитай комиссию'},
             {
                 sender: 'bot-message',
                 component: (
                     <Buttoni
                         first="Выбери валюту"
                         buttons={['Рубли', 'Евро', 'Доллары']}
-                        onClickHandler={valuta}
+                        onClickHandler={countries}
                     />
                 ),
             },
@@ -34,7 +35,7 @@ export default function Dialog({ yourmessage }) {
 
     useEffect(() => {
         setMessages([
-            { sender: 'user-message', text: yourmessage },
+            {sender: 'user-message', text: yourmessage},
             {
                 sender: 'bot-message',
                 component: (
@@ -48,16 +49,19 @@ export default function Dialog({ yourmessage }) {
         ]);
     }, []);
 
-    const countries = () => {
+
+    const countries = (valu) => {
+        setValutate(valu);
         setMessages(prev => [
             ...prev,
-            { sender: 'bot-message', text: 'Выбери страну в которую хочешь сделать перевод' },
+            {sender: 'user-message', text: valu},
             {
                 sender: 'repeat-bot-message', component: (
                     <>
-                        <Export />
-                        <button className={'button'} onClick={valuta}>Подтвердить</button>
+                        <p>Выбери страну в которую хочешь сделать перевод</p>
+                        <Export func={valuta}/>
                     </>
+
                 )
             }
         ]);
@@ -70,9 +74,9 @@ export default function Dialog({ yourmessage }) {
     const trade_valuta = () => {
         setMessages(prev => [
             ...prev,
-            { sender: 'user-message', text: 'Обмен валюты' },
+            {sender: 'user-message', text: 'Обмен валюты'},
             {
-                sender: 'bot-message', component: (<TradeCurrency />)
+                sender: 'bot-message', component: (<TradeCurrency/>)
             },
             {
                 sender: 'repeat-bot-message', component: (
@@ -86,20 +90,29 @@ export default function Dialog({ yourmessage }) {
         ]);
     };
 
-    const valuta = (val) => {
-        setValutate(val);
+    const valuta = (country) => {
+        setCountry(country)
         setMessages(prev => [
             ...prev,
-            { sender: 'user-message', text: val },
-            { sender: 'bot-message', text: 'Напиши сумму которую ты хочешь перевести' },
+            {sender: 'user-message', text: country},
+            {sender: 'bot-message', text: 'Напиши сумму которую ты хочешь перевести'},
         ]);
     };
 
     const Sendtoback = async (data) => {
         try {
             const response = await axios.post("http://127.0.0.1:8000/", data, {
-                headers: { "Content-Type": "application/json" },
-            });
+                    headers: {"Content-Type": "application/json"},
+                })
+
+            ;
+            setMessages(prev => [...prev, {
+                sender: 'bot-message', component: (
+                    <>
+                        <p>Ваша комиссия составит: undefined </p>
+                    </>
+                )
+            }])
             console.log("Успешный ответ и данные отправлены", response.data);
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
@@ -110,21 +123,21 @@ export default function Dialog({ yourmessage }) {
         setBank(bankik);
         setMessages(prev => [
             ...prev,
-            { sender: 'user-message', text: bankik },
+            {sender: 'user-message', text: bankik},
             {
                 sender: 'bot-message',
-                text:
-                    `Давайте полностью проверим информацию:\n` +
-                    `Валюта: ${valutate}\n` +
-                    `Сумма: ${summa}\n` +
-                    `Банк: ${bankik}`,
-            },
-            {
-                sender: 'repeat-bot-message',
                 component: (
-                    <button className="button" onClick={() => Sendtoback({ valutate, summa, bank: bankik })}>
-                        Все верно
-                    </button>
+                    <>
+                        <p>Давайте полностью проверим информацию:</p>
+                        <p>Валюта: {valutate}</p>
+                        <p>Страна: {country}</p>
+                        <p>Сумма: {summa}</p>
+                        <p>Банк: {bankik}</p>
+                        <button className="button" onClick={() => Sendtoback({valutate, summa, bank: bankik,country})}>
+                            Все верно
+                        </button>
+                    </>
+
                 ),
             },
         ]);
@@ -135,7 +148,7 @@ export default function Dialog({ yourmessage }) {
         const trimmed = input.trim();
         if (!trimmed) return;
 
-        setMessages(prev => [...prev, { sender: 'user-message', text: trimmed }]);
+        setMessages(prev => [...prev, {sender: 'user-message', text: trimmed}]);
 
         if (valutate && !message) {
             const msg = trimmed;
@@ -160,7 +173,7 @@ export default function Dialog({ yourmessage }) {
             } else {
                 setMessages(prev => [
                     ...prev,
-                    { sender: 'bot-message', text: 'Ты ввел неверное число' },
+                    {sender: 'bot-message', text: 'Ты ввел неверное число'},
                 ]);
             }
         }
@@ -177,7 +190,9 @@ export default function Dialog({ yourmessage }) {
                 messages={messages}
             />
             <button
-                onClick={() => window.location.reload()}
+
+                onClick={() =>
+                    window.location.reload()}
                 className="button-cleaning"
             >
                 Очистить чат

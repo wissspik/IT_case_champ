@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import './TradeCurrency.css'
+
 export default function TradeCurrency() {
     const [currencyhave, setCurrencyhave] = useState('')
     const [currencyneed, setCurrencyneed] = useState('')
+    const [need, setNeed] = useState('')
+    const [have, setHave] = useState('')
 
     const choosebutton = (text, from) => {
         if (from === 'have') {
@@ -12,6 +15,7 @@ export default function TradeCurrency() {
         }
     }
 
+    const curs = 100 // пример курса: 1 EUR = 100 RUB
     const currency = ['RUB', 'EUR', 'CNY', 'TRY', 'KZT', 'HKD', 'CHF']
 
     return (
@@ -32,7 +36,17 @@ export default function TradeCurrency() {
                 </span>
                 <div className="trade-currency-form">
                     <p>У меня есть</p>
-                    <input type="text" className="dynamic-text" />
+                    <input
+                        value={have}
+                        type="text"
+                        className="dynamic-text"
+                        onChange={(e) => {
+                            const val = e.target.value
+                            setHave(val)
+                            setNeed(val ? (Number(val) * (1 / curs)).toFixed(2) : '')
+                        }}
+                    />
+                    <span className={'dynamic-text'}>{currencyhave}</span>
                 </div>
             </div>
 
@@ -50,7 +64,17 @@ export default function TradeCurrency() {
                 </span>
                 <div className="trade-currency-form">
                     <p>Мне нужно</p>
-                    <input type="text" className="dynamic-text" />
+                    <input
+                        value={need}
+                        type="text"
+                        className="dynamic-text"
+                        onChange={(e) => {
+                            const val = e.target.value
+                            setNeed(val)
+                            setHave(val ? (Number(val) * curs).toFixed(2) : '')
+                        }}
+                    />
+                    <span className={'dynamic-text'}>{currencyneed}</span>
                 </div>
             </div>
         </div>

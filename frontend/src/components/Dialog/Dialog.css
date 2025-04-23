@@ -41,14 +41,13 @@
 }
 
 .repeat-bot-message {
-    margin-top: 5%;
+    margin-top: 4%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
     max-width: 70%;
     padding: 12px 16px;
     font-size: 21px;
     border-radius: 16px;
-    line-height: 1.4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     word-wrap: break-word;
     display: inline-block;
