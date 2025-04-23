@@ -11,10 +11,10 @@ class Application(BaseModel):
 class Countries(BaseModel):
     exchange_methods: Literal[
         'exchange_rates_internet_bank',
-        'exchange_rates_mobile_app',
         'exchange_rates_cards',
         'exchange_rates_office_cash',
-        'exchange_rates_office_cashless'
+        'exchange_rates_office_cashless',
+        'exchange_rates_office_cashless_premium'
     ]
     amount: condecimal(max_digits=12, decimal_places=2)
     currency_in:str
@@ -24,6 +24,4 @@ class fitback_chat(BaseModel):
     message: str
 class delivery_question(BaseModel):
     category : Literal['exchange','currency'] # доступные категории для вопросов
-class sum_number(BaseModel):
-    a : int
-    b : int
+

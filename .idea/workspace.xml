@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="исправил ошибки и все добавил валюты">
+      <change afterPath="$PROJECT_DIR$/backend/models/support_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/shapes.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/shapes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/banks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries_background_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_background_task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries_def_support.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_def_support.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/service/service_windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/service_windows.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +78,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\moisha" />
       <recent name="C:\moisha\app\routers\script_service" />
     </key>
   </component>
@@ -107,7 +125,10 @@
       <workItem from="1745251758556" duration="1617000" />
       <workItem from="1745326428788" duration="28000" />
       <workItem from="1745329518900" duration="3349000" />
-      <workItem from="1745380049310" duration="583000" />
+      <workItem from="1745380049310" duration="4448000" />
+      <workItem from="1745386888249" duration="8314000" />
+      <workItem from="1745403248552" duration="4687000" />
+      <workItem from="1745409735183" duration="6015000" />
     </task>
     <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
       <option name="closed" value="true" />
@@ -149,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745331814786</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="исправил ошибки и все добавил валюты">
+      <option name="closed" value="true" />
+      <created>1745380641511</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745380641511</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

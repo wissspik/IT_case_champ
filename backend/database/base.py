@@ -1,13 +1,18 @@
+import os
 from typing import Annotated
-
+from dotenv import load_dotenv
 from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import create_async_engine,async_sessionmaker,AsyncSession
 from backend.models.models import Base
 from fastapi import APIRouter
 from contextlib import asynccontextmanager
 
+load_dotenv()
 
-engine = create_async_engine('sqlite+aiosqlite:///database.db?async_fallback=True')
+
+url_base = os.getenv("DATABASE_URL")
+
+engine = create_async_engine(url_base)
 
 new_session = async_sessionmaker(engine,expire_on_commit= False)
 
