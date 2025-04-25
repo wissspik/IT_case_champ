@@ -1,67 +1,28 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase,declarative_base, relationship
-from sqlalchemy import String, LargeBinary, text, Integer, String, ForeignKey, LargeBinary,JSON
+from sqlalchemy import  text, Integer, String, ForeignKey, LargeBinary,JSON,Float,Enum,Index
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
-import json
-from sqlalchemy.types import TypeDecorator, TEXT
-class JSONText(TypeDecorator):
-    impl = TEXT
-
-    def process_bind_param(self, value, dialect):
-        # Сериализуем в JSON с ensure_ascii=False, чтобы не эскейпить кириллицу
-        return json.dumps(value, ensure_ascii=False)
-
-    def process_result_value(self, value, dialect):
-        if value is None:
-            return None
-        return json.loads(value)
+from backend.models.support_models import JSONText
+class Base(DeclarativeBase):
+    pass
 
 class Base(DeclarativeBase):
     pass
-#
-class exchange_rates_mobile_app(Base):
-    __tablename__ = 'exchange_rates_mobile_app'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-class exchange_rates_internet_bank(Base):
-    __tablename__ = 'exchange_rates_internet_bank'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-class exchange_rates_office_cash(Base):
-    __tablename__ = 'exchange_rates_office_cash'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-class exchange_rates_office_cashless(Base):
-    __tablename__ = 'exchange_rates_office_cashless'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-class exchange_rates_cards(Base):
-    __tablename__ = 'exchange_rates_cards'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-
-class exchange_rates_office_cashless_premium(Base):
-    __tablename__ = 'exchange_rates_office_cashless_premium'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    quantity: Mapped[int]
-    currency: Mapped[str]
-    buy:Mapped[float]
-    sell:Mapped[float]
-
+class exchange_methods_all(Base):
+    __tablename__ = 'exchange_methods_all'
+    __table_args__ = (
+        Index(
+            "ix_exchange_rates_currency_category",  # имя индекса в БД
+            "currency",
+            "category"
+        ),
+    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    currency: Mapped[str] = mapped_column(String(100),index = True)
+    category: Mapped[str] = mapped_column(String(100),index = True)
+    buy: Mapped[float] = mapped_column(Float)
+    sell: Mapped[float] = mapped_column(Float)
+    quantity: Mapped[int] = mapped_column(Integer)
 class countries(Base):
     __tablename__ = 'countries'
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -84,6 +45,7 @@ class servis_fitbacks(Base):
         server_default="[]"
     )
     message: Mapped[str] = mapped_column(String,nullable=True,index=False)
+
 
 '''
 class Banks(Base):

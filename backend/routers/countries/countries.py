@@ -5,9 +5,9 @@ from fastapi import HTTPException,FastAPI,APIRouter
 from backend.models.models import Base
 from backend.models.shapes import Countries
 from backend.database.base import SessionDep
-from sqlalchemy import select
+from sqlalchemy import select,and_
 from contextlib import asynccontextmanager
-from backend.models.models import exchange_rates_office_cash,exchange_rates_office_cashless,exchange_rates_cards,exchange_rates_internet_bank,exchange_rates_office_cashless_premium
+from backend.models.models import exchange_methods_all
 
 app = APIRouter(tags=['currency'])
 
@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
         scheduler.add_job(
             update_data,
             trigger='interval',
-            seconds=15,
+            seconds=86400,# 20
             id='update_data_job',
             replace_existing=True,
         )
@@ -42,12 +42,18 @@ async def currency_calculation(data: Countries, session : SessionDep):
     table_name = data.exchange_methods  # строка, напр. "usd_rates"
     table = Base.metadata.tables.get(table_name)
     async def fetch_rate(currency: str) -> tuple[Decimal, Decimal]:
-        query = select(table.c.buy, table.c.sell).where(table.c.currency == currency)
-        result = await session.execute(query)
+        # table — это Table, полученный по имени
+        stmt = select(
+            exchange_methods_all.buy,
+            exchange_methods_all.sell
+        ).where(
+            (exchange_methods_all.currency == currency) &
+            (exchange_methods_all.category == data.exchange_methods)
+        )
+        result = await session.execute(stmt)
         row = result.first()
-        if row is None:
-            raise HTTPException(status_code=404, detail=f"Rate for {currency} not found")
-        # возвращаем Decimal для точных расчётов
+        if not row:
+            raise HTTPException(404, f"Rate for {currency} not found")
         return Decimal(str(row.buy)), Decimal(str(row.sell))
 
     amt = Decimal(str(data.amount))

@@ -1,27 +1,29 @@
-
 from sqlalchemy import text
 from curl_cffi import requests
-from backend.models.models import exchange_rates_internet_bank, exchange_rates_office_cashless, \
-    exchange_rates_office_cashless_premium, exchange_rates_cards,exchange_rates_office_cash
+from backend.models.models import exchange_methods_all
 from backend.database.base import get_session_support
 from backend.routers.countries.countries_def_support import exchange_rates_office_cashless_done
 
 async def update_data():
     async with get_session_support() as session:
+        # Чистим таблицу
+        table_name = exchange_methods_all.__tablename__
+        await session.execute(text(f"DELETE FROM {table_name}"))
         # получаем сразу весь список: стандарт + премиум
         all_rates = exchange_rates_office_cashless_done()
         half = len(all_rates) // 2
         for idx, (currency, quantity, sell, buy) in enumerate(all_rates):
             model = (
-                exchange_rates_office_cashless
+                "exchange_rates_office_cashless"
                 if idx < half
-                else exchange_rates_office_cashless_premium
+                else "exchange_rates_office_cashless_premium"
             )
-            session.add(model(
+            session.add(exchange_methods_all(
                 currency=currency,
-                quantity=quantity,
-                sell=sell,
+                category=model,  # или просто category=code
                 buy=buy,
+                sell=sell,
+                quantity=quantity,
             ))
         # один общий коммит после всех офисных курсов
         await session.commit()
@@ -52,57 +54,34 @@ async def update_data():
         response = requests.get(api_url,
                 params=params,
                 headers=headers,
-                proxies={"http": None, "https": None},   # ⟵ не использовать системный прокси
+                proxies={"http": None, "https": None},# на случай если будет VPN OR ПРОКСИ
                 http_version=2,
                 timeout=60.0  # ждём до 60 секунд
                                 )
         response.raise_for_status()
         all_exchange_data = response.json()
 
-        # находим нужную секцию и добавляем все курсы за один заход
+        # нахожу нужную секцию и добавляю все курсы за один заход
         for section in all_exchange_data:
-            code = section.get("code")
-            if code not in ("exchange_rates_internet_bank",
-                            "exchange_rates_cards",
-                            "exchange_rates_office_cash"):
+            code = section["code"]
+            if code not in (
+                    "exchange_rates_internet_bank",
+                    "exchange_rates_cards",
+                    "exchange_rates_office_cash"
+            ):
                 continue
 
-            items = section["content"][0].get("items", [])
-            for rate_info in items:
-                # 1) quantity → int
-                raw_unit = rate_info.get("unit", 0)
-                try:
-                    quantity = float(raw_unit)
-                except (TypeError, ValueError):
-                    quantity = 0
+            for rate_info in section["content"][0].get("items", []):
+                # значение code можно сразу сохранить в category
+                q = int(rate_info.get("unit", 0))
+                b = float(rate_info.get("sell", 0.0))
+                s = float(rate_info.get("buy", 0.0))
 
-                # 2) buy/sell → float
-                raw_buy = rate_info.get("sell", 0.0)
-                raw_sell = rate_info.get("buy", 0.0)
-                try:
-                    buy = float(raw_buy)
-                except (TypeError, ValueError):
-                    buy = 0.0
-                try:
-                    sell = float(raw_sell)
-                except (TypeError, ValueError):
-                    sell = 0.0
-
-                # 3) выбрать модель
-                if code == "exchange_rates_internet_bank":
-                    Model = exchange_rates_internet_bank
-                elif code == "exchange_rates_cards":
-                    Model = exchange_rates_cards
-                else:
-                    Model = exchange_rates_office_cash
-                table_name = Model.__tablename__
-                await session.execute(text(f"DELETE FROM  {table_name} "))
-                # !!! id в таблице будут увеличиваться
-                session.add(Model(
-                    quantity=quantity,
+                session.add(exchange_methods_all(
                     currency=rate_info.get("ticker", "N/A"),
-                    buy=buy,
-                    sell=sell,
+                    category=code,  # вот теперь точно строка, а не класс
+                    buy=b,
+                    sell=s,
+                    quantity=q,
                 ))
-        # один коммит после всех интернет-курсов
         await session.commit()

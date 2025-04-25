@@ -1,9 +1,5 @@
 # Второй файл: парсер курсов без «213» и лишнего принта
 from curl_cffi import requests
-from backend.models.models import (
-    exchange_rates_office_cashless_premium,
-    exchange_rates_office_cashless,
-)
 
 def parse_rates(items):
     """

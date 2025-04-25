@@ -1,18 +1,23 @@
 import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers.banks import app as banks
 from backend.routers.commision import app as commision
 from backend.database.base import app as base
 from backend.routers.countries.countries import app as countries
 from backend.service.service_windows import app as service_windows
 from backend.routers.countries.countries import lifespan
+import os
+
+
+load_dotenv()
+
+
 app = FastAPI(lifespan=lifespan)
-app.include_router(banks,tags=['banks'])
-app.include_router(commision,tags=['commision'])
-app.include_router(base,tags=['base'])
-app.include_router(service_windows,tags=['service_windows'])
-app.include_router(countries,tags=['countries'])
+app.include_router(commision,prefix="/commision",tags=['commision'])
+app.include_router(base,prefix="/base_test",tags=['base'])
+app.include_router(service_windows,"/service_windows",tags=['service_windows'])
+app.include_router(countries,"/countries",tags=['countries'])
 
 origins = [ # нужно скрыть в env
     "http://localhost:3000",

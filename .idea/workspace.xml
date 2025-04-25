@@ -4,55 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="Доделал ручку:валюты,fitback-chat">
-      <change afterPath="$PROJECT_DIR$/backend/service/__init__.py" afterDir="false" />
+    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="исправил ошибки и все добавил валюты">
+      <change afterPath="$PROJECT_DIR$/backend/models/support_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/script.py.mako" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/script.py.mako" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/25360a5a9881_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/25360a5a9881_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/81f15e66a1dd_.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/81f15e66a1dd_.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/a5762c5ddb26_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/a5762c5ddb26_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/ba8ebd48d93d_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/ba8ebd48d93d_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/c9c70cb0a340_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/c9c70cb0a340_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/ebd5f1b3915a_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/ebd5f1b3915a_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/migrations/versions/feaaaa5f3ff2_initial_migration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/migrations/versions/feaaaa5f3ff2_initial_migration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/shapes.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/shapes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/banks.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/banks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/commision.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/commision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries/countries_background_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_background_task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/countries/countries_def_support.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_def_support.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/service_windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/service_windows.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/test_users.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/shapes.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/shapes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/banks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries_background_task.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_background_task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries_def_support.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries_def_support.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/service_windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/service_windows.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/1.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/10.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/11.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/8.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/9.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +78,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\moisha" />
       <recent name="C:\moisha\app\routers\script_service" />
     </key>
   </component>
@@ -152,7 +124,11 @@
       <workItem from="1745250653765" duration="1078000" />
       <workItem from="1745251758556" duration="1617000" />
       <workItem from="1745326428788" duration="28000" />
-      <workItem from="1745329518900" duration="2011000" />
+      <workItem from="1745329518900" duration="3349000" />
+      <workItem from="1745380049310" duration="4448000" />
+      <workItem from="1745386888249" duration="8314000" />
+      <workItem from="1745403248552" duration="4687000" />
+      <workItem from="1745409735183" duration="6015000" />
     </task>
     <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
       <option name="closed" value="true" />
@@ -186,7 +162,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745139211884</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="исправил ошибки и все добавил валюты">
+      <option name="closed" value="true" />
+      <created>1745331814786</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745331814786</updated>
+    </task>
+    <task id="LOCAL-00006" summary="исправил ошибки и все добавил валюты">
+      <option name="closed" value="true" />
+      <created>1745380641511</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745380641511</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +200,8 @@
     <MESSAGE value="f" />
     <MESSAGE value="save shell" />
     <MESSAGE value="Доделал ручку:валюты,fitback-chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал ручку:валюты,fitback-chat" />
+    <MESSAGE value="исправил ошибки и все добавил валюты" />
+    <option name="LAST_COMMIT_MESSAGE" value="исправил ошибки и все добавил валюты" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/moisha$main.coverage" NAME="main Coverage Results" MODIFIED="1745253203367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
