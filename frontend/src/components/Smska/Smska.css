@@ -6,7 +6,7 @@
     position: fixed;
     bottom: 0;
     left: 25%;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
     padding-left: 5px;
     font-family: 'Gilroy-light', sans-serif;
     font-size: 25px;
@@ -17,7 +17,9 @@
     z-index: 10;
 
 }
-
+.button-cleaning {
+    display: none;
+}
 @media (max-width: 700px) {
     .message-in-chat {
         margin-top: 0px;

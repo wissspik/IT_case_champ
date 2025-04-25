@@ -28,7 +28,7 @@ export default function App() {
                     }}>
                         <div className={'row1'}>
                             <FinanceTip/>
-
+                            <img className={'img-finance'} src="/img/Group21.png"  alt=""/>
                         </div>
                         <div className={'row2'}>
                             <Dialog yourmessage={submittedMessage}/>

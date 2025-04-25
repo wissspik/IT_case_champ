@@ -4,6 +4,7 @@
     position: relative;
     border-radius: 20px;
     box-sizing: border-box;
+    border: 1px #888888 ;
     width: 80%;
     height: 45vh;
 }
