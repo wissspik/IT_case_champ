@@ -41,15 +41,13 @@ export default function Dialog({yourmessage}) {
                 component: (
                     <Buttoniany
                         first="Привет, с чем конкретно тебе помочь?"
-                        buttons={['Комиссия', 'Обмен валюты', 'Вклады']}
+                        buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladi]}
                     />
                 ),
             },
         ]);
     }, []);
-
-
     const countries = (valu) => {
         setValutate(valu);
         setMessages(prev => [
@@ -61,22 +59,48 @@ export default function Dialog({yourmessage}) {
                         <p>Выбери страну в которую хочешь сделать перевод</p>
                         <Export func={valuta}/>
                     </>
-
                 )
             }
         ]);
     }
-
-    const vkladi = () => {
-        console.log('poka');
+    const vkladi = (info) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: info},
+            {
+                sender: 'bot-message', component: (
+                    <Buttoniany
+                        first={'Что тебя интересует '}
+                        buttons={['Накопительный счет', 'Вклады']}
+                        onClickHandler={[vkladi2,vkladi3]}
+                    />
+                )
+            }
+        ])
     };
+    const vkladi2 = (text) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: text},
+            {
+                sender: 'bot-message', component: (
+                    <Buttoniany
+                        first={'Что тебя интересует '}
+                        buttons={['Информация', 'Назад']}
+                        onClickHandler={[vkladi3,vkladi]}
+                    />
+                )
+            }
+        ])
+    }
+      const vkladi3 = () => {
+        return 3
+    }
 
     const trade_valuta = () => {
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: 'Обмен валюты'},
             {
-                sender: 'bot-message', component: (<TradeCurrency/>)
+                sender: 'change-moneta', component: (<TradeCurrency/>)
             },
             {
                 sender: 'repeat-bot-message', component: (
@@ -133,7 +157,7 @@ export default function Dialog({yourmessage}) {
                         <p>Страна: {country}</p>
                         <p>Сумма: {summa}</p>
                         <p>Банк: {bankik}</p>
-                        <button className="button" onClick={() => Sendtoback({valutate, summa, bank: bankik,country})}>
+                        <button className="button" onClick={() => Sendtoback({valutate, summa, bank: bankik, country})}>
                             Все верно
                         </button>
                     </>
@@ -142,14 +166,11 @@ export default function Dialog({yourmessage}) {
             },
         ]);
     };
-
     const handleSend = (e) => {
         e.preventDefault();
         const trimmed = input.trim();
         if (!trimmed) return;
-
         setMessages(prev => [...prev, {sender: 'user-message', text: trimmed}]);
-
         if (valutate && !message) {
             const msg = trimmed;
             if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0) {
@@ -177,10 +198,8 @@ export default function Dialog({yourmessage}) {
                 ]);
             }
         }
-
         setInput("");
     };
-
     return (
         <>
             <Smska

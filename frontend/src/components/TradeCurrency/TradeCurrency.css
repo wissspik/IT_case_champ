@@ -1,24 +1,32 @@
 .trade-currency {
+    background-color: white;
+    margin-left: 5%;
     position: relative;
     border-radius: 20px;
     box-sizing: border-box;
-    width: 90vh;
+    width: 80%;
     height: 45vh;
 }
-
+@media(max-height: 700px) {
+    .trade-currency {
+        height: 15vh;
+    }
+}
 .dynamic-text {
     color: #3F52B2;
 }
 
 .header-text-currency {
+    padding-top:6%;
     font-weight: 600;
     margin: 1vh;
     text-align: center;
     color: #3F52B2;
-    font-size: 40px;
+    font-size: 43px;
 }
 
 .trade-currency-have {
+    margin-left: 2%;
     margin-top: 30px;
     position: absolute;
     width: 50%;

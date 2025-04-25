@@ -1,6 +1,6 @@
 
 .bot-message {
-    z-index:10;
+    z-index: 10;
     margin-top: 5%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
@@ -54,5 +54,22 @@
     background-color: #ffffff;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
+
+}
+
+.change-moneta {
+    font-size: 21px;
+    font-family: "Gilroy-light", sans-serif;
+    margin-top: 4%;
+}
+
+@media (max-width: 750px) {
+    .user-message {
+        margin-left: 72%
+    }
+
+    .bot-message {
+        margin-left: 30px;
+    }
 
 }

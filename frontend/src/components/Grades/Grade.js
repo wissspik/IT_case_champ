@@ -1,20 +1,38 @@
 import React, {useState} from 'react';
 import './Grade.css';
+import axios from "axios";
 
 const Grade = ({question, options, onVote}) => {
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [input, setInput] = useState('');
     const [flag, setFlag] = useState(false);
+    const [voted, setVoted] = useState('');
+    const [comment, setComment] = useState('');
+    const Sendtoback = async (data) => {
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/", data, {
+                    headers: {"Content-Type": "application/json"},
+                })
+            ;
+            console.log("Успешный ответ и данные отправлены", response.data);
+        } catch (error) {
+            console.error("Ошибка при отправке данных:", error);
+        }
+    };
+
     const submit = (e) => {
         e.preventDefault();
+        setComment(input)
         setInput('')
         setFlag(true)
+        Sendtoback({comment,selected})
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         if (selected !== null) {
             setSubmitted(true);
+            setVoted(selected);
             onVote(selected);
         }
     };
