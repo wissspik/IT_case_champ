@@ -9,15 +9,13 @@ from backend.service.service_windows import app as service_windows
 from backend.routers.countries.countries import lifespan
 import os
 
-
 load_dotenv()
 
-
 app = FastAPI(lifespan=lifespan)
-app.include_router(commision,prefix="/commision",tags=['commision'])
-app.include_router(base,prefix="/base_test",tags=['base'])
-app.include_router(service_windows,"/service_windows",tags=['service_windows'])
-app.include_router(countries,"/countries",tags=['countries'])
+app.include_router(commision,prefix="/comission",tags=['comission'])
+app.include_router(base,prefix="/base_test",tags=['database'])
+app.include_router(service_windows,prefix = "/service_windows",tags=['service'])
+app.include_router(countries,prefix = "/countries",tags=['countries'])
 
 origins = [ # нужно скрыть в env
     "http://localhost:3000",

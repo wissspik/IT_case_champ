@@ -8,7 +8,7 @@ from sqlalchemy import select
 from backend.database.base import SessionDep
 from backend.models.models import countries
 
-app = APIRouter(tags=['countries'])
+app = APIRouter(tags=['сomission'])
 
 @app.post("/take_countries")
 async def take_countries(session: SessionDep):
@@ -21,5 +21,7 @@ async def take_countries(session: SessionDep):
     return {'country_array': array_country, 'picture_array': array_picture}
 '''
 Здесь нужно добавить ручку по
+1) выдаче валют
+2)
 
 '''
