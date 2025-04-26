@@ -4,29 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="добавил README.md,а также dockerFIle + compose">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="Изменил dockerfile,дополнил таблицу с комиссиями">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33_[Changes]/0.pack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33_[Changes]/1.pack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33_[Changes]/index.pack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33_[Changes]/index.pack.old" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2025_17_33__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routers/commision.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/commision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/0.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.cache/default-development/index.pack.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +135,8 @@
       <workItem from="1745573202890" duration="5331000" />
       <workItem from="1745591964015" duration="1839000" />
       <workItem from="1745594458341" duration="3182000" />
-      <workItem from="1745640403246" duration="4503000" />
+      <workItem from="1745640403246" duration="9079000" />
+      <workItem from="1745650232658" duration="1554000" />
     </task>
     <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
       <option name="closed" value="true" />
@@ -221,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745418090868</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Изменил dockerfile,дополнил таблицу с комиссиями">
+      <option name="closed" value="true" />
+      <created>1745645562817</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745645562818</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +242,8 @@
     <MESSAGE value="Доделал ручку:валюты,fitback-chat" />
     <MESSAGE value="исправил ошибки и все добавил валюты" />
     <MESSAGE value="добавил README.md,а также dockerFIle + compose" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавил README.md,а также dockerFIle + compose" />
+    <MESSAGE value="Изменил dockerfile,дополнил таблицу с комиссиями" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил dockerfile,дополнил таблицу с комиссиями" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/moisha$main.coverage" NAME="main Coverage Results" MODIFIED="1745253203367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />

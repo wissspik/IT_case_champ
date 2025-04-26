@@ -10,18 +10,6 @@ class servis_fitbacks(Base):
     __tablename__ = 'servis_fitbacks'
     id:         Mapped[int] = mapped_column(Integer,primary_key=True)
     score:      Mapped[int] = mapped_column(Integer,nullable=True)
-    category:   Mapped[str] =        mapped_column(String(255),nullable=True,index=True,unique=True)
-    question:   Mapped[list[str]] = mapped_column(
-        JSONText,
-        nullable=True,
-        server_default="[]"
-    )
-    answer:     Mapped[list[str]] = mapped_column(
-    JSONText,
-        nullable=True,
-        server_default="[]"
-    )
-    message: Mapped[str] = mapped_column(String,nullable=True,index=False)
 
 class exchange_methods_all(Base):
     __tablename__ = 'exchange_methods_all'
@@ -45,15 +33,15 @@ class countries(Base):
     country:Mapped[str] = mapped_column(String,index = True,unique= True)
     picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
 
-
-#Банковская система ботом
-class Banks(Base):
+'''
+#Банковская система таблиц
+class banks(Base):
     __tablename__ = 'banks'
     id:        Mapped[int]    = mapped_column(Integer, primary_key=True)
     bank:      Mapped[str]    = mapped_column(String(50), unique=True, nullable=False, index=True)
     website:   Mapped[str]    = mapped_column(String(100), unique=True, nullable=False)
 
-    countries = relationship("countries_bank",back_populates="bank",cascade="all, delete-orphan")
+    countries = relationship("countries_bank",back_populates="banks",cascade="all, delete-orphan")
 
 
 class countries_bank(Base):
@@ -63,12 +51,12 @@ class countries_bank(Base):
 
     bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('banks.id'))
 
-    parent = relationship(
-        "Parent",
-        back_populates="children"
+    bank = relationship(
+        "banks",
+        back_populates="countries_bank"
     )
-    countries = relationship('Transfer_methods', backref='county')
-class Transfer_methods(Base):
+
+class transfer_methods(Base):
     __tablename__ = 'transfer_methods'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     cash: Mapped[bool] = mapped_column(Boolean)
@@ -79,17 +67,11 @@ class Transfer_methods(Base):
     country_id: Mapped[int] = mapped_column(Integer, ForeignKey('countries_bank.id'))
 
     countries = relationship('Currencies', backref='methods')
-class Currencies(Base):
+class currencies(Base):
     __tablename__ = 'currencies'
     id : Mapped[int] = mapped_column(Integer, primary_key=True)
     name : Mapped[str] = mapped_column(String(50), nullable=False, index=True)
     methods_id: Mapped[int] = mapped_column(Integer, ForeignKey('transfer_methods.id'))
 
-
+'''
 #bank -> countries_many -> transfer_methods -> Currencies ->
-'''
-
-1)все страны распиши 
-2)все валюты
-
-'''

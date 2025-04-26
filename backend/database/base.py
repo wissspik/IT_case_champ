@@ -4,10 +4,9 @@ from dotenv import load_dotenv
 from fastapi.params import Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import create_async_engine,async_sessionmaker,AsyncSession
-from backend.models.models import Base, countries_bank
+from backend.models.models import Base
 from fastapi import APIRouter
 from contextlib import asynccontextmanager
-from backend.models.models import Banks
 load_dotenv()
 
 
@@ -40,7 +39,7 @@ async def setup_database():
 
 '''
 ПРЯМО СНИЗУ НАХОДИТСЯ РУЧКА ДЛЯ ДОБАВЛЕНИЯ БАНКОВ В БД !!!
-'''
+
 @app.post("/create_data")
 async def create_data(session: SessionDep):
     stml = select(Banks).where(Banks.bank == 'Сбербанк')
@@ -50,10 +49,4 @@ async def create_data(session: SessionDep):
     res.countries.append(link)
     await session.commit()
     return {"message":"how am i?"}
-# bank -> countries_many -> transfer_methods -> Currencies ->
-'''
-banks = []
-for bank in banks:
-
-
 '''
