@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="599b43ac-f2ad-4541-a734-05dc8faa6b8f" name="Changes" comment="Добавил не повреждённый файл">
-      <change afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b604747b-4cfc-4de6-9116-67e924688dd2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/shapes.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/shapes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routers/commision.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/commision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routers/countries/countries.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routers/countries/countries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/service/service_windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/service_windows.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/test_conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +21,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -59,7 +48,7 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "C:/script",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -141,7 +130,7 @@
       <workItem from="1745640403246" duration="9079000" />
       <workItem from="1745650232658" duration="1554000" />
       <workItem from="1745659879924" duration="11970000" />
-      <workItem from="1745682286669" duration="5409000" />
+      <workItem from="1745682286669" duration="5669000" />
     </task>
     <task id="LOCAL-00001" summary="Добавил формы для JSON-ов (ручек)">
       <option name="closed" value="true" />
@@ -248,7 +237,8 @@
     <MESSAGE value="исправил ошибки и все добавил валюты" />
     <MESSAGE value="добавил README.md,а также dockerFIle + compose" />
     <MESSAGE value="Изменил dockerfile,дополнил таблицу с комиссиями" />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменил dockerfile,дополнил таблицу с комиссиями" />
+    <MESSAGE value="Добавил не повреждённый файл" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил не повреждённый файл" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/moisha$main.coverage" NAME="main Coverage Results" MODIFIED="1745253203367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
