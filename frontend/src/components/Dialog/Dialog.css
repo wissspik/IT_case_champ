@@ -102,3 +102,28 @@
         margin-left: 30px;
     }
 }
+.promo-banner {
+  background-color: #eaf0ff;
+  border-left: 6px solid #3F52B2;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 30px auto;
+  max-width: 600px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.promo-banner h2 {
+  color: #3F52B2;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.promo-banner p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.promo-banner strong {
+  color: #1c2e7b;
+}

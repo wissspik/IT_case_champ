@@ -6,6 +6,7 @@ import Dialog from './components/Dialog/Dialog';
 import FinanceTip from "./components/FinanceTip/FinanceTip";
 import FaqTip from "./components/Faq/Faq";
 import Grade from './components/Grades/Grade';
+import Test from './components/test/Test';
 
 export default function App() {
     const [message, setMessage] = useState('');
@@ -57,10 +58,7 @@ export default function App() {
                         >
                             <Start message={message} setMessage={setMessage} handleSubmit={handleSubmit}/>
                         </div>
-
                     </div>
-
-
                 </>
             }
         </>

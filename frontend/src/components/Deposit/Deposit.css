@@ -1,0 +1,27 @@
+.deposit-card {
+  background-color: #f9f9ff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: 20px auto;
+  font-family: 'Gilroy-light', sans-serif;
+  color: #333;
+}
+
+.deposit-card h2 {
+  margin-bottom: 20px;
+  color: #3F52B2;
+  font-size: 24px;
+}
+
+.deposit-item {
+  margin-bottom: 16px;
+}
+
+.label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  color: #2a2a2a;
+}
