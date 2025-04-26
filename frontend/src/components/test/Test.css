@@ -1,0 +1,57 @@
+/* Общие стили */
+.sidebar {
+  position: fixed;
+  top: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #3F52B2;
+  color: white;
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar справа */
+.right-sidebar {
+  right: -250px;
+}
+
+.right-sidebar.open {
+  right: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 60px;
+}
+
+.sidebar li {
+  margin: 20px 0;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  z-index: 1100;
+}
+
+.hamburger.right {
+  right: 15px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+}

@@ -30,6 +30,7 @@ const FinanceTip = () => {
                 <h2 className="finance-tip__title">💡 Совет дня</h2>
                 <p className="finance-tip__text">{randomTip}</p>
             </div>
+
         </>
 
     )

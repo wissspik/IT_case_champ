@@ -16,7 +16,7 @@ export default function Smska({ input, messages, handleSend, setInput }) {
                     </div>
                 ))}
             </div>
-            <footer className={'footer-size'} >
+            <footer className={''} >
                 <form onSubmit={handleSend}>
                     <div>
                         <label>

@@ -35,3 +35,8 @@
 .nav-menu a:hover {
     color: blue;
 }
+@media (max-width: 700px) {
+    .Header {
+        display: none;
+    }
+}

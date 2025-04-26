@@ -1,6 +1,24 @@
+/* 1. Ключевые кадры для анимации появления */
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* 2. Общие стили анимации */
+.message-animated {
+  opacity: 0; /* изначально скрыто */
+  animation: messageAppear 0.8s ease-out forwards;
+}
+
+/* 3. Твои существующие классы—только дополняем анимацией */
 .bot-message {
-    z-index:10;
+    z-index: 10;
     margin-top: 5%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
@@ -9,12 +27,18 @@
     font-size: 21px;
     border-radius: 16px;
     line-height: 1.4;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
     display: inline-block;
     background-color: white;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
+
+    /* Плавное появление */
+    /* объединяем: */
+    /* animation-delay можно регулировать, если нужно */
+    /* например: animation-delay: 0.1s; */
+    animation: messageAppear 0.8s ease-out forwards;
 }
 
 .user-message {
@@ -27,20 +51,19 @@
     font-size: 22px;
     border-radius: 16px;
     line-height: 0.1;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
     display: inline-block;
     background-color: #007bff;
     color: white;
     border: 1px solid #004a91;
-}
 
-.button-cleaning {
-    display: none;
-
+    /* Плавное появление */
+    animation: messageAppear 0.8s ease-out forwards;
 }
 
 .repeat-bot-message {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 4%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
@@ -48,11 +71,59 @@
     padding: 12px 16px;
     font-size: 21px;
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     word-wrap: break-word;
     display: inline-block;
     background-color: #ffffff;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
 
+    /* Плавное появление */
+    animation: messageAppear 0.8s ease-out forwards;
+}
+
+/* Если будут блоки .change-moneta или другие, можешь добавить туда ту же анимацию: */
+/*
+.change-moneta {
+  animation: messageAppear 0.4s ease-out forwards;
+}
+*/
+.change-moneta {
+    font-size: 21px;
+    font-family: "Gilroy-light", sans-serif;
+    margin-top: 4%;
+}
+
+@media (max-width: 750px) {
+    .user-message {
+        margin-left: 72%;
+    }
+
+    .bot-message {
+        margin-left: 30px;
+    }
+}
+.promo-banner {
+  background-color: #eaf0ff;
+  border-left: 6px solid #3F52B2;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 30px auto;
+  max-width: 600px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.promo-banner h2 {
+  color: #3F52B2;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.promo-banner p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.promo-banner strong {
+  color: #1c2e7b;
 }
