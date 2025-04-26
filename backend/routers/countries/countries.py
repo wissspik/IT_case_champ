@@ -9,7 +9,7 @@ from sqlalchemy import select,and_
 from contextlib import asynccontextmanager
 from backend.models.models import exchange_methods_all
 
-app = APIRouter(tags=['currency'])
+app = APIRouter()
 
 scheduler = AsyncIOScheduler()
 

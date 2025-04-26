@@ -1,14 +1,11 @@
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport, Response
 from backend.main import app
 
-@pytest.fixture(scope="session")
-async def async_client():
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        yield ac
-
 @pytest.mark.asyncio
-async def test_take_banks(async_client):
-    response = await async_client.get("/take_banks")
-    assert response.status_code == 200
-    assert response.json() == {"hello": "world"}
+async def test_take_countries():
+    async with AsyncClient(transport=ASGITransport(app = app),base_url="http://test") as ac:
+        response = await ac.post("/commission/take_countries",json={"message":True})
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data) == 2

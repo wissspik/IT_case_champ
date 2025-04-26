@@ -1,7 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
-from sqlalchemy import  text, Integer, String,  LargeBinary,Float,Index,ForeignKey,Boolean
-from sqlalchemy.orm import relationship
-from typing import List
+from sqlalchemy import  text, Integer, String,  LargeBinary,Float,Index
 from backend.models.support_models import JSONText
 
 class Base(DeclarativeBase):
@@ -10,6 +8,7 @@ class servis_fitbacks(Base):
     __tablename__ = 'servis_fitbacks'
     id:         Mapped[int] = mapped_column(Integer,primary_key=True)
     score:      Mapped[int] = mapped_column(Integer,nullable=True)
+    comments:   Mapped[str] = mapped_column(String(250),nullable=True)
 
 class exchange_methods_all(Base):
     __tablename__ = 'exchange_methods_all'
@@ -33,29 +32,31 @@ class countries(Base):
     country:Mapped[str] = mapped_column(String,index = True,unique= True)
     picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
 
-'''
+
 #Банковская система таблиц
-class banks(Base):
-    __tablename__ = 'banks'
-    id:        Mapped[int]    = mapped_column(Integer, primary_key=True)
-    bank:      Mapped[str]    = mapped_column(String(50), unique=True, nullable=False, index=True)
-    website:   Mapped[str]    = mapped_column(String(100), unique=True, nullable=False)
+class BankSistem(Base):
+    __tablename__ = 'bank_sistem'
+    __table_args__ = (
+        Index(
+            "ix_bs_bank_country_method_curr",  # имя индекса в БД
+            "bank",
+            "country",
+            "method",
+            "currency",
 
-    countries = relationship("countries_bank",back_populates="banks",cascade="all, delete-orphan")
-
-
-class countries_bank(Base):
-    __tablename__ = 'countries_bank'
-    id:      Mapped[int] = mapped_column(Integer, primary_key=True)
-    country:    Mapped[str] = mapped_column(String(50), nullable=False, index=True)
-
-    bank_id: Mapped[int] = mapped_column(Integer, ForeignKey('banks.id'))
-
-    bank = relationship(
-        "banks",
-        back_populates="countries_bank"
+        ),
     )
+    id : Mapped[int] = mapped_column(Integer, primary_key=True)
+    bank: Mapped[str] = mapped_column(String(50), nullable=False)
+    country: Mapped[str] = mapped_column(String(50), nullable=False)
+    method: Mapped[str] = mapped_column(String(50), nullable=False)
+    currency: Mapped[str] = mapped_column(String(50), nullable=False)
+    commision: Mapped[float] = mapped_column(Float)
+    limit_min: Mapped[float] = mapped_column(Float)
+    limit_max: Mapped[int] = mapped_column(Integer)
+    comments: Mapped[str] = mapped_column(String(150), nullable=True)
 
+'''
 class transfer_methods(Base):
     __tablename__ = 'transfer_methods'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
