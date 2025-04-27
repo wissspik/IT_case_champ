@@ -44,16 +44,14 @@ async def setup_database():
 '''
 @app.post("/create_data")
 async def create_data(session: SessionDep):
-    for x in range(2000):
-        new_rule = BankSistem(
-            bank='Сбербанк',
-            country='Германия',
-            method='SWIFT',
-            currency='EUR',
-            commision=1.5,  # 1.5%
-            limit_max=x,  # максимальный лимит 100 000 EUR
-            comments='Стандартная комиссия по SWIFT-переводам'
-        )
-        session.add(new_rule)
+    new_rule = (BankSistem(bank = "Сбербанк",
+                           country= "Абхазия",
+                           currency="RUB",
+                           method="mobile",
+                           commision=1.0,
+                           limit_min=0.0,
+                           limit_max=1500000.0,
+                           comments="15000-24;1500000-744"))
+    session.add(new_rule)
     await session.commit()
     return {"message":True}

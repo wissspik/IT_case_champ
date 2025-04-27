@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
 from sqlalchemy import  text, Integer, String,  LargeBinary,Float,Index
-from backend.models.support_models import JSONText
 
 class Base(DeclarativeBase):
     pass
