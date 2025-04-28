@@ -2,7 +2,7 @@ import os
 from typing import Annotated
 from dotenv import load_dotenv
 from fastapi.params import Depends
-from sqlalchemy import select
+from sqlalchemy import select,text
 from sqlalchemy.ext.asyncio import create_async_engine,async_sessionmaker,AsyncSession
 from backend.models.models import BankSistem,Base
 from fastapi import APIRouter
@@ -10,9 +10,9 @@ from contextlib import asynccontextmanager
 load_dotenv()
 
 
-url_base = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_async_engine(url_base)
+engine = create_async_engine(DATABASE_URL)
 
 new_session = async_sessionmaker(engine,expire_on_commit= False)
 
@@ -44,6 +44,8 @@ async def setup_database():
 '''
 @app.post("/create_data")
 async def create_data(session: SessionDep):
+    result = await session.execute(text("SELECT COUNT(*) FROM bank_sistem"))
+    len_before = result.scalar_one()
     new_rule = (BankSistem(bank = "Сбербанк",
                            country= "Абхазия",
                            currency="RUB",
@@ -54,4 +56,7 @@ async def create_data(session: SessionDep):
                            comments="15000-24;1500000-744"))
     session.add(new_rule)
     await session.commit()
+    result = await session.execute(text("SELECT COUNT(*) FROM bank_sistem"))
+    len_after = result.scalar_one()
+    print(len_after - len_before)
     return {"message":True}
