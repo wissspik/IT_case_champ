@@ -1,5 +1,4 @@
 import React from 'react';
-import './ButtonsForAccept.css'
 export default function ButtonsForAccept({first, buttons, onClickHandler,sums}) {
     return (
         <>
