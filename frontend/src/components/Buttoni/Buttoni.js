@@ -1,5 +1,4 @@
 import React from 'react';
-import './Buttoni.css'
 export default function Buttoni({first, buttons, onClickHandler}) {
     return (
         <>

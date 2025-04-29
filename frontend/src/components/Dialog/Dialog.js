@@ -9,6 +9,7 @@ import TradeCurrency from "../TradeCurrency/TradeCurrency";
 import './Dialog.css'
 import Deposit from "../Deposit/Deposit";
 import Deposit2 from "../Deposit/Nakopschet";
+import EqualButtons from "../EqualButtons";
 
 export default function Dialog({yourmessage}) {
     const [valutate, setValutate] = useState('');
@@ -17,6 +18,22 @@ export default function Dialog({yourmessage}) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [country, setCountry] = useState('');
+    const point = {
+        Balance: 0,
+        Plus: 0,
+        Money: 0,
+        Kopit: 0,
+        Big: 0,
+        Vozmozh: 0,
+    }
+    const pointnames = {
+        Balance: 'В балансе',
+        Plus: 'В плюсе',
+        Money: 'Новые деньги',
+        Kopit: 'Копить',
+        Big: 'Большая Выгода',
+        Vozmozh: 'Расширяй возможности',
+    }
 
     const comissia = () => {
         setMessages(prev => [
@@ -56,9 +73,9 @@ export default function Dialog({yourmessage}) {
             ...prev,
             {sender: 'user-message', text: valu},
             {
-                sender: 'repeat-bot-message', component: (
+                sender: 'bot-message', component: (
                     <>
-                        <p>🌏    Выбери страну в которую хочешь сделать перевод</p>
+                        <p>🌏 Выбери страну в которую хочешь сделать перевод</p>
                         <Export func={valuta}/>
                     </>
                 )
@@ -108,15 +125,16 @@ export default function Dialog({yourmessage}) {
     const nakopshetcategor = (info) => {
         setMessages(prev => [...prev,
             {sender: 'user-message', text: info},
-            {sender: 'bot-message', component: (
-            <>
-                <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
-                <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
-            </>
-        )
-    }
+            {
+                sender: 'bot-message', component: (
+                    <>
+                        <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
+                        <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
+                    </>
+                )
+            }
 
-    ])
+        ])
     }
     const nakopschetinfo = (info) => {
         setMessages(prev => [...prev,
@@ -159,8 +177,116 @@ export default function Dialog({yourmessage}) {
     const helpchoosevklad = (text) => {
         setMessages(prev => [...prev,
             {sender: 'user-message', text: text},
+            {
+                sender: 'bot-message', component: (
+                    <EqualButtons
+                        first={'Выбери валюту в которой будешь держать вклад'}
+                        buttons={['Рубли', 'Юани']}
+                        onClickHandler={currency}
+                        value={['Рубли', 'Юани']}
+                    />
+
+                )
+            }
         ])
     }
+    const currency = (voted) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: voted},
+        ])
+        if (voted === 'Рубли') {
+            point.Balance += 1
+            point.Plus += 1
+            point.Money += 1
+            point.Kopit += 1
+            point.Big += 1
+
+        } else {
+            point.Vozmozh += 1
+        }
+        setMessages(prev => [...prev,
+            {
+                sender: 'bot-message', component: (
+                    <Buttoni
+                        first={'На какой срок вы планируете разместить средства?'}
+                        buttons={['1-3 мес', '4-7 мес', '8 мес - 3 года']}
+                        onClickHandler={times}
+                    />
+                )
+            },
+
+        ])
+
+
+    }
+    const times = (times) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: times},
+        ])
+        if (times === '1-3 мес' || times === '4-7 мес') {
+            point.Balance += 1
+            point.Money += 1
+            point.Kopit += 1
+            point.Plus += 1
+        }
+        setMessages(prev => [...prev,
+            {
+                sender: 'bot-message', component: (
+                    <Buttoni
+                        first={'Как вам удобнее получать проценты?'}
+                        buttons={['Ежемесячно на счет / карту', 'В конце срока']}
+                        onClickHandler={procents}
+                    />
+                )
+            }
+        ])
+    }
+    const procents = (procents) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: procents}
+        ])
+        if (procents === 'Ежемесячно на счет/карту') {
+            point.Balance += 1
+        } else {
+            point.Plus += 1
+            point.Money += 1
+            point.Kopit += 1
+            point.Big += 1
+        }
+        setMessages(prev => [...prev,
+            {
+                sender: 'bot-message', component: (
+                    <>
+                        <div className="promo-banner">
+                            <h2>💼 Готовы ли вы выполнить какие-либо условия, чтобы получить надбавку к базовой
+                                ставке?</h2>
+                            <p>
+                                1)Никаких условий, только максимальная фиксированная ставка <br/>
+                                2)Поддерживать средний остаток на дебетовой карте <br/>
+                                3)Подключить опцию «Накопления» в сервисе «Газпром Бонус» <br/>
+                                4)Внести «новые деньги» (не было 30 дней на ваших счетах) <br/>
+                                5)Открыть дистанционно и быть новым/зарплатным/пенсионным клиентом! 🌙💸
+                            </p>
+                        </div>
+                        <Buttoni first={''}
+                                 buttons={['пва', 'авы', 'авы', 'ч', 'я']}
+                                 onClickHandler={ysl}
+                        />
+                    </>
+
+
+                )
+            }
+        ])
+    }
+   const ysl = (vote) => {
+    setMessages(prev => [...prev,
+        { sender: 'user-message', text: vote }
+    ]);
+
+
+};
+
     const categories = (text) => {
         setMessages(prev => [...prev,
             {sender: 'user-message', text: text},
@@ -176,15 +302,22 @@ export default function Dialog({yourmessage}) {
         ])
     }
     const privileges = (text) => {
-        setMessages(prev => [...prev,
-            {sender: 'user-message', text: text},
-            {
-                sender: 'bot-message', component: (
-                    <Deposit/>
-                )
-            }
-        ])
-    }
+        setMessages(prev => {
+            return [
+                ...prev,
+                {sender: 'user-message', text},
+                {
+                    sender: 'bot-message',
+                    component: (
+                        <>
+                            <Deposit/>
+                        </>
+                    )
+                }
+            ];
+        });
+    };
+
 
     const trade_valuta = () => {
         setMessages(prev => [
@@ -288,6 +421,15 @@ export default function Dialog({yourmessage}) {
                     {sender: 'bot-message', text: 'Ты ввел неверное число'},
                 ]);
             }
+        } else {
+            setMessages(prev => {
+                const lastComponent = [...prev].reverse().find(m => m.component)?.component;
+                return [
+                    ...prev,
+                    {sender: 'bot-message', text: 'Прости, пока затрудняюсь ответить на твой вопрос'},
+                    lastComponent && {sender: 'second-bot-message', component: lastComponent}
+                ].filter(Boolean); // убирает undefined, если lastComponent не найден
+            });
         }
         setInput("");
     };
@@ -300,7 +442,6 @@ export default function Dialog({yourmessage}) {
                 messages={messages}
             />
             <button
-
                 onClick={() =>
                     window.location.reload()}
                 className="button-cleaning"

@@ -1,5 +1,4 @@
 import React from 'react';
-import './Buttoniany.css'
 export default function Buttoniany({first, buttons, onClickHandler}) {
     return (
         <>

@@ -62,17 +62,17 @@
     animation: messageAppear 0.8s ease-out forwards;
 }
 
-.repeat-bot-message {
+.second-bot-message {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 4%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
-    max-width: 70%;
+    max-width: 33%;
     padding: 12px 16px;
     font-size: 21px;
     border-radius: 16px;
     word-wrap: break-word;
-    display: inline-block;
+    display: block;
     background-color: #ffffff;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
