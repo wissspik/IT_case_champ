@@ -16,7 +16,7 @@ class Countries(BaseModel):
         'exchange_rates_office_cashless',
         'exchange_rates_office_cashless_premium'
     ]
-    amount: condecimal(max_digits=12, decimal_places=2)
+    amount: condecimal(max_digits=12, decimal_places=2,ge=0) # 0 >=
     currency_in:str
     currency_out:str
 class fitback_chat(BaseModel):

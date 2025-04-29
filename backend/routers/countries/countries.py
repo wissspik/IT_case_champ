@@ -58,14 +58,15 @@ async def currency_calculation(data: Countries, session : SessionDep):
 
     amt = Decimal(str(data.amount))
 
-    if data.currency_in == 'RUB':
+    if data.currency_in == data.currency_out:
+        return {'amount':data.amount}
+    elif data.currency_in == 'RUB':
         buy_target, _ = await fetch_rate(data.currency_out)
         converted = amt / buy_target
 
     elif data.currency_out == 'RUB':
         _, sell_source = await fetch_rate(data.currency_in)
         converted = sell_source * amt
-
     else:
         # OTH -> OTH: сначала в RUB, потом в целевую валюту
         _, sell_source = await fetch_rate(data.currency_in)
@@ -74,5 +75,5 @@ async def currency_calculation(data: Countries, session : SessionDep):
         converted = rub_amount / buy_target
 
     # округляем "вниз" до двух знаков
-    return float(converted.quantize(Decimal('0.01'), rounding=ROUND_DOWN))
+    return {'amount':float(converted.quantize(Decimal('0.01'), rounding=ROUND_DOWN))}
 
