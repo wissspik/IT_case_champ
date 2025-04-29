@@ -1,4 +1,3 @@
-# conftest.py
 import pytest
 from backend.main import app
 from httpx import AsyncClient, ASGITransport
