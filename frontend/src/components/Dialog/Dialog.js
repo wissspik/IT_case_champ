@@ -8,6 +8,7 @@ import ButtonsForAccept from "../ButtonsForAccept/ButtonsForAccept";
 import TradeCurrency from "../TradeCurrency/TradeCurrency";
 import './Dialog.css'
 import Deposit from "../Deposit/Deposit";
+import Deposit2 from "../Deposit/Nakopschet";
 
 export default function Dialog({yourmessage}) {
     const [valutate, setValutate] = useState('');
@@ -25,7 +26,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message',
                 component: (
                     <Buttoni
-                        first="Выбери валюту"
+                        first="💱 Выбери валюту"
                         buttons={['Рубли', 'Евро', 'Доллары']}
                         onClickHandler={countries}
                     />
@@ -41,7 +42,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message',
                 component: (
                     <Buttoniany
-                        first="Привет, с чем конкретно тебе помочь?"
+                        first="👋 Привет, с чем конкретно тебе помочь?"
                         buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
@@ -57,7 +58,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'repeat-bot-message', component: (
                     <>
-                        <p>Выбери страну в которую хочешь сделать перевод</p>
+                        <p>🌏    Выбери страну в которую хочешь сделать перевод</p>
                         <Export func={valuta}/>
                     </>
                 )
@@ -70,7 +71,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoniany
-                        first={'Что тебя интересует '}
+                        first={'🧐 Что тебя интересует '}
                         buttons={['Накопительный счет', 'Вклады']}
                         onClickHandler={[nakopschet, vklad]}
                     />
@@ -83,18 +84,48 @@ export default function Dialog({yourmessage}) {
             {sender: 'user-message', text: text},
             {
                 sender: 'bot-message', component: (
-                    <Buttoniany
-                        first={'Что тебя интересует '}
-                        buttons={['Информация', 'Назад']}
-                        onClickHandler={[nakopschetinfo, vkladiandscheta]}
-                    />
+                    <>
+                        <div className="promo-banner">
+                            <h2>💼 Почему накопительный счет?</h2>
+                            <p>
+                                Накопительный счёт — надёжный инструмент для хранения и приумножения средств за счёт
+                                стабильных процентов. Помогает сформировать «подушку безопасности», достичь финансовых
+                                целей и спокойно планировать будущее. 🌙💸
+                            </p>
+                        </div>
+
+                        <Buttoniany
+                            first={''}
+                            buttons={['Преимущества', 'Категории и счета', 'Назад']}
+                            onClickHandler={[nakopschetinfo, nakopshetcategor, vkladiandscheta]}
+                        />
+                    </>
+
                 )
             }
         ])
     }
+    const nakopshetcategor = (info) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: info},
+            {sender: 'bot-message', component: (
+            <>
+                <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
+                <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
+            </>
+        )
+    }
+
+    ])
+    }
     const nakopschetinfo = (info) => {
         setMessages(prev => [...prev,
             {sender: 'user-message', text: info},
+            {
+                sender: 'bot-message', component: (
+                    <Deposit2/>
+                )
+            }
         ])
     }
     const vklad = (text) => {
@@ -136,7 +167,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <>
-                        <p>Все категории в нашем банке вы можете увидеть по ссылке </p>
+                        <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
                         <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
                     </>
 
@@ -165,7 +196,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'repeat-bot-message', component: (
                     <Buttoniany
-                        first="Может теперь нужна помощь с чем-то другим?"
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
                         buttons={['Комиссия', 'Обмен валюты', 'Вклады']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
@@ -179,7 +210,7 @@ export default function Dialog({yourmessage}) {
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: country},
-            {sender: 'bot-message', text: 'Напиши сумму которую ты хочешь перевести'},
+            {sender: 'bot-message', text: '✍️ Напиши сумму которую ты хочешь перевести'},
         ]);
     };
 
