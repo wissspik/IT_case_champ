@@ -1,69 +1,41 @@
-from fastapi import APIRouter,HTTPException
-from unicodedata import category
-
+from fastapi import APIRouter,HTTPException,status
 from backend.models.shapes import fitback_chat,delivery_question
 from backend.database.base import SessionDep
 from backend.models.models import servis_fitbacks
-from sqlalchemy import select
+from sqlalchemy import text
 
-app = APIRouter(tags=['service'])
-
+app = APIRouter()
 
 # ручка,которая добавляет оценку работы бота в таблицу
-@app.put("/takes_fitback")
+@app.post("/take_fitbacks",
+    status_code=status.HTTP_201_CREATED, # статус ответ при получения проект
+    summary="Получения fitback от пользователей насчет работы чат-бота",
+    description="Принимает 2 поля: score(int,0 <= score <= 5) and comments(str). В дальнейшем кладёт их в servis_fitback")
 async def takes_fitback(data:fitback_chat,session : SessionDep):
-    if data.message and data.score:
-        session.add(servis_fitbacks(score=data.score,message=data.message))
-    elif data.message:
-        session.add(servis_fitbacks(message=data.message))
+    result_before = await session.execute(text("SELECT COUNT(*) FROM servis_fitbacks"))
+    len_before = result_before.scalar_one()
+    if data.comments and data.score:
+        session.add(servis_fitbacks(score=data.score,comments=data.comments))
+    elif data.comments:
+        session.add(servis_fitbacks(comments=data.comments))
     else:
         session.add(servis_fitbacks(score = data.score))
     await session.commit()
-    return {'message': 'ok'}
+    result_after =await  session.execute(text("SELECT COUNT(*) FROM servis_fitbacks"))
+    len_after = result_after.scalar_one()
+    return {'len_before':len_before,'len_after':len_after}
 
-'''
-ручка для добавлений данных для ответов.
-'''
-
-
-@app.post("/delivery_question")
+@app.post("/delivery_question",
+          summary="Выдача вопросов на категорию.",
+          description='Ручка принимает конкретную категорию:Вклад,Валюты и т.д.')
 async def delivery_question(data : delivery_question, session : SessionDep):
-    corw = data.category
-    stmt = select(servis_fitbacks).where(servis_fitbacks.category == corw)
-    result = await session.execute(stmt)
-    item = result.scalar_one_or_none()  # !!! вытаскиваем модель или None
-    if item is None:
-        raise HTTPException(status_code=404, detail="Запись не найдена")
-    return {
-        "question": item.question,
-        "answer": item.answer
+    all_category_question = {
+        'Вклад':{"questions":["Что такое вклад?","От чего будет зависеть доход?","Что такое капитализация процентов?","Минимальная гарантированная ставка по вкладу — это что?","Как узнать, сколько процентов я получаю?","Что такое пролонгация договора?","Что выбрать: накопительный счет или вклад?","Могу ли я открыть вклад на другого человека?","Могу ли я закрыть вклад, который открыт на кого-то другого?","Что такое налог на вклад и как его заплатить?","Какие вклады являются застрахованными?"],"answers":["Так называется депозит в рублях или иностранной валюте, который вы размещаете на счете в Газпромбанке на определенный срок, за что банк начисляет вам проценты по заранее известной выгодной ставке.","Доход определяется процентной ставкой, сроком размещения средств, наличием возможности пополнения и снятия. Ставка зависит от суммы открытия и лимитов на максимальную сумму, периода размещения средств, а также наличия спецпредложений и подключенных опций.","Если просто — это «процент на процент». Когда вы выбираете опцию капитализации, проценты за период будут присоединяться к сумме вашего депозита, и следующее начисление процентов будет производиться уже на новый остаток. То есть в новом периоде формула расчета будет выглядеть так: (вклад + %) × % = Увеличенный доход.","Так называется ставка, по которой вам будет выплачен минимальный доход вне зависимости от дополнительных условий или надбавок при условии, что вы не будете снимать деньги до истечения полного срока.","Посмотреть условия по процентной ставке по уже открытым продуктам можно в мобильном приложении. Сведения о начисленных процентах доступны в истории операций по счету — данные можно просмотреть в мобильном приложении или же запросить выписку по вкладу за период. Узнать проценты по новым предложениям можно в разделе «Условия» выбранного депозита.","Так называется автоматическое продление на новый срок, аналогичный первому. Например, вы открыли депозит на 6 месяцев, и когда это время пройдет, банк автоматически продлит договор (если это предусмотрено договором) еще на тот же период. Процентная ставка будет применена в соответствии с условиями, действующими на дату пролонгации.","Эти сбережения могут приносить одинаковый доход и являются способами приумножить ваши средства. Ставка по счету может быть изменена банком в одностороннем порядке, зато вы можете пополнять и снимать деньги в любой день без потери процентов за предыдущие периоды. По вкладу ставка фиксирована на весь срок, но при досрочном изъятии средств проценты будут выплачены по ставке «До востребования».","Да, достаточно предоставить свой паспорт и данные лица, на чье имя вы открываете счет. Управлять и распоряжаться депозитом сможет только тот, на чьем имя он оформлен.","Это можно сделать по нотариальной доверенности, а также в особом порядке, если владелец признан недееспособным или скончался.","Так называется 13% НДФЛ, который платят вкладчики, получающие доход от размещения средств в банке. Налог начисляется только на доход, полученный в истекшем календарном году, и только при условии, что сумма этого дохода выше необлагаемого минимума. Необлагаемый минимум рассчитывается как максимальное значение ключевой ставки ЦБ в отчетном году, умноженное на 1 млн рублей. При доходе свыше 5 млн ₽ до ставки НДФЛ составляет 15%. В 2024 году максимальная ставка была 21%, значит от налога освобождены проценты по вкладам в размере 210 000 ₽. Депозиты в разных банках суммируются, консолидированная сумма налога будет отражена в вашем личном кабинете на сайте ФНС вместе с налогами на имущество. Она подлежит уплате до 1 декабря года, следующего за отчётным.","Все продукты на сумму до 1,4 млн ₽. Если их размер больше, страховое покрытие распространяется только на указанную сумму. Средства на счетах в разных банках страхуются независимо друг от друга, а в одном — суммируются. Если у вас три депозита в разных банках, вы получите от всех трёх организаций, если у банков отзовут лицензию или наступит другой страховой случай."]},
+        'Валюты':{"questions":["Где возможно совершить конверсионную операцию?","Существуют ли в банке какие-либо комиссии при обмене валюты?","Какие документы необходимы для совершения конверсионной операции?","Какой самый быстрый, удобный и выгодный способ обмена валют в банке?","Что необходимо для обмена валюты в мобильном приложении и интернет-банке?","Как получить льготный курс обмена валюты?"],"answers":["Конверсионную операцию можно совершить как в любом офисе банка, так и в мобильном приложении или интернет-банке.","Нет. В банке нет никаких комиссий при обмене валюты.","Необходим документ, удостоверяющий личность, а также банк имеет право запросить документы, подтверждающие происхождение денежных средств.","В мобильном приложении и интернет-банке вы можете обменять валюту всего за несколько секунд и по самым выгодным курсам в банке.","Чтобы совершить конверсионную операцию, вам нужно быть клиентом Банка. Если вы ещё не являетесь клиентом, можно оформить карту с курьерской доставкой.","Для этого необходимо обратиться в офис банка. Льготный курс предоставляется клиенту только по безналичным конверсионным операциям."]}
     }
-@app.post("/gives_baners")
-async def gives_baners(session : SessionDep):
-    url_picture = ('https://cdn.gpb.ru/upload/files/bve/2c2/amtv44agojowa3eubap1npeqxnq3ggke/x1_Head-banner-Desktop-960x1120px.png',
-                   'https://cdn.gpb.ru/upload/files/bve/699/a094p509kwihmwyq2c09lt6qmf7fuh1k/x1_Head-banner-Desktop-960x1120px.png',
-                   'https://cdn.gpb.ru/upload/files/bve/df6/9orh0nxl6exk1c9ndf100xqed4oetkjs/x1_Head-banner-Desktop-_-PDS-_-960x1120px.png',
-                   'https://cdn.gpb.ru/upload/files/bve/911/f951dz6nfpw8bztxuojcl35rqd2vkbw7/x1_Head-banner-Desktop-960x1120px.png',
-                   'https://cdn.gpb.ru/upload/files/bve/173/exuq6hvwwpgot1boknxp8i1gc1kc3pvs/x1_Head-banner-Desktop-960x1120px.png',
-                   'https://cdn.gpb.ru/upload/files/bve/4bb/sqguii0x9ybhc7a4tp0dptfzvb00x55z/x1_Head-banner-Desktop-960x1120px.png')
-    id_arr = ("BigBenefits","Cashback","LongSavings","PremiumCard","LowPayment","PreciousMetals")
-    category_arr = ("Сбережения","Карты","Сбережения","Премиум","Кредиты","Инвестиции")
-    title_arr = ("21% годовых по вкладу «Большая выгода»","Кэшбэк на самое важное","Программа долгосрочных сбережений","Лучшая премиальная карта","Большой кредит с низким платежом","Драгоценные металлы")
-    subtitle_arr = ("Фиксированная ставка на 367 дней","По дебетовой карте","До 64% выгоды к личным взносам по программе","с выгодой от 500 000 ₽ в год","Выгоднее с залогом недвижимости","Покупка и продажа золотых слитков")
-    background_color = ('#476BF0','#DDF1FF','#FFD7C4','#4D2331','#A8DCFF','#3356D7')
-    textColor_arr = ("#FFFFFF","#000000","#000000","FFFFFF","#000000","#FFFFFF")
-    linkUrl_arr = ("https://www.gazprombank.ru/personal/increase/deposits/detail/7567855/","https://www.gazprombank.ru/personal/cards/7579039/","https://www.gazprombank.ru/personal/page/pds/","https://www.gazprombank.ru/premium/","https://www.gazprombank.ru/personal/take_credit/mortgage/42168/","https://www.gazprombank.ru/personal/page/metal/")
-    result =  []
-    for i in range(len(url_picture)):
-        j_s = {"id":id_arr[i],
-             "category":category_arr[i],
-             "title": title_arr[i],
-             "subtitle": subtitle_arr[i],
-             "backgroundColor": background_color[i],
-             "textColor": textColor_arr[i],
-             "imageUrl": url_picture[i],
-             "linkUrl": linkUrl_arr[i]
-        }
-        result.append(j_s)
-    return result
+    if data.category not in all_category_question:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        )
+    return all_category_question[data.category]
 

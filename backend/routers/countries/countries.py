@@ -9,7 +9,7 @@ from sqlalchemy import select,and_
 from contextlib import asynccontextmanager
 from backend.models.models import exchange_methods_all
 
-app = APIRouter(tags=['currency'])
+app = APIRouter()
 
 scheduler = AsyncIOScheduler()
 
@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
         scheduler.add_job(
             update_data,
             trigger='interval',
-            seconds=86400,# 20
+            seconds=20,# 86400
             id='update_data_job',
             replace_existing=True,
         )

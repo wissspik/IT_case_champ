@@ -21,7 +21,7 @@ class Countries(BaseModel):
     currency_out:str
 class fitback_chat(BaseModel):
     score: Literal[0,1,2,3,4,5]
-    message: str
+    comments: str
 class delivery_question(BaseModel):
     category : Literal['exchange','currency'] # доступные категории для вопросов
 
