@@ -55,23 +55,4 @@ class BankSistem(Base):
     limit_max: Mapped[int] = mapped_column(Integer)
     comments: Mapped[str] = mapped_column(String(150), nullable=True)
 
-'''
-class transfer_methods(Base):
-    __tablename__ = 'transfer_methods'
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    cash: Mapped[bool] = mapped_column(Boolean)
-    bank_card: Mapped[bool] = mapped_column(Boolean)
-    account_number: Mapped[bool] = mapped_column(Boolean)
-    full_name: Mapped[bool] = mapped_column(Boolean)
-
-    country_id: Mapped[int] = mapped_column(Integer, ForeignKey('countries_bank.id'))
-
-    countries = relationship('Currencies', backref='methods')
-class currencies(Base):
-    __tablename__ = 'currencies'
-    id : Mapped[int] = mapped_column(Integer, primary_key=True)
-    name : Mapped[str] = mapped_column(String(50), nullable=False, index=True)
-    methods_id: Mapped[int] = mapped_column(Integer, ForeignKey('transfer_methods.id'))
-
-'''
 #bank -> countries_many -> transfer_methods -> Currencies ->

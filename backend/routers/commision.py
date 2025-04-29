@@ -1,8 +1,8 @@
 from fastapi import APIRouter
-from sqlalchemy.sql.visitors import replacement_traverse
-
+from sqlalchemy import select,func,over
 from backend.database.base import SessionDep
-
+from backend.models.shapes import BankCommissions
+from backend.models.models import BankSistem
 app = APIRouter()
 
 @app.post("/take_countries",
@@ -18,4 +18,35 @@ async def take_countries(session: SessionDep):
 async def take_currencies():
     array_currencies = ("UZS", "KGS", "BYN", "TJS", "RUB", "AMD", "KZT", "AZN", "CNY", "VND", "IRR", "RSD", "AED", "ILS", "GEL", "KGS", "EUR", "KRW", "TRY", "MNT", "MDL", "THB", "IDR", "INR", "PHP")
     return {"array_currencies": array_currencies}
+
+@app.post("/calculation_сommissions")
+async def calculation_сommissions(data:BankCommissions ,session: SessionDep):
+    all_banks = ["Альфа-банк", "МТС банк", "Ozon банк", "ВТБ", "Газпромбанк", "Т-банк", "Почта Банк", "Россельхозбанк", "Сбербанк", "ЮMoney"]
+    subq = (
+        select(
+            BankSistem,
+            func.row_number()
+            .over(
+                partition_by=BankSistem.bank,
+                order_by=BankSistem.commission
+            )
+            .label("rn")
+        )
+        .where(
+            BankSistem.bank.in_(all_banks),
+            BankSistem.currency == data.currency,
+            BankSistem.country == data.country,
+            BankSistem.method == data.method,
+            BankSistem.limit_min <= data.amount,
+            data.amount <= BankSistem.limit_max
+        )
+        .subquery()
+    )
+    stmt = select(subq).where(subq.c.rn == 1)
+    result = await session.execute(stmt)
+    best_per_bank = result.scalars().all()
+    # нужно представить строки в виде конечного результата,убрать айди,и обработать comments
+    return {'message':True}
+
+
 
