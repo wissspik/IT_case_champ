@@ -67,12 +67,13 @@
     margin-top: 4%;
     margin-left: 60px;
     font-family: "Gilroy-light", sans-serif;
-    max-width: 33%;
+    min-width: 50% ;
+    max-width: 70%;
     padding: 12px 16px;
     font-size: 21px;
     border-radius: 16px;
     word-wrap: break-word;
-    display: block;
+    display: inline-block;
     background-color: #ffffff;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
