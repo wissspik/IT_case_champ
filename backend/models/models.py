@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase
+from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy import  text, Integer, String,  LargeBinary,Float,Index
 
-class Base(DeclarativeBase):
+class Base(AsyncAttrs,DeclarativeBase):
     pass
 class servis_fitbacks(Base):
     __tablename__ = 'servis_fitbacks'
@@ -29,8 +30,7 @@ class countries(Base):
     __tablename__ = 'countries'
     id: Mapped[int] = mapped_column(primary_key=True)
     country:Mapped[str] = mapped_column(String,index = True,unique= True)
-    picture: Mapped[bytes] = mapped_column(LargeBinary,nullable=False, server_default=text("X''"))
-
+    picture: Mapped[str] = mapped_column(String,index = True,unique= True)
 
 #Банковская система таблиц
 class BankSistem(Base):

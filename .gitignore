@@ -24,3 +24,5 @@ yarn-error.log*
 .idea/
 .venv/
 venv/
+
+docker-compose_db.yml

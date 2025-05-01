@@ -1,27 +1,41 @@
-# Второй файл: парсер курсов без «213» и лишнего принта
 from curl_cffi import requests
 
 def parse_rates(items):
     """
     Возвращает список кортежей:
-    (ticker, tickerTitle, unit_str, buy_str, sell_str)
+    (ticker: str, title: str, unit: int, buy: float, sell: float)
     """
     result = []
     for r in items:
         ticker = r.get('ticker', 'N/A')
-        title  = r.get('tickerTitle', 'N/A')
-        unit   = r.get('unit')
-        buy    = r.get('buy')
-        sell   = r.get('sell')
+        title = r.get('tickerTitle', 'N/A')
+        unit = r.get('unit')
+        buy = r.get('buy')
+        sell = r.get('sell')
 
-        unit_str = str(unit) if unit is not None else 'N/A'
-        buy_str  = str(buy)  if buy  is not None else 'N/A'
-        sell_str = str(sell) if sell is not None else 'N/A'
+        try:
+            unit_int = int(unit) if unit is not None else 0
+        except (ValueError, TypeError):
+            unit_int = 0
 
-        result.append((ticker, title, unit_str, buy_str, sell_str))
+        try:
+            buy_f = float(buy) if buy is not None else 0.0
+        except (ValueError, TypeError):
+            buy_f = 0.0
+
+        try:
+            sell_f = float(sell) if sell is not None else 0.0
+        except (ValueError, TypeError):
+            sell_f = 0.0
+
+        result.append((ticker, title, unit_int, buy_f, sell_f))
     return result
 
 def exchange_rates_office_cashless_done():
+    """
+    Получает курсы офисного безналичного обмена и возвращает список кортежей:
+    (ticker: str, unit: int, buy: float, sell: float)
+    """
     headers = {
         'accept': '*/*',
         'accept-language': 'ru,en;q=0.9',
@@ -33,7 +47,11 @@ def exchange_rates_office_cashless_done():
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 YaBrowser/25.2.0.0 Safari/537.36',
+        'user-agent': (
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+            'AppleWebKit/537.36 (KHTML, like Gecko) '
+            'Chrome/132.0.0.0 YaBrowser/25.2.0.0 Safari/537.36'
+        ),
     }
     params = {
         'ab_segment': 'segment08',
@@ -43,25 +61,24 @@ def exchange_rates_office_cashless_done():
     }
     api_url = 'https://www.gazprombank.ru/rest/exchange/rate'
 
-    resp = requests.get(api_url,
-    params=params,
-    headers=headers,
-    proxies={"http": None, "https": None},   # ⟵ не использовать системный прокси
-    http_version=2
-                        )
-    resp.raise_for_status()
-    data = resp.json()
-    result = []
+    response = requests.get(
+        api_url,
+        params=params,
+        headers=headers,
+        proxies={"http": None, "https": None},
+        http_version=2
+    )
+    response.raise_for_status()
+    data = response.json()
 
+    result = []
     for section in data:
         if section.get('code') != 'exchange_rates_office_cashless':
             continue
         content = section.get('content', {})
         for segment_name in ('segment_regular', 'segment_premium'):
-            seg_list = content.get(segment_name, [])
-            for block in seg_list:
+            for block in content.get(segment_name, []):
                 rates = parse_rates(block.get('items', []))
-                # собираем результат
-                for t, name, u, buy, sell in rates:
-                    result.append([t, u, buy, sell])
+                for ticker, title, unit_int, buy_f, sell_f in rates:
+                    result.append((ticker, unit_int, buy_f, sell_f))
     return result

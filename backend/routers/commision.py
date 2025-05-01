@@ -3,6 +3,9 @@ from sqlalchemy import select,func,over
 from backend.database.base import SessionDep
 from backend.models.shapes import BankCommissions
 from backend.models.models import BankSistem
+import time
+from decimal import Decimal
+import json
 app = APIRouter()
 
 @app.post("/take_countries",
@@ -19,8 +22,8 @@ async def take_currencies():
     array_currencies = ("UZS", "KGS", "BYN", "TJS", "RUB", "AMD", "KZT", "AZN", "CNY", "VND", "IRR", "RSD", "AED", "ILS", "GEL", "KGS", "EUR", "KRW", "TRY", "MNT", "MDL", "THB", "IDR", "INR", "PHP")
     return {"array_currencies": array_currencies}
 
-@app.post("/calculation_сommissions")
-async def calculation_сommissions(data:BankCommissions ,session: SessionDep):
+@app.post("/сommision_calculation")
+async def calculation_сommissions(data:BankCommisions ,session: SessionDep):
     all_banks = ["Альфа-банк", "МТС банк", "Ozon банк", "ВТБ", "Газпромбанк", "Т-банк", "Почта Банк", "Россельхозбанк", "Сбербанк", "ЮMoney"]
     subq = (
         select(
@@ -28,7 +31,7 @@ async def calculation_сommissions(data:BankCommissions ,session: SessionDep):
             func.row_number()
             .over(
                 partition_by=BankSistem.bank,
-                order_by=BankSistem.commission
+                order_by=BankSistem.commision
             )
             .label("rn")
         )
@@ -43,10 +46,26 @@ async def calculation_сommissions(data:BankCommissions ,session: SessionDep):
         .subquery()
     )
     stmt = select(subq).where(subq.c.rn == 1)
+    start_time = time.perf_counter() # замер времени
     result = await session.execute(stmt)
-    best_per_bank = result.scalars().all()
-    # нужно представить строки в виде конечного результата,убрать айди,и обработать comments
-    return {'message':True}
+    end_time = time.perf_counter()# замер времени
+    elapsed = end_time - start_time
+    print(f"⏱️ Время выполнения запроса: {elapsed:.4f} секунд")
+    best_per_bank = result.all()
+    print(best_per_bank)
 
-
+    rows_data = [
+        {   "bank":r[1],
+            "country": r[2],
+            "method": r[3],
+            "currency": r[4],
+            "commission": r[5],
+            "limit_min":r[6],
+            "limit_max":r[7],
+            "comments": r[8],
+            "amount": Decimal(str(data.amount)) * Decimal('0.95')# тут нужно сделать перерасчет
+        }
+        for r in range(len(best_per_bank))
+    ]
+    return rows_data
 

@@ -12,7 +12,7 @@ import os
 load_dotenv()
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(commission,prefix="/commission",tags=['commission'])
+app.include_router(commission,prefix="/commision",tags=['commision'])
 app.include_router(base,prefix="/base_test",tags=['database'])
 app.include_router(service_windows,prefix = "/service_windows",tags=['service'])
 app.include_router(countries,prefix = "/countries",tags=['countries'])
