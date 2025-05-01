@@ -2,7 +2,6 @@ from idlelib.rpc import response_queue
 
 import pytest
 
-import data
 
 
 @pytest.mark.asyncio
@@ -37,7 +36,7 @@ class TestCommission:
         response = await client.post("/commission/сommission_calculation")
         assert response.status_code == expected_status
 
-    @pytest.mark.parametrize('payload,expected_status,expected_len', [
+    @pytest.mark.parametrize('payload,expected_status', [
         # ERROR 422
         ({'currency:': 'F', 'country': 'Узбекистан', 'method': 'cash', 'amount': 10},422),
         ({'currency:': 'RUB', 'country': 'DDD', 'method': 'cash', 'amount': 10}, 422),
@@ -46,11 +45,16 @@ class TestCommission:
         ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': 'FDF'}, 422),
         ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': None}, 422)
     ])
-    async def test_calculation_сommisions(self, expected_status, client):
-        response = client.post("/commision/сommision_calculation")
+    async def test_calculation_сommisions_422(self, payload,expected_status, client):
+        response = client.post("/commision/сommision_calculation",json=payload)
         assert response.status_code == expected_status
-    @pytest.mark.parametrize('payload,expected_status,expected_len',[
+
+        #good кейс
+    @pytest.mark.parametrize('payload,expected_status',[
         ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': 10000}, 200)])
+    async def test_calculation_сommisions_422(self, payload,expected_status, client):
+        response = client.post("/commision/сommision_calculation",json=payload)
+        assert response.status_code == expected_status
 
 
 @pytest.mark.asyncio

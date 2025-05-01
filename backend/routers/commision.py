@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import select,func,over
 from backend.database.base import SessionDep
-from backend.models.shapes import BankCommissions
+from backend.models.shapes import BankCommisions
 from backend.models.models import BankSistem
 import time
 from decimal import Decimal
@@ -55,17 +55,18 @@ async def calculation_сommissions(data:BankCommisions ,session: SessionDep):
     print(best_per_bank)
 
     rows_data = [
-        {   "bank":r[1],
-            "country": r[2],
-            "method": r[3],
-            "currency": r[4],
-            "commission": r[5],
-            "limit_min":r[6],
-            "limit_max":r[7],
-            "comments": r[8],
-            "amount": Decimal(str(data.amount)) * Decimal('0.95')# тут нужно сделать перерасчет
+        {   "bank":best_per_bank[r][1],
+            "country": best_per_bank[r][2],
+            "method": best_per_bank[r][3],
+            "currency": best_per_bank[r][4],
+            "commission": best_per_bank[r][5],
+            "limit_min":best_per_bank[r][6],
+            "limit_max":best_per_bank[r][7],
+            "comments": best_per_bank[r][8],
+            "amount": Decimal(str(data.amount)) * Decimal(str(1 - best_per_bank[r][5] / 100))
         }
         for r in range(len(best_per_bank))
     ]
+    rows_data.sort(key=lambda x: x["commission"])
     return rows_data
 
