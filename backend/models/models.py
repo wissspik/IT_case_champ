@@ -52,7 +52,7 @@ class BankSistem(Base):
     currency: Mapped[str] = mapped_column(String(50), nullable=False)
     commision: Mapped[float] = mapped_column(Float)
     limit_min: Mapped[float] = mapped_column(Float)
-    limit_max: Mapped[int] = mapped_column(Integer)
+    limit_max: Mapped[int] = mapped_column(Integer) # изменить на флот
     comments: Mapped[str] = mapped_column(String(150), nullable=True)
 
 #bank -> countries_many -> transfer_methods -> Currencies ->

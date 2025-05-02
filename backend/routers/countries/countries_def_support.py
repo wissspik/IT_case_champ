@@ -2,8 +2,23 @@ from curl_cffi import requests
 
 def parse_rates(items):
     """
-    Возвращает список кортежей:
-    (ticker: str, title: str, unit: int, buy: float, sell: float)
+    Выполняет парсинг списка курсов и возвращает готовые к использованию кортежи.
+
+    Args:
+        items (list of dict): Список словарей с полями:
+            - 'ticker' (str): Код валюты.
+            - 'tickerTitle' (str): Название валюты.
+            - 'unit' (int/str): Количество единиц, к которым привязан курс.
+            - 'buy' (float/str): Цена покупки.
+            - 'sell' (float/str): Цена продажи.
+
+    Returns:
+        list of tuple: Список кортежей по формату:
+            - ticker (str): Код валюты.
+            - title (str): Название валюты.
+            - unit (int): Количество единиц.
+            - buy (float): Цена покупки.
+            - sell (float): Цена продажи.
     """
     result = []
     for r in items:
@@ -33,8 +48,24 @@ def parse_rates(items):
 
 def exchange_rates_office_cashless_done():
     """
-    Получает курсы офисного безналичного обмена и возвращает список кортежей:
-    (ticker: str, unit: int, buy: float, sell: float)
+    Получает и парсит курсы офисного безналичного обмена Газпромбанка.
+
+    Выполняет HTTP-запрос к публичному API Газпромбанка, фильтрует секцию
+    'exchange_rates_office_cashless' и собирает курсы из блоков
+    'segment_regular' и 'segment_premium' через функцию parse_rates.
+
+    Args:
+        None
+
+    Returns:
+        list of tuple: Список кортежей курсов по формату:
+            - ticker (str): Код валюты.
+            - unit (int): Количество единиц валюты.
+            - buy (float): Цена покупки.
+            - sell (float): Цена продажи.
+
+    Raises:
+        HTTPError: Если запрос к API возвращает ошибочный статус.
     """
     headers = {
         'accept': '*/*',

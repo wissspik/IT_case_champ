@@ -17,6 +17,24 @@ scheduler = AsyncIOScheduler()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    '''
+    Начинает процессы фоновых задач.
+
+   Args:
+       app (FastAPI): приложение FastAPI.
+
+   Returns:
+       dict: Словарь с массивами,которые содержат:
+            -bank: Названия банка.
+            -country: Название страны.
+            -method: Название способа перевода.
+            -currency: Название валюта для перевода.
+            -commission: Сумма комиссии по переводу.
+            -limit_min: Минимальная сумма перевода.
+            -limit_max: Максимальная сумма перевода.
+            -comments: Дополнительные комментарии для перевода.
+            -amount: Сумма перевода с учетом комиссии.
+    '''
     # === start ===
     if not scheduler.get_job('update_data_job'):
         scheduler.add_job(
@@ -39,6 +57,17 @@ async def lifespan(app: FastAPI):
 
 @app.post("/currency_calculation")
 async def currency_calculation(data: Countries, session : SessionDep):
+    '''
+        Расчитывает комиссию для перевода из валют.
+
+        Args:
+           data (Countries): Входной JSON с данными.
+           session (SessionDep): Зависимость FastAPI для работы с сессией.
+
+        Returns:
+           dict: Словарь с 1 ключом:
+                -amount: Сумма перевода с одной валюты,в другую валюту.
+    '''
     table_name = data.exchange_methods  # строка, напр. "usd_rates"
     table = Base.metadata.tables.get(table_name)
     async def fetch_rate(currency: str) -> tuple[Decimal, Decimal]:

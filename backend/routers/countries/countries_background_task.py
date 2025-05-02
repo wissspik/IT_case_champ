@@ -6,6 +6,10 @@ from backend.database.base import get_session_support
 from backend.routers.countries.countries_def_support import exchange_rates_office_cashless_done
 
 async def update_data():
+    '''
+        Функция для парсинга данных.
+        Заполняет таблицу в бд с ценами валют(парсинг из сайта:https://www.gazprombank.ru/personal/courses/).
+    '''
     async with get_session_support() as session:
         # Чистим таблицу перед вставкой новых курсов
         table_name = exchange_methods_all.__tablename__
@@ -92,6 +96,5 @@ async def update_data():
                     sell=s,
                     quantity=q,
                 ))
-
         # Коммитим интернет-банковские и картовые курсы
         await session.commit()

@@ -2,7 +2,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers.commision import app as commision
+from backend.routers.commission import app as commission
 from backend.database.base import app as base
 from backend.routers.countries.countries import app as countries
 from backend.service.service_windows import app as service_windows
@@ -12,7 +12,7 @@ import os
 load_dotenv()
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(commision,prefix="/commision",tags=['commision'])
+app.include_router(commission,prefix="/commission",tags=['commission'])
 app.include_router(base,prefix="/base_test",tags=['database'])
 app.include_router(service_windows,prefix = "/service_windows",tags=['service'])
 app.include_router(countries,prefix = "/countries",tags=['countries'])
