@@ -13,6 +13,8 @@ import EqualButtons from "../EqualButtons";
 
 export default function Dialog({yourmessage}) {
     const [valutate, setValutate] = useState('');
+    const [money, setMoney] = useState(false);
+    const [counts, setCounts] = useState(false);
     const [message, setMessage] = useState('');
     const [banker, setBank] = useState('');
     const [messages, setMessages] = useState([]);
@@ -36,6 +38,7 @@ export default function Dialog({yourmessage}) {
     }
 
     const comissia = () => {
+        console.log("comissia")
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: 'Рассчитай комиссию'},
@@ -113,8 +116,8 @@ export default function Dialog({yourmessage}) {
 
                         <Buttoniany
                             first={''}
-                            buttons={['Преимущества', 'Категории и счета', 'Назад']}
-                            onClickHandler={[nakopschetinfo, nakopshetcategor, vkladiandscheta]}
+                            buttons={['Преимущества', 'Помоги выбрать', 'Категории и счета', 'Назад']}
+                            onClickHandler={[nakopschetinfo, nakopshetchoose, nakopshetcategor, vkladiandscheta]}
                         />
                     </>
 
@@ -135,6 +138,96 @@ export default function Dialog({yourmessage}) {
             }
 
         ])
+    }
+    const nakopshetchoose = (info) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: info},
+            {
+                sender: 'bot-message', component: (
+                    <Buttoni first={'Сколько денег вы хотите держать на счёте?'}
+                             buttons={['До 10 млн', 'Свыше 10 млн']}
+                             onClickHandler={nakopshetchoosestep2}
+                    />
+                )
+            }
+        ])
+    }
+    const nakopshetchoosestep2 = (choose) => {
+        if (choose === 'До 10 млн') {
+            setMoney(true)
+        } else {
+            setMoney(false)
+        }
+
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: choose},
+            {
+                sender: 'bot-message', component: (
+                    <Buttoni
+                        first={'Будете ли вы часто снимать или пополнять счет?'}
+                        buttons={['Да', 'Нет']}
+                        onClickHandler={nakopshetchoosestep3}
+                    />
+                )
+            }
+
+
+        ])
+    }
+    const nakopshetchoosestep3 = (info) => {
+        if (info) {
+            setCounts(true)
+        } else {
+            setCounts(false)
+        }
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: info},
+            {
+                sender: 'bot-message', component: (
+                    <Buttoni first={'Что для вас важнее?'}
+                             buttons={['максимальная ставка (до 21,5 % годовых)', 'простые условия (19,5 % без ограничения операций)']}
+                             onClickHandler={nakopshetchoosestep4}
+                    />
+                )
+            }
+
+        ])
+
+    }
+    const nakopshetchoosestep4 = (info) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: info},
+        ])
+        if (money && !counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+            setMessages(prev => [...prev,
+                {sender: 'bot-message', text: 'Premium'},])
+        }
+        if (!money && !counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+            setMessages(prev => [...prev,
+                {sender: 'bot-message', text: 'Накопительный счет'},])
+        }
+        if (counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+            setMessages(prev => [...prev,
+                {sender: 'bot-message', text: 'Ежедневный процент'},])
+        }
+        if (info === 'простые условия (19,5 % без ограничения операций)') {
+            setMessages(prev => [...prev,
+                {sender: 'bot-message', text: 'Простой процент'},])
+        }
+        setMessages(prev => [...prev,
+            {
+                sender: 'bot-message', component: (
+                    <Buttoniany
+                        first="Может быт тебе помочь с чем то другим?"
+                        buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+                )
+            }
+
+        ])
+
+
     }
     const nakopschetinfo = (info) => {
         setMessages(prev => [...prev,
@@ -209,7 +302,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message', component: (
                     <Buttoni
                         first={'На какой срок вы планируете разместить средства?'}
-                        buttons={['1-3 мес', '4-7 мес', '8 мес - 3 года']}
+                        buttons={['1 - 3 мес', '4 - 7 мес', '8 мес - 3 года']}
                         onClickHandler={times}
                     />
                 )
@@ -223,7 +316,7 @@ export default function Dialog({yourmessage}) {
         setMessages(prev => [...prev,
             {sender: 'user-message', text: times},
         ])
-        if (times === '1-3 мес' || times === '4-7 мес') {
+        if (times === '1 - 3 мес' || times === '4 - 7 мес') {
             point.Balance += 1
             point.Money += 1
             point.Kopit += 1
@@ -269,7 +362,7 @@ export default function Dialog({yourmessage}) {
                             </p>
                         </div>
                         <Buttoni first={''}
-                                 buttons={['пва', 'авы', 'авы', 'ч', 'я']}
+                                 buttons={['1', '2', '3', '4', '5']}
                                  onClickHandler={ysl}
                         />
                     </>
@@ -279,13 +372,53 @@ export default function Dialog({yourmessage}) {
             }
         ])
     }
-   const ysl = (vote) => {
-    setMessages(prev => [...prev,
-        { sender: 'user-message', text: vote }
-    ]);
+    const ysl = (vote) => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: vote}
+        ]);
+
+        if (vote === '1') {
+            point.Big += 1;
+        } else if (vote === '2') {
+            point.Balance += 1;
+        } else if (vote === '3') {
+            point.Plus += 1;
+        } else if (vote === '4') {
+            point.Money += 1;
+        } else {
+            point.Kopit += 1;
+        }
+
+        const maxValue = Math.max(...Object.values(point));
+
+        const itog = [];
+        for (const key in point) {
+            if (point[key] === maxValue) {
+                itog.push(key);
+            }
+        }
+
+        const user_itog = itog.map(key => pointnames[key]);
+
+        console.log('Результат:', user_itog);
+        setMessages(prev => [...prev,
+            {
+                sender: 'bot-message', component: (
+                    <>
+
+                        {user_itog.map((key, itogi) => (
+                            <>
+                                <p>Тебе подходят такие вклады как: {key}</p>
+                            </>
+                        ))
+                        }
+                    </>
+                )
+            },
 
 
-};
+        ])
+    };
 
     const categories = (text) => {
         setMessages(prev => [...prev,
@@ -327,7 +460,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'change-moneta', component: (<TradeCurrency/>)
             },
             {
-                sender: 'repeat-bot-message', component: (
+                sender: 'second-bot-message', component: (
                     <Buttoniany
                         first="👀 Может теперь нужна помощь с чем-то другим?"
                         buttons={['Комиссия', 'Обмен валюты', 'Вклады']}
@@ -352,7 +485,6 @@ export default function Dialog({yourmessage}) {
             const response = await axios.post("http://127.0.0.1:8000/", data, {
                     headers: {"Content-Type": "application/json"},
                 })
-
             ;
             setMessages(prev => [...prev, {
                 sender: 'bot-message', component: (
