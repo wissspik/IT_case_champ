@@ -26,3 +26,4 @@ yarn-error.log*
 venv/
 
 docker-compose_db.yml
+data/database.db
