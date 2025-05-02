@@ -1,10 +1,12 @@
 .message-in-chat {
+    border: 2px solid #d1d5db;
+    color: #111827;
+    border-radius: 30px;
     overflow-x: hidden;
     background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
     left: 23%;
     padding-bottom: 15px;
     padding-left: 5px;
@@ -12,14 +14,21 @@
     font-size: 25px;
     width: 50%;
     height: 100px;
-    border-radius: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     z-index: 10;
-
 }
+
+.message-in-chat:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
 .button-cleaning {
     display: none;
 }
+
 @media (max-width: 700px) {
     .message-in-chat {
         margin-top: 0px;
@@ -30,6 +39,7 @@
         padding-bottom: 0px;
 
     }
+
     .chat-container {
         max-height: 70%;
         width: 100%;
@@ -55,4 +65,22 @@
 
 .size-messages {
     width: auto;
+}
+
+
+.icon-button {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.send-button-indialog {
+  background-color: #4caf50;
+  color: white;
+}
+
+.clear-button {
+  background-color: #f44336;
+  color: white;
 }

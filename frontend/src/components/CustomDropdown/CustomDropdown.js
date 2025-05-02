@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import './CustomDropdown.css';
 
-export default function CustomDropdown({options, onSelect, placeholder = "Выбери страну", photos}) {
+export default function CustomDropdown({options, onSelect, placeholder, photos}) {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");

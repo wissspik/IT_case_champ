@@ -10,6 +10,8 @@ import './Dialog.css'
 import Deposit from "../Deposit/Deposit";
 import Deposit2 from "../Deposit/Nakopschet";
 import EqualButtons from "../EqualButtons";
+import {Send, Trash2} from "lucide-react";
+
 
 export default function Dialog({yourmessage}) {
     const [valutate, setValutate] = useState('');
@@ -20,6 +22,19 @@ export default function Dialog({yourmessage}) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [country, setCountry] = useState('');
+    const handleClearMessages = () => {
+        setMessages([
+            {
+                sender: 'bot-message', component: (
+                    <Buttoniany
+                        first="👋 Пока, если нужна будет помощь, я тут"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+                )
+            }
+        ]);
+    }
     const point = {
         Balance: 0,
         Plus: 0,
@@ -45,11 +60,10 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message',
                 component: (
-                    <Buttoni
-                        first="💱 Выбери валюту"
-                        buttons={['Рубли', 'Евро', 'Доллары']}
-                        onClickHandler={countries}
-                    />
+                    <>
+                        <p>💱 Выбери валюту</p>
+                         <Export func={countries} choose={2}/>
+                    </>
                 ),
             },
         ]);
@@ -63,7 +77,7 @@ export default function Dialog({yourmessage}) {
                 component: (
                     <Buttoniany
                         first="👋 Привет, с чем конкретно тебе помочь?"
-                        buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
                 ),
@@ -79,7 +93,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message', component: (
                     <>
                         <p>🌏 Выбери страну в которую хочешь сделать перевод</p>
-                        <Export func={valuta}/>
+                        <Export func={valuta} choose={1}/>
                     </>
                 )
             }
@@ -92,7 +106,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message', component: (
                     <Buttoniany
                         first={'🧐 Что тебя интересует '}
-                        buttons={['Накопительный счет', 'Вклады']}
+                        buttons={['💎 Накопительный счет', '📠 Вклады']}
                         onClickHandler={[nakopschet, vklad]}
                     />
                 )
@@ -116,7 +130,7 @@ export default function Dialog({yourmessage}) {
 
                         <Buttoniany
                             first={''}
-                            buttons={['Преимущества', 'Помоги выбрать', 'Категории и счета', 'Назад']}
+                            buttons={['🧩 Преимущества', '🎯 Помоги выбрать', '✨ Категории и счета', '🔙 Назад']}
                             onClickHandler={[nakopschetinfo, nakopshetchoose, nakopshetcategor, vkladiandscheta]}
                         />
                     </>
@@ -144,8 +158,8 @@ export default function Dialog({yourmessage}) {
             {sender: 'user-message', text: info},
             {
                 sender: 'bot-message', component: (
-                    <Buttoni first={'Сколько денег вы хотите держать на счёте?'}
-                             buttons={['До 10 млн', 'Свыше 10 млн']}
+                    <Buttoni first={'👀 Сколько денег вы хотите держать на счёте?'}
+                             buttons={['😎 До 10 млн', '🤑 Свыше 10 млн']}
                              onClickHandler={nakopshetchoosestep2}
                     />
                 )
@@ -153,7 +167,7 @@ export default function Dialog({yourmessage}) {
         ])
     }
     const nakopshetchoosestep2 = (choose) => {
-        if (choose === 'До 10 млн') {
+        if (choose === '😎 До 10 млн') {
             setMoney(true)
         } else {
             setMoney(false)
@@ -164,8 +178,8 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoni
-                        first={'Будете ли вы часто снимать или пополнять счет?'}
-                        buttons={['Да', 'Нет']}
+                        first={'👾 Будете ли вы часто снимать или пополнять счет?'}
+                        buttons={['✔️ Да', '❌ Нет']}
                         onClickHandler={nakopshetchoosestep3}
                     />
                 )
@@ -175,7 +189,7 @@ export default function Dialog({yourmessage}) {
         ])
     }
     const nakopshetchoosestep3 = (info) => {
-        if (info) {
+        if (info === '✔️ Да') {
             setCounts(true)
         } else {
             setCounts(false)
@@ -185,7 +199,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoni first={'Что для вас важнее?'}
-                             buttons={['максимальная ставка (до 21,5 % годовых)', 'простые условия (19,5 % без ограничения операций)']}
+                             buttons={['Максимальная ставка (до 21,5 % годовых)', 'Простые условия (19,5 % без ограничения операций)']}
                              onClickHandler={nakopshetchoosestep4}
                     />
                 )
@@ -195,8 +209,9 @@ export default function Dialog({yourmessage}) {
 
     }
     const nakopshetchoosestep4 = (info) => {
+        const sms = info === 'Максимальная ставка (до 21,5 % годовых)' ? 'Максимальная' : 'Простые условия'
         setMessages(prev => [...prev,
-            {sender: 'user-message', text: info},
+            {sender: 'user-message', text: sms},
         ])
         if (money && !counts && info === 'максимальная ставка (до 21,5 % годовых)') {
             setMessages(prev => [...prev,
@@ -218,7 +233,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoniany
-                        first="Может быт тебе помочь с чем то другим?"
+                        first="Может быть тебе помочь с чем то другим?"
                         buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
@@ -273,7 +288,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <EqualButtons
-                        first={'Выбери валюту в которой будешь держать вклад'}
+                        first={'👍 Выбери валюту в которой будешь держать вклад'}
                         buttons={['Рубли', 'Юани']}
                         onClickHandler={currency}
                         value={['Рубли', 'Юани']}
@@ -301,7 +316,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoni
-                        first={'На какой срок вы планируете разместить средства?'}
+                        first={'😊 На какой срок вы планируете разместить средства?'}
                         buttons={['1 - 3 мес', '4 - 7 мес', '8 мес - 3 года']}
                         onClickHandler={times}
                     />
@@ -326,7 +341,7 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoni
-                        first={'Как вам удобнее получать проценты?'}
+                        first={'🙂 Как вам удобнее получать проценты?'}
                         buttons={['Ежемесячно на счет / карту', 'В конце срока']}
                         onClickHandler={procents}
                     />
@@ -400,7 +415,7 @@ export default function Dialog({yourmessage}) {
 
         const user_itog = itog.map(key => pointnames[key]);
 
-        console.log('Результат:', user_itog);
+        console.log('😉 Результат:', user_itog);
         setMessages(prev => [...prev,
             {
                 sender: 'bot-message', component: (
@@ -463,7 +478,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'second-bot-message', component: (
                     <Buttoniany
                         first="👀 Может теперь нужна помощь с чем-то другим?"
-                        buttons={['Комиссия', 'Обмен валюты', 'Вклады']}
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
                 )
@@ -513,7 +528,7 @@ export default function Dialog({yourmessage}) {
                         <p>🌍 Страна: {country}</p>
                         <p>💰 Сумма: {summa}</p>
                         <p> 🏦 Банк: {bankik}</p>
-                        <button className="button" onClick={() => Sendtoback({valutate, summa, bank: bankik, country})}>
+                        <button className="button" onClick={() => Sendtoback({valutate, summa, bankik, country})}>
                             Все верно
                         </button>
                     </>
@@ -522,6 +537,20 @@ export default function Dialog({yourmessage}) {
             },
         ]);
     };
+    const bankers = (msg) => {
+        setMessages(prev => [
+            ...prev,
+            {
+                sender: 'bot-message',
+                component: (
+                    <>
+                        <p>Выбери банк в который хочешь сделать перевод</p>
+                        <Export func={bank} choose={0} val2={msg}/>
+                    </>
+                ),
+            },
+        ]);
+    }
     const handleSend = (e) => {
         e.preventDefault();
         const trimmed = input.trim();
@@ -532,20 +561,7 @@ export default function Dialog({yourmessage}) {
             if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0) {
                 if (valutate && !message) {
                     setMessage(msg);
-                    setMessages(prev => [
-                        ...prev,
-                        {
-                            sender: 'bot-message',
-                            component: (
-                                <ButtonsForAccept
-                                    first={'Выбери банк'}
-                                    buttons={['Сбербанк', 'Т-банк', 'Совкомбанк']}
-                                    onClickHandler={bank}
-                                    sums={msg}
-                                />
-                            ),
-                        },
-                    ]);
+                    bankers(msg)
                 }
             } else {
                 setMessages(prev => [
@@ -558,28 +574,22 @@ export default function Dialog({yourmessage}) {
                 const lastComponent = [...prev].reverse().find(m => m.component)?.component;
                 return [
                     ...prev,
-                    {sender: 'bot-message', text: 'Прости, пока затрудняюсь ответить на твой вопрос'},
+                    {sender: 'bot-message', text: '😩 Прости, пока затрудняюсь ответить на твой вопрос'},
                     lastComponent && {sender: 'second-bot-message', component: lastComponent}
-                ].filter(Boolean); // убирает undefined, если lastComponent не найден
+                ].filter(Boolean);
             });
         }
         setInput("");
     };
     return (
-        <>
+        <div>
             <Smska
                 input={input}
                 handleSend={handleSend}
                 setInput={setInput}
                 messages={messages}
+                clear={handleClearMessages}
             />
-            <button
-                onClick={() =>
-                    window.location.reload()}
-                className="button-cleaning"
-            >
-                Очистить чат
-            </button>
-        </>
+        </div>
     );
 }

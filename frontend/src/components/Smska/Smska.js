@@ -1,6 +1,8 @@
 import React from "react";
 import './Smska.css'
-export default function Smska({ input, messages, handleSend, setInput }) {
+import {Send, Trash2} from "lucide-react";
+
+export default function Smska({input, messages, handleSend, setInput, clear}) {
     return (
         <div className="chat-container">
             <div className={'size-messages'}>
@@ -16,7 +18,7 @@ export default function Smska({ input, messages, handleSend, setInput }) {
                     </div>
                 ))}
             </div>
-            <footer className={''} >
+            <footer>
                 <form onSubmit={handleSend}>
                     <div>
                         <label>
@@ -27,7 +29,14 @@ export default function Smska({ input, messages, handleSend, setInput }) {
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Введите сообщение"
                             />
+                            <button onClick={handleSend} className="icon-button send-button-indialog">
+                                <Send size={18}/>
+                            </button>
+                            <button onClick={clear} className="icon-button clear-button">
+                                <Trash2 size={18}/>
+                            </button>
                         </label>
+
                     </div>
                 </form>
             </footer>
