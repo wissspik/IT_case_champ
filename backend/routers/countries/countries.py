@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
         scheduler.add_job(
             update_data,
             trigger='interval',
-            seconds=86400,# 20
+            seconds=20,# 86400
             id='update_data_job',
             replace_existing=True,
         )

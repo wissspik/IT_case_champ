@@ -10,4 +10,5 @@ services:
       - ./data/pgdata:/var/lib/postgresql/data
     ports:
       - 5433:5432
+
 # docker-compose -f docker-compose_db.yml up --force-recreate
