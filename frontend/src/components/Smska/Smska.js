@@ -29,12 +29,16 @@ export default function Smska({input, messages, handleSend, setInput, clear}) {
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Введите сообщение"
                             />
-                            <button onClick={handleSend} className="icon-button send-button-indialog">
-                                <Send size={18}/>
-                            </button>
-                            <button onClick={clear} className="icon-button clear-button">
-                                <Trash2 size={18}/>
-                            </button>
+                            <div className={'geopositions-icons'}>
+                                <button onClick={clear} className="icon-button clear-button">
+                                    <Trash2 size={22}/>
+                                </button>
+                                <button onClick={handleSend} className="icon-button send-button-indialog">
+                                    <Send size={22}/>
+                                </button>
+
+                            </div>
+
                         </label>
 
                     </div>

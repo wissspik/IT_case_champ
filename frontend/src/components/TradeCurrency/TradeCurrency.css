@@ -1,91 +1,146 @@
-.trade-currency {
-    background-color: white;
+.trade-currency-container {
+    max-width: 800px;
     margin-left: 5%;
-    position: relative;
-    border-radius: 20px;
-    box-sizing: border-box;
-    border: 1px #888888 ;
-    width: 80%;
-    height: 45vh;
-}
-@media(max-height: 700px) {
-    .trade-currency {
-        height: 15vh;
-    }
-}
-.dynamic-text {
-    color: #3F52B2;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-.header-text-currency {
-    padding-top:6%;
-    font-weight: 600;
-    margin: 1vh;
+.trade-currency-title {
+    color: #3F52B2;
     text-align: center;
-    color: #3F52B2;
-    font-size: 43px;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
-.trade-currency-have {
-    margin-left: 2%;
-    margin-top: 30px;
-    position: absolute;
-    width: 50%;
-    height: 80%;
+.currency-converter {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.trade-currency-form {
-    width: 90%;
-    height: 30%;
-    margin-top: 4vh;
-    border-radius: 10px;
-    border: 1px solid rgb(0, 0, 0, 0.3)
+.currency-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.trade-currency-form p {
-    margin: 15px;
-    font-size: 19px;
+.currency-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.trade-currency button {
-    width: 55px;
-    height: 45px;
-    background-color: white;
-    border: 1px solid rgb(0, 0, 0, 0.3)
+.currency-option {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: #333;
 }
 
-.trade-currency button:hover {
-    background-color: #EFEEEE;
-
+.currency-option:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
 }
 
-.trade-currency button:active {
-    background-color: #7F93F5;
+.currency-option.active {
+    background: #3F52B2;
     color: white;
-
+    border-color: #3F52B2;
 }
 
-.trade-currency-need {
-    margin-top: 30px;
-    right: 4px;
-    position: absolute;
-    width: 50%;
-    height: 80%;
-
+.currency-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.trade-currency input {
-    font-size: 125%;
+.input-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.input-wrapper-trade {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.input-wrapper-trade:focus-within {
+    border-color: #3F52B2;
+    box-shadow: 0 0 0 2px rgba(63, 82, 178, 0.2);
+}
+
+.currency-input {
+    flex: 1;
     border: none;
     outline: none;
-    margin-left: 8px;
-    width: 40%;
-    height: 20%;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    color: #333;
+    background: transparent;
 }
 
-button.active-button {
-    background-color: #7F93F5;
-    color: white;
-    border: none;
-    transition: background-color 0.2s ease;
+.currency-code {
+    color: #3F52B2;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    min-width: 3rem;
+    text-align: right;
+}
+
+.swap-button {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 70px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.swap-button:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+}
+
+.swap-button svg {
+    fill: #3F52B2;
+}
+
+.conversion-rate {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .currency-converter {
+        flex-direction: column;
+    }
+
+    .swap-button {
+        transform: rotate(90deg);
+    }
 }

@@ -1,6 +1,8 @@
+from idlelib.rpc import response_queue
+
 import pytest
-from backend.main import app
-from sqlalchemy import text
+
+
 
 @pytest.mark.asyncio
 class TestCommission:
@@ -22,6 +24,39 @@ class TestCommission:
         data = response.json()
         assert len(data) == expected_len
         assert isinstance(data, dict)
+    @pytest.mark.parametrize('expected_status,expected_len', [
+        ({'currency:':'F','country':'Узбекистан','method':'cash','amount':10},422),
+        ({'currency:': 'RUB', 'country': 'DDD', 'method': 'cash', 'amount': 10}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'FFFF', 'amount': 10}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': -40}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': 'FDF'}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': None}, 422)
+    ])
+    async def test_calculation_сommissions(self,expected_status,client):
+        response = await client.post("/commission/сommission_calculation")
+        assert response.status_code == expected_status
+
+    @pytest.mark.parametrize('payload,expected_status', [
+        # ERROR 422
+        ({'currency:': 'F', 'country': 'Узбекистан', 'method': 'cash', 'amount': 10},422),
+        ({'currency:': 'RUB', 'country': 'DDD', 'method': 'cash', 'amount': 10}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'FFFF', 'amount': 10}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': -40}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': 'FDF'}, 422),
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': None}, 422)
+    ])
+    async def test_calculation_сommisions_422(self, payload,expected_status, client):
+        response = client.post("/commision/сommision_calculation",json=payload)
+        assert response.status_code == expected_status
+
+        #good кейс
+    @pytest.mark.parametrize('payload,expected_status',[
+        ({'currency:': 'RUB', 'country': 'Узбекистан', 'method': 'cash', 'amount': 10000}, 200)])
+    async def test_calculation_сommisions_422(self, payload,expected_status, client):
+        response = client.post("/commision/сommision_calculation",json=payload)
+        assert response.status_code == expected_status
+
+
 @pytest.mark.asyncio
 class TestService:
     @pytest.mark.parametrize('payload,expected_status', [
@@ -49,6 +84,13 @@ class TestService:
         if expected_status == 200:
             assert len(data) == 2
             assert isinstance(data, dict)
+    @pytest.mark.parametrize('expected_status,expected_len', [(200,2)])
+    async def test_delivery_answer(self, expected_status, expected_len, client):
+        response = await  client.post("/service_windows/give_banks")
+        assert response.status_code == expected_status
+        if response.status_code == expected_status:
+            assert len(response.json()) == expected_len
+            assert isinstance(response.json(), dict)
 @pytest.mark.asyncio
 class TestCurrencyCalculation:
     @pytest.mark.parametrize('payload,expected_status', [

@@ -13,11 +13,18 @@
     font-family: 'Gilroy-light', sans-serif;
     font-size: 25px;
     width: 50%;
-    height: 100px;
+    height: 112px;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     z-index: 10;
+}
+.geopositions-icons {
+    z-index:15;
+    left: 67%;
+    bottom: 15px;
+    position: fixed;
+
 }
 
 .message-in-chat:focus {
@@ -69,18 +76,20 @@
 
 
 .icon-button {
-  padding: 8px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+    margin-left: 13px;
+    padding: 8px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 .send-button-indialog {
-  background-color: #4caf50;
-  color: white;
+    background-color: #007bff;
+    color: white;
 }
 
 .clear-button {
-  background-color: #f44336;
-  color: white;
+    background-color: black;
+    opacity: 90%;
+    color: white;
 }

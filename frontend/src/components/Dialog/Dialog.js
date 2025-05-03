@@ -1,19 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import axios from "axios";
 import Buttoni from "../Buttoni/Buttoni";
 import Smska from "../Smska/Smska";
 import Buttoniany from "../Buttoniany/Buttoniany";
 import Export from "../Export/Export";
-import ButtonsForAccept from "../ButtonsForAccept/ButtonsForAccept";
 import TradeCurrency from "../TradeCurrency/TradeCurrency";
 import './Dialog.css'
 import Deposit from "../Deposit/Deposit";
 import Deposit2 from "../Deposit/Nakopschet";
 import EqualButtons from "../EqualButtons";
-import {Send, Trash2} from "lucide-react";
-
 
 export default function Dialog({yourmessage}) {
+
     const [valutate, setValutate] = useState('');
     const [money, setMoney] = useState(false);
     const [counts, setCounts] = useState(false);
@@ -62,7 +60,7 @@ export default function Dialog({yourmessage}) {
                 component: (
                     <>
                         <p>💱 Выбери валюту</p>
-                         <Export func={countries} choose={2}/>
+                        <Export func={countries} choose={2}/>
                     </>
                 ),
             },
@@ -233,8 +231,8 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <Buttoniany
-                        first="Может быть тебе помочь с чем то другим?"
-                        buttons={['Комиссия', 'Обмен валюты', 'Вклады и счета']}
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
                         onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                     />
                 )
@@ -273,7 +271,7 @@ export default function Dialog({yourmessage}) {
                         </div>
                         <Buttoniany
                             first={''}
-                            buttons={['Помочь выбрать вклад', 'Категории', 'Преимущества']}
+                            buttons={['🎯 Помочь выбрать вклад', '📌 Категории', '✨ Преимущества']}
                             onClickHandler={[helpchoosevklad, categories, privileges]}
                         />
                     </>
@@ -422,9 +420,7 @@ export default function Dialog({yourmessage}) {
                     <>
 
                         {user_itog.map((key, itogi) => (
-                            <>
-                                <p>Тебе подходят такие вклады как: {key}</p>
-                            </>
+                            <p>Тебе подходят такие вклады как: {key}</p>
                         ))
                         }
                     </>
