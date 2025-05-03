@@ -9,6 +9,17 @@ services:
     volumes:
       - ./data/pgdata:/var/lib/postgresql/data
     ports:
-      - 5433:5432
+      - "5433:5432"
+  backend:
+    build:
+      context: .
+      dockerfile: /backend/Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend   # монтируем именно папку backend
 
-# docker-compose -f docker-compose_db.yml up --force-recreate

@@ -1,10 +1,10 @@
 from fastapi import APIRouter
-from sqlalchemy import select,func,over
+from sqlalchemy import select,func
 from backend.database.base import SessionDep
-from backend.models.shapes import BankCommisions
-from backend.models.models import BankSistem
+from backend.shapes.shapes import BankCommisions
+from backend.database.models import BankSistem
 from decimal import Decimal
-import json
+
 app = APIRouter()
 
 @app.post("/take_countries",
