@@ -20,7 +20,7 @@
 .bot-message {
     z-index: 10;
     margin-top: 5%;
-    margin-left: 60px;
+    margin-left: 5%;
     font-family: "Gilroy-light", sans-serif;
     max-width: 70%;
     padding: 12px 16px;
@@ -65,7 +65,7 @@
 .second-bot-message {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: 4%;
-    margin-left: 60px;
+    margin-left: 5%;
     font-family: "Gilroy-light", sans-serif;
     min-width: 50% ;
     max-width: 70%;
@@ -89,6 +89,7 @@
 }
 */
 .change-moneta {
+    margin-right: 3%;
     font-size: 21px;
     font-family: "Gilroy-light", sans-serif;
     margin-top: 4%;
@@ -104,10 +105,15 @@
 @media (max-width: 750px) {
     .user-message {
         margin-left: 72%;
+        font-size: 16px;
     }
 
     .bot-message {
-        margin-left: 30px;
+        margin-left: 1%;
+        font-size: 16px;
+    }
+    .button {
+        font-size: 12px;
     }
 }
 .promo-banner {
@@ -134,4 +140,50 @@
 
 .promo-banner strong {
   color: #1c2e7b;
+}
+@media (max-width: 1600px) {
+    .bot-message {
+        margin-left: 5%;
+    }
+    .user-message {
+        margin-left:70%
+    }
+}
+@media (max-width: 1150px) {
+    .user-message {
+        margin-left: 60%;
+        font-size:16px
+    }
+    .bot-message {
+        font-size:16px }
+
+    .button {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 1288px) {
+    .user-message {
+        margin-left: 64%;
+        font-size:17px
+    }
+     .bot-message {
+        font-size:17px }
+
+    .button {
+        font-size: 16px;
+    }
+
+}
+@media (max-width:950px) {
+    .user-message {
+        font-size: 16px;
+    }
+    .bot-message {
+        font-size: 16px;
+    }
+    .button {
+        font-size: 15px;
+    }
+
 }

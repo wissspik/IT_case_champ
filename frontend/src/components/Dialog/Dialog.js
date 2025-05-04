@@ -267,11 +267,15 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message', component: (
                     <Deposit2/>
                 )
-            }, <Buttoniany
-                first="👀 Может теперь нужна помощь с чем-то другим?"
-                buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
-                onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
-            />
+            }, {
+                sender: 'second-bot-message', component: (
+                    <Buttoniany
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+                )
+            }
         ])
     }
     const vklad = (text) => {
@@ -476,11 +480,16 @@ export default function Dialog({yourmessage}) {
                     </>
 
                 )
-            }, <Buttoniany
-                first="👀 Может теперь нужна помощь с чем-то другим?"
-                buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
-                onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
-            />
+            }, {
+                sender: 'second-bot-message', component: (
+                    <Buttoniany
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+
+                )
+            }
         ])
     }
     const privileges = (text) => {
@@ -559,8 +568,17 @@ export default function Dialog({yourmessage}) {
                 {sender: 'user-message', text: 'Все верно'},
 
                 {
-                    sender:'Tabler', component: (
+                    sender: 'Tabler', component: (
                         <Table data={response.data}/>
+                    )
+                }, {
+                    sender: 'second-bot-message', component: (
+                        <Buttoniany
+                            first="👀 Может теперь нужна помощь с чем-то другим?"
+                            buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                            onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                        />
+
                     )
                 }
             ]);
