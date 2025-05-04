@@ -19,7 +19,7 @@ class FitbackChat(BaseModel):
 class DeliveryQuestion(BaseModel):
     category : Literal['exchange','currency'] # доступные категории для вопросов
 
-class BankCommisions(BaseModel):
+class BankCommissions(BaseModel):
     currency : Literal["UZS", "KGS", "BYN","TJS", "RUB", "AMD", "KZT", "AZN", "CNY", "VND", "IRR", "RSD", "AED", "ILS", "GEL", "KGS", "EUR", "KRW", "TRY", "MNT", "MDL", "THB", "IDR", "INR", "PHP"]
     country: Literal["Узбекистан", "Киргизия", "Беларусь", "Таджикистан",  "Абхазия", "Армения", "Южная Осетия", "Казахстан", "Азербайджан", "Китай",  "Вьетнам", "Иран", "Сербия", "ОАЭ", "Израиль", "Грузия", "Кыргыpcтан", "Кипр", "Греция", "Корея (Республика)", "Турция", "Монголия", "Молдова", "Таиланд", "Приднестровье", "Индонезия", "Индия", "Филиппины"]
     method: Literal['cash','bank_card','FN','phone_number','account number']
