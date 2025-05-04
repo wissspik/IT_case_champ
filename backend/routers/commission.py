@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import select,func
 from backend.database.base import SessionDep
-from backend.shapes.shapes import BankCommisions
+from backend.shapes.shapes import BankCommissions
 from backend.database.models import BankSistem
 from decimal import Decimal
 
@@ -37,13 +37,13 @@ async def take_currencies():
     return {"array_currencies": array_currencies,'currency_names':currency_names}
 @app.post("/сommision_calculation",
           summary="Высчитывание самой вышгодной комиссии")
-async def calculation_сommissions(data:BankCommisions ,session: SessionDep):
+async def calculation_сommissions(data:BankCommissions ,session: SessionDep):
     '''
            Возвращает комиссию по переводам для банков.
 
            Args:
                session (SessionDep): Зависимость FastAPI для работы с сессией.
-               data (BankCommisions):  Входной JSON с данными.
+               data (BankCommissions):  Входной JSON с данными.
 
            Returns:
                dict: Словарь с массивами,которые содержат:
@@ -64,7 +64,7 @@ async def calculation_сommissions(data:BankCommisions ,session: SessionDep):
             func.row_number()
             .over(
                 partition_by=BankSistem.bank,
-                order_by=BankSistem.commision
+                order_by=BankSistem.commission
             )
             .label("rn")
         )
