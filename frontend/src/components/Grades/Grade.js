@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './Grade.css';
 import axios from 'axios';
 
-const Grade = ({ question, options, onVote }) => {
+const Grade = ({question, options, onVote}) => {
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [input, setInput] = useState('');
@@ -10,8 +10,8 @@ const Grade = ({ question, options, onVote }) => {
 
     const sendToBackend = async (data) => {
         try {
-            const response = await axios.post("http://127.0.0.1:8000/", data, {
-                headers: { "Content-Type": "application/json" },
+            const response = await axios.post("http://127.0.0.1:8000/service_windows/take_fitbacks", data, {
+                headers: {"Content-Type": "application/json"},
             });
             console.log("Данные отправлены успешно:", response.data);
         } catch (error) {
@@ -29,7 +29,7 @@ const Grade = ({ question, options, onVote }) => {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        sendToBackend({ comment: input, selected });
+        sendToBackend({selected, input});
         setInput('');
         setCommentSent(true);
     };

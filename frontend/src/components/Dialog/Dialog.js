@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Buttoni from "../Buttoni/Buttoni";
 import Smska from "../Smska/Smska";
@@ -9,6 +9,7 @@ import './Dialog.css'
 import Deposit from "../Deposit/Deposit";
 import Deposit2 from "../Deposit/Nakopschet";
 import EqualButtons from "../EqualButtons";
+import Table from "../Table/Table";
 
 export default function Dialog({yourmessage}) {
 
@@ -18,9 +19,11 @@ export default function Dialog({yourmessage}) {
     const [message, setMessage] = useState('');
     const [banker, setBank] = useState('');
     const [messages, setMessages] = useState([]);
+    const [method, setMethod] = useState('');
     const [input, setInput] = useState("");
     const [country, setCountry] = useState('');
-    const handleClearMessages = () => {
+    const ClearMessages = () => {
+        setMessage('')
         setMessages([
             {
                 sender: 'bot-message', component: (
@@ -51,6 +54,7 @@ export default function Dialog({yourmessage}) {
     }
 
     const comissia = () => {
+        setMessage('')
         console.log("comissia")
         setMessages(prev => [
             ...prev,
@@ -143,11 +147,22 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <>
-                        <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
-                        <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
+                        <p>Все категории в нашем банке вы можете увидеть здесь 👉 </p>
+                        <a href="https://www.gazprombank.ru/personal/increase/deposits/">Накопительные счета</a>
                     </>
                 )
+            },
+            {
+                sender: 'bot-message', component: (
+                    <Buttoniany
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+
+                )
             }
+
 
         ])
     }
@@ -170,6 +185,7 @@ export default function Dialog({yourmessage}) {
         } else {
             setMoney(false)
         }
+        console.log(choose)
 
         setMessages(prev => [...prev,
             {sender: 'user-message', text: choose},
@@ -192,11 +208,12 @@ export default function Dialog({yourmessage}) {
         } else {
             setCounts(false)
         }
+        console.log(info)
         setMessages(prev => [...prev,
             {sender: 'user-message', text: info},
             {
                 sender: 'bot-message', component: (
-                    <Buttoni first={'Что для вас важнее?'}
+                    <Buttoni first={'🤔 Что для вас важнее?'}
                              buttons={['Максимальная ставка (до 21,5 % годовых)', 'Простые условия (19,5 % без ограничения операций)']}
                              onClickHandler={nakopshetchoosestep4}
                     />
@@ -207,29 +224,30 @@ export default function Dialog({yourmessage}) {
 
     }
     const nakopshetchoosestep4 = (info) => {
+        console.log(money, counts)
         const sms = info === 'Максимальная ставка (до 21,5 % годовых)' ? 'Максимальная' : 'Простые условия'
         setMessages(prev => [...prev,
             {sender: 'user-message', text: sms},
         ])
-        if (money && !counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+        if (money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: 'Premium'},])
+                {sender: 'bot-message', text: '🤙 Вам подходит категория: Premium'},])
         }
-        if (!money && !counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+        if (!money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: 'Накопительный счет'},])
+                {sender: 'bot-message', text: '🤙 Вам подходит категория: Накопительный счет'},])
         }
-        if (counts && info === 'максимальная ставка (до 21,5 % годовых)') {
+        if (counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: 'Ежедневный процент'},])
+                {sender: 'bot-message', text: '🤙 Вам подходит категория: Ежедневный процент'},])
         }
-        if (info === 'простые условия (19,5 % без ограничения операций)') {
+        if (sms === 'Простые условия') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: 'Простой процент'},])
+                {sender: 'bot-message', text: '🤙 Вам подходит категория: Простой процент'},])
         }
         setMessages(prev => [...prev,
             {
-                sender: 'bot-message', component: (
+                sender: 'second-bot-message', component: (
                     <Buttoniany
                         first="👀 Может теперь нужна помощь с чем-то другим?"
                         buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
@@ -249,7 +267,11 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message', component: (
                     <Deposit2/>
                 )
-            }
+            }, <Buttoniany
+                first="👀 Может теперь нужна помощь с чем-то другим?"
+                buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+            />
         ])
     }
     const vklad = (text) => {
@@ -371,7 +393,7 @@ export default function Dialog({yourmessage}) {
                                 2)Поддерживать средний остаток на дебетовой карте <br/>
                                 3)Подключить опцию «Накопления» в сервисе «Газпром Бонус» <br/>
                                 4)Внести «новые деньги» (не было 30 дней на ваших счетах) <br/>
-                                5)Открыть дистанционно и быть новым/зарплатным/пенсионным клиентом! 🌙💸
+                                5)Открыть дистанционно и быть новым/зарплатным/пенсионным клиентом!
                             </p>
                         </div>
                         <Buttoni first={''}
@@ -420,12 +442,22 @@ export default function Dialog({yourmessage}) {
                     <>
 
                         {user_itog.map((key, itogi) => (
-                            <p>Тебе подходят такие вклады как: {key}</p>
+                            <p>🤝 Тебе подходят такие вклады как: {key}</p>
                         ))
                         }
+                        <p>Полную информацию о нем можете узнать <a
+                            href="https://www.gazprombank.ru/personal/increase/deposits/">здесь</a></p>
                     </>
                 )
-            },
+            }, {
+                sender: 'second-bot-message', component: (
+                    <Buttoniany
+                        first="👀 Может теперь нужна помощь с чем-то другим?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+                )
+            }
 
 
         ])
@@ -437,12 +469,18 @@ export default function Dialog({yourmessage}) {
             {
                 sender: 'bot-message', component: (
                     <>
-                        <p>Все категории в нашем банке вы можете увидеть по ссылке 👉 </p>
-                        <a href="https://www.gazprombank.ru/personal/increase/deposits/">https://www.gazprombank.ru/personal/increase/deposits/</a>
+                        <p>Все категории в нашем банке вы можете увидеть 👉 <a
+                            href="https://www.gazprombank.ru/personal/increase/deposits/">Здесь</a>
+                        </p>
+
                     </>
 
                 )
-            }
+            }, <Buttoniany
+                first="👀 Может теперь нужна помощь с чем-то другим?"
+                buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+            />
         ])
     }
     const privileges = (text) => {
@@ -456,6 +494,14 @@ export default function Dialog({yourmessage}) {
                         <>
                             <Deposit/>
                         </>
+                    )
+                }, {
+                    sender: 'second-bot-message', component: (
+                        <Buttoniany
+                            first="👀 Может теперь нужна помощь с чем-то другим?"
+                            buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                            onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                        />
                     )
                 }
             ];
@@ -492,26 +538,59 @@ export default function Dialog({yourmessage}) {
     };
 
     const Sendtoback = async (data) => {
+        console.log(data.country)
         try {
-            const response = await axios.post("http://127.0.0.1:8000/", data, {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/commission/сommision_calculation",
+                {
+                    currency: data.currency,
+                    country: data.country,
+                    method: data.method,
+                    amount: Number(data.amount)
+                },
+                {
                     headers: {"Content-Type": "application/json"},
-                })
-            ;
-            setMessages(prev => [...prev, {
-                sender: 'bot-message', component: (
-                    <>
-                        <p>Ваша комиссия составит: undefined </p>
-                    </>
-                )
-            }])
-            console.log("Успешный ответ и данные отправлены", response.data);
+                }
+            );
+
+            console.log("Успешный ответ от сервера:", response.data);
+
+            setMessages(prev => [...prev,
+                {sender: 'user-message', text: 'Все верно'},
+
+                {
+                    sender:'Tabler', component: (
+                        <Table data={response.data}/>
+                    )
+                }
+            ]);
+
         } catch (error) {
-            console.error("Ошибка при отправке данных:", error);
+            console.error("Ошибка 422:", error.response?.data || error.message);
+            setMessages(prev => [...prev,
+                {
+                    sender: 'bot-message',
+                    text: `Ошибка: ${error.response?.data?.detail || 'Неверные данные в запросе'}`
+                }
+            ]);
         }
     };
 
+
+    const Back = () => {
+        setMessages(prev => [...prev,
+            {sender: 'user-message', text: 'Заполнить заново'}
+        ])
+        setBank('')
+        setCountry('')
+        setValutate('')
+        setMessage('')
+        comissia()
+
+    }
+
     const bank = (bankik, summa) => {
-        setBank(bankik);
+        setMethod(bankik);
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: bankik},
@@ -523,9 +602,17 @@ export default function Dialog({yourmessage}) {
                         <p>💵 Валюта: {valutate}</p>
                         <p>🌍 Страна: {country}</p>
                         <p>💰 Сумма: {summa}</p>
-                        <p> 🏦 Банк: {bankik}</p>
-                        <button className="button" onClick={() => Sendtoback({valutate, summa, bankik, country})}>
+                        <p> 🏦 Метод: {bankik}</p>
+                        <button className="button" onClick={() => Sendtoback({
+                            currency: valutate,
+                            amount: summa,
+                            method: bankik,
+                            country: country
+                        })}>
                             Все верно
+                        </button>
+                        <button className={'button'} onClick={Back}>Заполнить
+                            заново
                         </button>
                     </>
 
@@ -540,7 +627,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message',
                 component: (
                     <>
-                        <p>Выбери банк в который хочешь сделать перевод</p>
+                        <p>💳 Выбери метод </p>
                         <Export func={bank} choose={0} val2={msg}/>
                     </>
                 ),
@@ -562,7 +649,7 @@ export default function Dialog({yourmessage}) {
             } else {
                 setMessages(prev => [
                     ...prev,
-                    {sender: 'bot-message', text: 'Ты ввел неверное число'},
+                    {sender: 'bot-message', text: '😞 Ты ввел неверное число'},
                 ]);
             }
         } else {
@@ -584,7 +671,7 @@ export default function Dialog({yourmessage}) {
                 handleSend={handleSend}
                 setInput={setInput}
                 messages={messages}
-                clear={handleClearMessages}
+                clear={ClearMessages}
             />
         </div>
     );

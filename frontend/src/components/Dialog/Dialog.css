@@ -93,6 +93,13 @@
     font-family: "Gilroy-light", sans-serif;
     margin-top: 4%;
 }
+.Tabler {
+    font-size: 19px;
+    margin-left:4%;
+    font-family: "Gilroy-light", sans-serif;
+    margin-top: 4%;
+
+}
 
 @media (max-width: 750px) {
     .user-message {

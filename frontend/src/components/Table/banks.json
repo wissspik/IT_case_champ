@@ -1,0 +1,24 @@
+[
+  {
+    "bank": "Банк А",
+    "country": "Россия",
+    "method": "Онлайн перевод",
+    "currency": "USD",
+    "commission": 2.5,
+    "limit_min": 100,
+    "limit_max": 10000,
+    "comments": "Без выходных",
+    "amount": 1025
+  },
+  {
+    "bank": "Банк Б",
+    "country": "Казахстан",
+    "method": "Через отделение",
+    "currency": "EUR",
+    "commission": 3.1,
+    "limit_min": 50,
+    "limit_max": 5000,
+    "comments": "Только будни",
+    "amount": 1031
+  }
+]
