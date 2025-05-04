@@ -8,8 +8,12 @@ from backend.routers.commission import app as commission
 from backend.routers.db import app as base
 from backend.routers.countries import app as countries
 from backend.routers.service_windows import app as service_windows
+import os
 
 load_dotenv()
+ORIGINS = os.getenv("ORIGINS")
+
+
 scheduler = AsyncIOScheduler()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -44,8 +48,8 @@ app.include_router(base,prefix="/base_handler",tags=['database'])
 app.include_router(service_windows,prefix = "/service_windows",tags=['service'])
 app.include_router(countries,prefix = "/countries",tags=['countries'])
 
-origins = [ # нужно скрыть в env
-    "http://localhost:3000",
+origins = [
+    ORIGINS
 ]
 
 app.add_middleware(

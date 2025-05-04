@@ -27,5 +27,5 @@ venv/
 
 
 data/database.db
-
+frontend/node_modules
 docker-compose_db.yml
