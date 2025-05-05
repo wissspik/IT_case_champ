@@ -219,9 +219,7 @@
     grid-template-columns: 1fr;
   }
 }
-/* Дополнения к предыдущим стилям */
 
-/* Специальные карточки */
 .rate-card {
   border-left: 4px solid #e74c3c;
 }
@@ -273,4 +271,133 @@
   .depositButton {
     max-width: 100%;
   }
+}/* Добавляем эти стили в ваш CSS файл */
+
+/* Стили для choose === 3 */
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.benefitItem:hover {
+  transform: translateY(-5px);
+}
+
+.benefitIcon {
+  font-size: 28px;
+  margin-right: 20px;
+  color: #3498db;
+}
+
+.benefitContent h3 {
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.benefitContent p {
+  color: #7f8c8d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.rate-card {
+  border-left: 4px solid #e74c3c;
+}
+
+.bonus-card {
+  border-left: 4px solid #2ecc71;
+}
+
+.amount-card {
+  border-left: 4px solid #3498db;
+}
+
+
+.benefitItem .benefitIcon {
+  min-width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .benefitItem {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .benefitIcon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .benefitContent h3 {
+    font-size: 1.2rem;
+  }
+
+  .benefitContent p {
+    font-size: 0.9rem;
+  }
+}
+
+.depositButton {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 2rem auto 0;
+  padding: 1rem;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.depositButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .depositButton {
+    max-width: 100%;
+  }
+}
+
+.depositBenefits {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  font-family: 'Arial', sans-serif;
+}
+
+.benefitsTitle {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  position: relative;
+}
+
+.benefitsTitle::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #3498db;
+  margin: 15px auto 0;
 }

@@ -119,7 +119,7 @@ export default function Show({func, choose, val2}) {
     }
     const method = {
         'methods': ["KoronPay", "unistream", "IBAN", "mobile", "bank_card", "account number", "cash", "FN"],
-        'methods_for_user' : ["KoronPay", "Unistream", "IBAN", "По номеру телефона", "По номеру каты", "Номер счета", "Наличные", "По ФИО"]
+        'methods_for_user' : ["KoronPay", "Unistream", "IBAN", "По номеру телефона", "По номеру карты", "Номер счета", "Наличные", "По ФИО"]
     }
     const arcountry = country.array_countries
     const imgcountry = country.array_picture

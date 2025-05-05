@@ -1,65 +1,65 @@
-/* 1. Ключевые кадры для анимации появления */
+
 @keyframes messageAppear {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* 2. Общие стили анимации */
 .message-animated {
-  opacity: 0; /* изначально скрыто */
-  animation: messageAppear 0.8s ease-out forwards;
+    opacity: 0;
+    animation: messageAppear 0.8s ease-out forwards;
 }
 
-/* 3. Твои существующие классы—только дополняем анимацией */
-.bot-message {
-    z-index: 10;
-    margin-top: 5%;
-    margin-left: 5%;
+.bot-message, .user-message {
+    min-width: 18%;
     font-family: "Gilroy-light", sans-serif;
-    max-width: 70%;
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 85%;
+    margin-top: 5%;
     padding: 12px 16px;
     font-size: 21px;
     border-radius: 16px;
     line-height: 1.4;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
-    display: inline-block;
+    animation: messageAppear 0.8s ease-out forwards;
+    box-sizing: border-box;
+}
+
+.bot-message {
+    margin-left: 5%;
+    margin-right: auto; /* Прижимаем к левому краю */
     background-color: white;
     border: 1px solid #dce3eb;
     color: #1a1a1a;
-
-    /* Плавное появление */
-    /* объединяем: */
-    /* animation-delay можно регулировать, если нужно */
-    /* например: animation-delay: 0.1s; */
-    animation: messageAppear 0.8s ease-out forwards;
+    text-align: left;
 }
 
 .user-message {
-    margin-top: 4%;
-    font-family: "Gilroy-light", sans-serif;
-    margin-left: 62%;
-    min-width: 23%;
-    max-width: 70%;
-    padding: 12px 16px;
-    font-size: 22px;
-    border-radius: 16px;
-    line-height: 0.1;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word;
-    display: inline-block;
+    margin-left: auto; /* Прижимаем к правому краю */
+    margin-right: 5%;
     background-color: #007bff;
     color: white;
     border: 1px solid #004a91;
+    text-align: left;
+}
 
-    /* Плавное появление */
-    animation: messageAppear 0.8s ease-out forwards;
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .second-bot-message {
@@ -67,7 +67,7 @@
     margin-top: 4%;
     margin-left: 5%;
     font-family: "Gilroy-light", sans-serif;
-    min-width: 50% ;
+    min-width: 50%;
     max-width: 70%;
     padding: 12px 16px;
     font-size: 21px;
@@ -82,13 +82,8 @@
     animation: messageAppear 0.8s ease-out forwards;
 }
 
-/* Если будут блоки .change-moneta или другие, можешь добавить туда ту же анимацию: */
-/*
 .change-moneta {
-  animation: messageAppear 0.4s ease-out forwards;
-}
-*/
-.change-moneta {
+    position: relative;
     margin-right: 3%;
     font-size: 21px;
     font-family: "Gilroy-light", sans-serif;
@@ -96,7 +91,7 @@
 }
 .Tabler {
     font-size: 19px;
-    margin-left:4%;
+    margin-left: 4%;
     font-family: "Gilroy-light", sans-serif;
     margin-top: 4%;
 
@@ -112,78 +107,104 @@
         margin-left: 1%;
         font-size: 16px;
     }
+    .second-bot-message {
+        margin-left: 1%;
+        font-size: 16px;
+    }
+    .change-moneta {
+        font-size:16px
+    }
+
     .button {
         font-size: 12px;
     }
 }
+
 .promo-banner {
-  background-color: #eaf0ff;
-  border-left: 6px solid #3F52B2;
-  border-radius: 12px;
-  padding: 30px;
-  margin: 8px;
-  max-width: 600px;
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+    background-color: #eaf0ff;
+    border-left: 6px solid #3F52B2;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 8px;
+    max-width: 600px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
 }
 
 .promo-banner h2 {
-  color: #3F52B2;
-  font-size: 22px;
-  margin-bottom: 12px;
+    color: #3F52B2;
+    font-size: 22px;
+    margin-bottom: 12px;
 }
 
 .promo-banner p {
-  font-size: 18px;
-  line-height: 1.6;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 .promo-banner strong {
-  color: #1c2e7b;
+    color: #1c2e7b;
 }
+
 @media (max-width: 1600px) {
-    .bot-message {
+    .bot-message,
+    .second-bot-message {
         margin-left: 5%;
     }
     .user-message {
-        margin-left:70%
+        margin-left: 70%;
     }
-}
-@media (max-width: 1150px) {
-    .user-message {
-        margin-left: 60%;
-        font-size:16px
-    }
-    .bot-message {
-        font-size:16px }
-
-    .button {
-        font-size: 15px;
+    .change-moneta {
+        font-size: 22px; /* базовый размер как у bot-message */
     }
 }
 
 @media (max-width: 1288px) {
     .user-message {
         margin-left: 64%;
-        font-size:17px
+        font-size: 17px;
     }
-     .bot-message {
-        font-size:17px }
-
+    .bot-message,
+    .second-bot-message {
+        font-size: 17px;
+    }
     .button {
         font-size: 16px;
     }
-
+    .change-moneta {
+        font-size: 17px;
+    }
 }
-@media (max-width:950px) {
+
+@media (max-width: 1150px) {
     .user-message {
+        margin-left: 60%;
         font-size: 16px;
     }
-    .bot-message {
+    .bot-message,
+    .second-bot-message {
         font-size: 16px;
     }
     .button {
         font-size: 15px;
     }
+    .change-moneta {
+        font-size: 16px;
+    }
+}
 
+@media (max-width: 950px) {
+    .user-message {
+        font-size: 16px;
+    }
+    .bot-message,
+    .second-bot-message {
+        font-size: 16px;
+    }
+    .button {
+        font-size: 15px;
+    }
+    .change-moneta {
+        font-size: 16px;
+    }
 }

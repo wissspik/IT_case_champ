@@ -42,7 +42,7 @@ export default function Dialog({yourmessage}) {
         "Unistream": "unistream",
         "IBAN": "IBAN",
         "По номеру телефона": "mobile",
-        "По номеру каты": "bank_card",
+        "По номеру карты": "bank_card",
         "Номер счета": "account number",
         "Наличные": "cash",
         "По ФИО": "FN"
@@ -308,8 +308,8 @@ export default function Dialog({yourmessage}) {
                         </div>
                         <Buttoniany
                             first={''}
-                            buttons={['🎯 Помочь выбрать вклад', '📌 Категории', '✨ Преимущества']}
-                            onClickHandler={[helpchoosevklad, categories, privileges]}
+                            buttons={['🎯 Помочь выбрать вклад', '📌 Категории', '✨ Преимущества','🔙 Назад']}
+                            onClickHandler={[helpchoosevklad, categories, privileges,vkladiandscheta]}
                         />
                     </>
 
@@ -408,7 +408,7 @@ export default function Dialog({yourmessage}) {
                                 2)Поддерживать средний остаток на дебетовой карте <br/>
                                 3)Подключить опцию «Накопления» в сервисе «Газпром Бонус» <br/>
                                 4)Внести «новые деньги» (не было 30 дней на ваших счетах) <br/>
-                                5)Открыть дистанционно и быть новым/зарплатным/пенсионным клиентом!
+                                5)Открыть дистанционно и быть новым/зарплатным/пенсионным клиентом! ✍️👾
                             </p>
                         </div>
                         <Buttoni first={''}
@@ -459,12 +459,15 @@ export default function Dialog({yourmessage}) {
                         {user_itog.map((key, itogi) => (
                             <>
                                 <p>🤝 Тебе подходят такие вклады как: {key}</p>
+                                {key === 'Копить'?<Vkladi choose={5} /> :null}
+                                {key === 'Расширяй возможности'?<Vkladi choose={4} /> :null}
+                                {key === 'Новые деньги'?<Vkladi choose={3} /> :null}
+                                {key === 'В балансе'?<Vkladi choose={2} /> :null}
+                                {key === 'В плюсе'?<Vkladi choose={1} /> :null}
                             </>
-
-
                         ))
                         }
-                        <Vkladi choose={5} />
+
                         <p>Полную информацию о нем можете узнать <a
                             href="https://www.gazprombank.ru/personal/increase/deposits/">здесь</a></p>
                     </>
@@ -603,8 +606,8 @@ export default function Dialog({yourmessage}) {
             console.error("Ошибка 422:", error.response?.data || error.message);
             setMessages(prev => [...prev,
                 {
-                    sender: 'bot-message',
-                    text: `Ошибка: ${error.response?.data?.detail || 'Неверные данные в запросе'}`
+                    sender: 'second-bot-message',
+                    text: `Ошибка при расчете комиссии`
                 }
             ]);
         }
@@ -675,7 +678,7 @@ export default function Dialog({yourmessage}) {
         setMessages(prev => [...prev, {sender: 'user-message', text: trimmed}]);
         if (valutate && !message) {
             const msg = trimmed;
-            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0) {
+            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0 &&Number(msg) < 1000000000 && country) {
                 if (valutate && !message) {
                     setMessage(msg);
                     bankers(msg)

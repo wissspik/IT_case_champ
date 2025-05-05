@@ -29,7 +29,8 @@ export default function App() {
                     }}>
                         <div className={'row1'}>
                             <FinanceTip/>
-                            <img className={'img-finance'} src="/img/Group21.png" alt=""/>
+                            <a href="https://www.gazprombank.ru/personal/increase/deposits/"><img
+                                className={'img-finance'} src="/img/Group21.png" alt=""/></a>
                         </div>
                         <div className={'row2'}>
                             <Dialog yourmessage={submittedMessage}/>
