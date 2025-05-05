@@ -52,31 +52,25 @@
 
 ## 🏁 Как запустить
 Перед установкой проект нужно скачать .env файл:
-1) способ(only DockerHub + .env)
+1) скачайие проект по команде снизу и перейдите в корневу директиву.
+```bash
+git clone https://github.com/wissspik/IT_case_champ.git
+```
+2) вставьте .env в корень проект.
 ```
 # .env
-CORS_ORIGINS = http://localhost:3000
-DATABASE_URL = sqlite+aiosqlite:///database.db?async_fallback=True
-ORIGINS=http://localhost:3000,https://myapp.example.com
+ORIGINS      = http://localhost:3000
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=postgres
 ```
-Вставьте в одну деректорию с контейнером .env
-
-```bash
-docker pull wissspik/moisha-web
-docker run -p 8000:8000 wissspik/moisha-web:latest
-
+3) Напиши команду в терминал для запуска проекта.
 ```
-2. способ(github + Docker + .env)
+docker-compose up --build
 ```
-git clone https://github.com/wissspik/IT_case_champ.git
-# передейти в основную папку проекта и пропишить:
-uvicorn backend.main:app --reload
-cd frontend
-npm start
-```
-После этого у вас откроется сайт проекта  
-
-
+По ссылке https:/localhost:3000 будет доступен наш сайт
 ---
 
 ## 📎 Лицензия
@@ -84,6 +78,3 @@ npm start
 
 
 
-
-
-кст артурчик чепуха)

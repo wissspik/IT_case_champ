@@ -59,17 +59,17 @@ class BankSistem(Base):
     method: Mapped[str] = mapped_column(String(50), nullable=False)
     currency: Mapped[str] = mapped_column(String(50), nullable=False)
     commission: Mapped[Decimal] = mapped_column(
-        Numeric(precision=12, scale=2),
+        Numeric(precision=14, scale=2),
         nullable=False,
         default=Decimal("0.00"),
     )
     limit_min: Mapped[Decimal] = mapped_column(
-        Numeric(12, 2),
+        Numeric(14, 2),
         nullable=False,
         default=Decimal("0.00"),
     )
     limit_max: Mapped[Decimal] = mapped_column(
-        Numeric(12, 2),
+        Numeric(14, 2),
         nullable=False,
         default=Decimal("0.00"),
     )

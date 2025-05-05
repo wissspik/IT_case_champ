@@ -35,3 +35,8 @@ async def delivery_question(data : DeliveryQuestion, session : SessionDep):
           summary="Выдача логотипов,а также их банков.")
 async def give_banks():
     return {"banks":["Альфа-банк","МТС банк","Ozon банк","ВТБ","Газпромбанк","Т-банк","Почта Банк","Россельхозбанк","Сбербанк","ЮMoney"],"logos":["https://upload.wikimedia.org/wikipedia/commons/8/87/Alfabank_logo.png","https://upload.wikimedia.org/wikipedia/commons/3/35/MTS-Bank.png","https://upload.wikimedia.org/wikipedia/commons/f/f2/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_Ozon_%D0%B1%D0%B0%D0%BD%D0%BA.jpg","https://upload.wikimedia.org/wikipedia/commons/7/7c/VTB_Logo_2018.svg","https://upload.wikimedia.org/wikipedia/en/9/99/Gazprombank_en.svg","https://upload.wikimedia.org/wikipedia/commons/1/17/T-Bank_RU_logo.svg","https://logo.clearbit.com/pochtabank.ru?format=png","https://upload.wikimedia.org/wikipedia/ru/5/51/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A0%D0%BE%D1%81%D1%81%D0%B5%D0%BB%D1%8C%D1%85%D0%BE%D0%B7%D0%B1%D0%B0%D0%BD%D0%BA.svg","https://logo.clearbit.com/sberbank.ru?format=png","https://logo.clearbit.com/yoomoney.ru?format=png"]}
+
+@app.post("give_methods",
+    summary="Выдача методов для банка.")
+async def give_methods():
+    return {'array_methods':[]}
