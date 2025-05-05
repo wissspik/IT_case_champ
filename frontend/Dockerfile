@@ -2,8 +2,8 @@ FROM nginx:alpine
 
 WORKDIR /app
 
-RUN rm /etc/config/conf.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 
-COPY build /usr/share/nginx/html
+COPY frontend/build /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
