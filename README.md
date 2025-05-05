@@ -56,7 +56,7 @@
 ```bash
 git clone https://github.com/wissspik/IT_case_champ.git
 ```
-2) вставьте .env в корень проект.
+2) вставьте .env файл  в корень проекта.
 ```
 # .env
 ORIGINS      = http://localhost:3000
@@ -71,7 +71,6 @@ DB_NAME=postgres
 docker-compose up --build
 ```
 По ссылке https:/localhost:3000 будет доступен наш сайт
-
 
 P.S.
 Если хотите ознакомиться с документацией end-point - ов в проекте,то перейдите по ссылке:
