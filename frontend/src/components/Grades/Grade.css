@@ -1,6 +1,6 @@
 .mini-poll {
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 15px;
     background-color: #f9fafb;
     border-radius: 12px;
     padding: 20px;
@@ -74,4 +74,18 @@
     border: 1px solid #d1d5db;
     font-size: 14px;
     width: 100%;
+}
+
+@media (max-width: 1660px) {
+    .mini-poll {
+        left:0;
+        margin-left: 0;
+        width: 80%;
+        font-size: 12px;
+
+    }
+    .mini-poll h3 {
+        font-size: 16px;
+    }
+
 }

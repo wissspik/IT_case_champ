@@ -12,7 +12,7 @@
 }
 
 .nav-menu {
-    z-index:6;
+    z-index: 6;
     font-family: "Gilroy", sans-serif;
     font-size: 19px;
     font-weight: 500;
@@ -20,7 +20,10 @@
     padding: 0px 60px;
     gap: 20px
 }
-
+.img-gazprom {
+    width: 290px;
+    height: 61px
+}
 .nav-menu a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -35,8 +38,30 @@
 .nav-menu a:hover {
     color: blue;
 }
-@media (max-width: 700px) {
-    .Header {
-        display: none;
+
+
+
+@media (max-width: 1048px) {
+    .img-gazprom {
+        width: 230px;
+        height: 53px;
     }
+    .nav-menu {
+        padding: 8px 27px;
+        gap:16px;
+        font-size: 14px;
+    }
+
+}
+@media (max-width: 700px) {
+    .nav-menu {
+        padding: 6px 25px;
+        gap: 16px;
+        font-size: 11px;
+    }
+    .img-gazprom {
+        width: 198px;
+        height: 50px;
+    }
+
 }

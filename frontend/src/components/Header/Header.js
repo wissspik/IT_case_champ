@@ -3,7 +3,7 @@ import React from "react";
 export default function Header() {
     return (
         <div className={'Header'}>
-            <a href="https://www.gazprombank.ru/"><img src="/img/gaziz.png" alt="" width={'290'} height={'61'}/></a>
+            <a href="https://www.gazprombank.ru/"><img className={'img-gazprom'} src="/img/gaziz.png" alt="" /></a>
             <nav className={'nav-menu'}>
                 <div className={'a'}>
                     <a href={'https://www.gazprombank.ru/personal/courses/'}>Обмен валют</a>

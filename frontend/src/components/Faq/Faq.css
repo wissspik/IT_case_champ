@@ -1,10 +1,11 @@
 .faq {
-    margin-top:4vh;
-    margin-left:3vh;
+    margin-top: 4vh;
+    margin-left: 15px;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 16px;
     width: 260px;
+    font-size: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
 }
@@ -28,11 +29,26 @@
 .faq-question {
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
+
 }
 
 .faq-answer {
     margin-top: 4px;
-    font-size: 14px;
+
     color: #555555;
 }
+
+@media (max-width: 1660px) {
+    .faq {
+        margin-left: 0;
+        left: 0%;
+        width: 80%;
+        font-size: 12px;
+
+    }
+    .faq h3 {
+        font-size :16px
+    }
+
+}
+

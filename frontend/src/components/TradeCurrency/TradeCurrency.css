@@ -135,7 +135,7 @@
     border-radius: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .currency-converter {
         flex-direction: column;
     }

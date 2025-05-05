@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import './TradeCurrency.css';
 
 export default function TradeCurrency() {
@@ -6,21 +7,40 @@ export default function TradeCurrency() {
     const [currencyNeed, setCurrencyNeed] = useState('EUR');
     const [amountHave, setAmountHave] = useState('');
     const [amountNeed, setAmountNeed] = useState('');
-
-    // Пример реальных курсов (можно заменить на API)
-    const exchangeRates = {
-        RUB: { EUR: 0.01, CNY: 0.08, TRY: 0.30, KZT: 5.00, HKD: 0.09, CHF: 0.009, RUB: 1 },
-        EUR: { RUB: 100, CNY: 8.00, TRY: 30.00, KZT: 500.00, HKD: 9.00, CHF: 0.90, EUR: 1 },
-        CNY: { RUB: 12.50, EUR: 0.125, TRY: 3.75, KZT: 62.50, HKD: 1.125, CHF: 0.1125, CNY: 1 },
-        TRY: { RUB: 3.33, EUR: 0.033, CNY: 0.267, KZT: 16.67, HKD: 0.30, CHF: 0.03, TRY: 1 },
-        KZT: { RUB: 0.20, EUR: 0.002, CNY: 0.016, TRY: 0.06, HKD: 0.018, CHF: 0.0018, KZT: 1 },
-        HKD: { RUB: 11.11, EUR: 0.111, CNY: 0.889, TRY: 3.33, KZT: 55.56, CHF: 0.10, HKD: 1 },
-        CHF: { RUB: 111.11, EUR: 1.11, CNY: 8.89, TRY: 33.33, KZT: 555.56, HKD: 10.00, CHF: 1 }
-    };
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const currencies = ['RUB', 'EUR', 'CNY', 'TRY', 'KZT', 'HKD', 'CHF'];
 
-    const handleAmountChange = (value, isFromHave) => {
+    const fetchExchangeRate = async (amount, currencyIn, currencyOut) => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/countries/currency_calculation",
+                {
+                    exchange_methods: "exchange_rates_internet_bank",
+                    amount: amount,
+                    currency_in: currencyIn,
+                    currency_out: currencyOut
+                },
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+
+            return response.data.amount;
+        } catch (error) {
+            console.error("Ошибка при конвертации:", error);
+            setError('Ошибка при получении курса обмена');
+            return null;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleAmountChange = async (value, isFromHave) => {
         if (value === '') {
             setAmountHave('');
             setAmountNeed('');
@@ -29,43 +49,68 @@ export default function TradeCurrency() {
 
         if (isNaN(value)) return;
 
+        const amount = parseFloat(value);
         if (isFromHave) {
             setAmountHave(value);
-            const rate = exchangeRates[currencyHave][currencyNeed];
-            setAmountNeed((value * rate).toFixed(2));
+            if (amount > 0) {
+                const convertedAmount = await fetchExchangeRate(amount, currencyHave, currencyNeed);
+                if (convertedAmount !== null) {
+                    setAmountNeed(convertedAmount.toFixed(2));
+                }
+            } else {
+                setAmountNeed('');
+            }
         } else {
             setAmountNeed(value);
-            const rate = exchangeRates[currencyNeed][currencyHave];
-            setAmountHave((value * rate).toFixed(2));
+            if (amount > 0) {
+                const convertedAmount = await fetchExchangeRate(amount, currencyNeed, currencyHave);
+                if (convertedAmount !== null) {
+                    setAmountHave(convertedAmount.toFixed(2));
+                }
+            } else {
+                setAmountHave('');
+            }
         }
     };
 
-    const handleCurrencyChange = (currency, isFromHave) => {
+    const handleCurrencyChange = async (currency, isFromHave) => {
         if (isFromHave) {
             setCurrencyHave(currency);
-            if (amountHave) {
-                const rate = exchangeRates[currency][currencyNeed];
-                setAmountNeed((amountHave * rate).toFixed(2));
+            if (amountHave && parseFloat(amountHave) > 0) {
+                const convertedAmount = await fetchExchangeRate(parseFloat(amountHave), currency, currencyNeed);
+                if (convertedAmount !== null) {
+                    setAmountNeed(convertedAmount.toFixed(2));
+                }
             }
         } else {
             setCurrencyNeed(currency);
-            if (amountHave) {
-                const rate = exchangeRates[currencyHave][currency];
-                setAmountNeed((amountHave * rate).toFixed(2));
+            if (amountHave && parseFloat(amountHave) > 0) {
+                const convertedAmount = await fetchExchangeRate(parseFloat(amountHave), currencyHave, currency);
+                if (convertedAmount !== null) {
+                    setAmountNeed(convertedAmount.toFixed(2));
+                }
             }
         }
     };
 
-    const swapCurrencies = () => {
+    const swapCurrencies = async () => {
+        const tempCurrency = currencyHave;
         setCurrencyHave(currencyNeed);
-        setCurrencyNeed(currencyHave);
-        setAmountHave(amountNeed);
-        setAmountNeed(amountHave);
+        setCurrencyNeed(tempCurrency);
+
+        if (amountHave && parseFloat(amountHave) > 0) {
+            const convertedAmount = await fetchExchangeRate(parseFloat(amountHave), currencyNeed, tempCurrency);
+            if (convertedAmount !== null) {
+                setAmountNeed(convertedAmount.toFixed(2));
+            }
+        }
     };
 
     return (
         <div className="trade-currency-container">
             <h2 className="trade-currency-title">Конвертер валют</h2>
+
+            {error && <div className="error-message">{error}</div>}
 
             <div className="currency-converter">
                 <div className="currency-section">
@@ -75,6 +120,7 @@ export default function TradeCurrency() {
                                 key={`have-${currency}`}
                                 className={`currency-option ${currencyHave === currency ? 'active' : ''}`}
                                 onClick={() => handleCurrencyChange(currency, true)}
+                                disabled={isLoading}
                             >
                                 {currency}
                             </button>
@@ -90,13 +136,18 @@ export default function TradeCurrency() {
                                 onChange={(e) => handleAmountChange(e.target.value, true)}
                                 className="currency-input"
                                 placeholder="0.00"
+                                disabled={isLoading}
                             />
                             <span className="currency-code">{currencyHave}</span>
                         </div>
                     </div>
                 </div>
 
-                <button className="swap-button" onClick={swapCurrencies}>
+                <button
+                    className="swap-button"
+                    onClick={swapCurrencies}
+                    disabled={isLoading}
+                >
                     <svg viewBox="0 0 24 24" width="24" height="24">
                         <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/>
                     </svg>
@@ -109,6 +160,7 @@ export default function TradeCurrency() {
                                 key={`need-${currency}`}
                                 className={`currency-option ${currencyNeed === currency ? 'active' : ''}`}
                                 onClick={() => handleCurrencyChange(currency, false)}
+                                disabled={isLoading}
                             >
                                 {currency}
                             </button>
@@ -121,7 +173,6 @@ export default function TradeCurrency() {
                             <input
                                 type="number"
                                 value={amountNeed}
-                                onChange={(e) => handleAmountChange(e.target.value, false)}
                                 className="currency-input"
                                 placeholder="0.00"
                                 readOnly
@@ -132,9 +183,11 @@ export default function TradeCurrency() {
                 </div>
             </div>
 
-            {amountHave && (
+            {isLoading && <div className="loading-indicator">Загрузка...</div>}
+
+            {amountHave && !isLoading && !error && (
                 <div className="conversion-rate">
-                    1 {currencyHave} = {(exchangeRates[currencyHave][currencyNeed]).toFixed(6)} {currencyNeed}
+                    Курс обмена: 1 {currencyHave} ≈ {(parseFloat(amountNeed)/parseFloat(amountHave)).toFixed(6)} {currencyNeed}
                 </div>
             )}
         </div>

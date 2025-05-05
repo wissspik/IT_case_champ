@@ -1,0 +1,69 @@
+
+.table-container {
+  width: 90%;
+  padding: 24px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+}
+
+.table-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.styled-table thead {
+  background-color: #4f46e5;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #e0e7ff;
+  transition: background-color 0.3s ease;
+}
+
+.commission-badge {
+  background-color: #f97316;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.comment-note {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.amount-highlight {
+  color: #10b981;
+  font-weight: bold;
+}

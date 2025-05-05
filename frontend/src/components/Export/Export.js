@@ -77,13 +77,13 @@ export default function Show({func, choose, val2}) {
         ],
         "logos": [
             "https://upload.wikimedia.org/wikipedia/commons/8/87/Alfabank_logo.png",
-            "https://upload.wikimedia.org/wikipedia/commons/3/36/MTSBank_Logo_800px.png",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Ozon_logo_clear.svg/640px-Ozon_logo_clear.svg.png",
-            "https://upload.wikimedia.org/wikipedia/commons/9/97/Vtb-logo.png",
-            "https://logo.clearbit.com/gazprombank.ru?format=png",
-            "https://logo.clearbit.com/t-bank.ru?format=png",
-            "https://logo.clearbit.com/pochta.ru?format=png",
-            "https://logo.clearbit.com/rshb.ru?format=png",
+            "https://upload.wikimedia.org/wikipedia/commons/3/35/MTS-Bank.png",
+            "https://upload.wikimedia.org/wikipedia/commons/f/f2/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_Ozon_%D0%B1%D0%B0%D0%BD%D0%BA.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/7/7c/VTB_Logo_2018.svg",
+            "https://upload.wikimedia.org/wikipedia/en/9/99/Gazprombank_en.svg",
+            "https://upload.wikimedia.org/wikipedia/commons/1/17/T-Bank_RU_logo.svg",
+            "https://logo.clearbit.com/pochtabank.ru?format=png",
+            "https://upload.wikimedia.org/wikipedia/ru/5/51/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%A0%D0%BE%D1%81%D1%81%D0%B5%D0%BB%D1%8C%D1%85%D0%BE%D0%B7%D0%B1%D0%B0%D0%BD%D0%BA.svg",
             "https://logo.clearbit.com/sberbank.ru?format=png",
             "https://logo.clearbit.com/yoomoney.ru?format=png"
         ]
@@ -117,25 +117,25 @@ export default function Show({func, choose, val2}) {
             "PHP"
         ]
     }
-    const banks = banki.banks
-    const imgbanks = banki.logos
+    const method = {
+        'methods': ["KoronPay", "unistream", "IBAN", "mobile", "bank_card", "account number", "cash", "FN"]
+    }
     const arcountry = country.array_countries
     const imgcountry = country.array_picture
     const valut = valutes.array_currencies
+    const methodi = method.methods
 
     return (
         <>
             {choose === 1 ?
                 <CustomDropdown photos={imgcountry} placeholder={'Выбери страну'} onSelect={(val) => func(val)}
                                 options={arcountry}/> : null}
-            {choose === 0 ? <CustomDropdown photos={imgbanks} onSelect={(val) => func(val, val2)} options={banks}
-                                            placeholder={'Выбери банк'}/> : null}
+            {choose === 0 ? <CustomDropdown photos={''} onSelect={(val) => func(val, val2)} options={methodi}
+                                            placeholder={'Выбери метод'}/> : null}
             {choose === 2 ?
-                <CustomDropdown photos={imgbanks} placeholder={'Выбери валюту'} onSelect={(val) => func(val)}
-                                options={valut}/> : null
+                <CustomDropdown photos={''} placeholder={'Выбери валюту'} onSelect={(val) => func(val)}
+                                options={valut}/> : null}
 
-
-            }
         </>
     );
 }
