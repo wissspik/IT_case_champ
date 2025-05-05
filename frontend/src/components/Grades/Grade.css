@@ -89,3 +89,16 @@
     }
 
 }
+@media (max-width: 1200px) {
+    .mini-poll {
+        font-size: 10px;
+
+    }
+    .mini-poll h3 {
+        font-size: 14px;
+    }
+    .comment-form {
+        gap:6px;
+    }
+
+}

@@ -26,3 +26,19 @@
     transform: scale(1.1);
     transition: transform 0.3s ease;
 }
+@media (max-width: 1100px) {
+    .finance-tip__title {
+        font-size: 14px;
+    }
+    .finance-tip__text {
+        font-size: 8px;
+    }
+}
+@media (max-width: 1250px) {
+    .finance-tip__title {
+        font-size: 14px;
+    }
+    .finance-tip__text {
+        font-size: 10px;
+    }
+}

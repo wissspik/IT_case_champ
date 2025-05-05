@@ -1,0 +1,276 @@
+/* Vkladi.css */
+.deposit-card {
+  max-width: 680px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-image:
+    radial-gradient(at top right, rgba(228, 240, 255, 0.5), transparent),
+    radial-gradient(at bottom left, rgba(220, 255, 235, 0.4), transparent);
+}
+
+.deposit-title {
+  color: #1a3e72;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 3rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.deposit-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  border-radius: 2px;
+}
+
+.benefit-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-left-color: #3a7bd5;
+}
+
+.benefit-icon {
+  font-size: 2.2rem;
+  margin-right: 1.5rem;
+  min-width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.accent-blue { background-color: #e3f2fd; color: #1976d2; }
+.accent-green { background-color: #e8f5e9; color: #2e7d32; }
+.accent-gold { background-color: #fff8e1; color: #ff8f00; }
+.accent-purple { background-color: #f3e5f5; color: #7b1fa2; }
+
+.benefit-text h3 {
+  color: #263238;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.benefit-text p {
+  color: #546e7a;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .deposit-card {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+
+  .benefit-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .benefit-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+/* DepositBenefits.css */
+.deposit-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.deposit-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.deposit-main-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-decoration {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.interest-card {
+  border-top: 4px solid #3498db;
+}
+
+.amount-card {
+  border-top: 4px solid #2ecc71;
+}
+
+.rate-card {
+  border-top: 4px solid #e74c3c;
+}
+
+.capitalization-card {
+  border-top: 4px solid #9b59b6;
+}
+
+.interest-card .card-icon { color: #3498db; }
+.amount-card .card-icon { color: #2ecc71; }
+.rate-card .card-icon { color: #e74c3c; }
+.capitalization-card .card-icon { color: #9b59b6; }
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.card-description {
+  color: #7f8c8d;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.card-badge {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  background: #e74c3c;
+  color: white;
+  padding: 0.3rem 2rem;
+  transform: rotate(45deg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .deposit-main-title {
+    font-size: 2rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Дополнения к предыдущим стилям */
+
+/* Специальные карточки */
+.rate-card {
+  border-left: 4px solid #e74c3c;
+}
+
+.bonus-card {
+  border-left: 4px solid #2ecc71;
+}
+
+.amount-card {
+  border-left: 4px solid #3498db;
+}
+
+/* Бейдж */
+.specialBadge {
+  display: inline-block;
+  background: #e74c3c;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Кнопка */
+.depositButton {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 2rem auto 0;
+  padding: 1rem;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.depositButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .depositButton {
+    max-width: 100%;
+  }
+}

@@ -10,6 +10,7 @@ import Deposit from "../Deposit/Deposit";
 import Deposit2 from "../Deposit/Nakopschet";
 import EqualButtons from "../EqualButtons";
 import Table from "../Table/Table";
+import Vkladi from "../Vkladi/Vkladi";
 
 export default function Dialog({yourmessage}) {
 
@@ -36,6 +37,16 @@ export default function Dialog({yourmessage}) {
             }
         ]);
     }
+    const paymentMethods = {
+        "KoronPay": "KoronPay",
+        "Unistream": "unistream",
+        "IBAN": "IBAN",
+        "По номеру телефона": "mobile",
+        "По номеру каты": "bank_card",
+        "Номер счета": "account number",
+        "Наличные": "cash",
+        "По ФИО": "FN"
+    };
     const point = {
         Balance: 0,
         Plus: 0,
@@ -446,9 +457,14 @@ export default function Dialog({yourmessage}) {
                     <>
 
                         {user_itog.map((key, itogi) => (
-                            <p>🤝 Тебе подходят такие вклады как: {key}</p>
+                            <>
+                                <p>🤝 Тебе подходят такие вклады как: {key}</p>
+                            </>
+
+
                         ))
                         }
+                        <Vkladi choose={5} />
                         <p>Полную информацию о нем можете узнать <a
                             href="https://www.gazprombank.ru/personal/increase/deposits/">здесь</a></p>
                     </>
@@ -547,7 +563,7 @@ export default function Dialog({yourmessage}) {
     };
 
     const Sendtoback = async (data) => {
-        console.log(data.country)
+        console.log(data.method)
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/commission/сommision_calculation",
@@ -608,7 +624,7 @@ export default function Dialog({yourmessage}) {
     }
 
     const bank = (bankik, summa) => {
-        setMethod(bankik);
+        setMethod(paymentMethods[bankik]);
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: bankik},
@@ -624,7 +640,7 @@ export default function Dialog({yourmessage}) {
                         <button className="button" onClick={() => Sendtoback({
                             currency: valutate,
                             amount: summa,
-                            method: bankik,
+                            method: paymentMethods[bankik],
                             country: country
                         })}>
                             Все верно
@@ -645,7 +661,7 @@ export default function Dialog({yourmessage}) {
                 sender: 'bot-message',
                 component: (
                     <>
-                        <p>💳 Выбери метод </p>
+                        <p>💳 Выбери метод для перевода </p>
                         <Export func={bank} choose={0} val2={msg}/>
                     </>
                 ),
