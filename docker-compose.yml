@@ -32,6 +32,18 @@ services:
       - db
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app/frontend
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
 
 
 
