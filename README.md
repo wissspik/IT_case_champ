@@ -75,7 +75,8 @@ docker-compose up --build
 http://localhost:3000/
 ```
 
-##P.S.
+## P.S.
+```
 -Если хотите ознакомиться с документацией end-point - ов в проекте,то перейдите по ссылке:
 ```
 http://localhost:8000/docs
@@ -85,7 +86,5 @@ http://localhost:8000/docs
 ```
 backend/tests/integration/test_users_endpoints.py
 ```
-
----
 
 
