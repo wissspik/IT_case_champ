@@ -72,7 +72,7 @@ docker-compose up --build
 ```
 Далее просто перейдите на наш сайт:
 ```bash
-http://localhost:3000/
+http://localhost:3000
 ```
 
 ## P.S.
