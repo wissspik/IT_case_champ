@@ -270,11 +270,14 @@ export default function Dialog({yourmessage}) {
         ])
         if (money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                 {sender: 'bot-message', component: (<>
-                            <p>🤙 Вам подходит категория: Premium <br/> Полная информация 👉 <a href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
+                {
+                    sender: 'bot-message', component: (<>
+                            <p>🤙 Вам подходит категория: Premium <br/> Полная информация 👉 <a
+                                href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
                         </>
 
-         )},])
+                    )
+                },])
         }
         if (!money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
@@ -740,7 +743,7 @@ export default function Dialog({yourmessage}) {
         setMessages(prev => [...prev, {sender: 'user-message', text: trimmed}]);
         if (valutate && !message) {
             const msg = trimmed;
-            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0 && Number(msg) < 1000000000 && country) {
+            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 10 && Number(msg) < 1000000000 && country && msg[0] !== '0') {
                 if (valutate && !message) {
                     setMessage(msg);
                     bankers(msg)
@@ -748,7 +751,7 @@ export default function Dialog({yourmessage}) {
             } else {
                 setMessages(prev => [
                     ...prev,
-                    {sender: 'bot-message', text: '😞 Ты ввел неверное число'},
+                    {sender: 'bot-message', text: '😞 Ты ввел неверное число, попробуй еще раз'},
                 ]);
             }
         } else {
