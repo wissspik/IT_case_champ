@@ -115,15 +115,42 @@ export default function Show({func, choose, val2}) {
             "IDR",
             "INR",
             "PHP"
+        ], "currency_names": [
+            "Узбекский сом",
+            "Киргизский сом",
+            "Белорусский рубль",
+            "Таджикский сомони",
+            "Российский рубль",
+            "Армянский драм",
+            "Казахский тенге",
+            "Азербайджанский манат",
+            "Китайский юань",
+            "Вьетнамский донг",
+            "Иранский риал",
+            "Сербский динар",
+            "Дирхам ОАЭ",
+            "Новый израильский шекель",
+            "Грузинский лари",
+            "Киргизский сом",
+            "Евро",
+            "Южнокорейская вона",
+            "Турецкая лира",
+            "Монгольский тугрик",
+            "Молдавский лей",
+            "Тайский бат",
+            "Индонезийская рупия",
+            "Индийская рупия",
+            "Филиппинское песо"
         ]
+
     }
     const method = {
         'methods': ["KoronPay", "unistream", "IBAN", "mobile", "bank_card", "account number", "cash", "FN"],
-        'methods_for_user' : ["KoronPay", "Unistream", "IBAN", "По номеру телефона", "По номеру карты", "Номер счета", "Наличные", "По ФИО"]
+        'methods_for_user': ["KoronPay", "Unistream", "IBAN", "По номеру телефона", "По номеру карты", "Номер счета", "Наличные", "По ФИО"]
     }
     const arcountry = country.array_countries
     const imgcountry = country.array_picture
-    const valut = valutes.array_currencies
+    const valut = valutes.currency_names
     const methodi = method.methods_for_user
     return (
         <>
