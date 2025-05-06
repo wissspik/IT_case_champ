@@ -109,7 +109,8 @@ export default function Dialog({yourmessage}) {
     };
 
     useEffect(() => {
-        setMessages([
+        if (yourmessage) {
+             setMessages([
             {sender: 'user-message', text: yourmessage},
             {
                 sender: 'bot-message',
@@ -122,6 +123,22 @@ export default function Dialog({yourmessage}) {
                 ),
             },
         ]);
+
+        } else {
+            setMessages([
+            {
+                sender: 'bot-message',
+                component: (
+                    <Buttoniany
+                        first="👋 Привет, с чем конкретно тебе помочь?"
+                        buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
+                        onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
+                    />
+                ),
+            },
+        ]);
+        }
+
     }, []);
     const countries = (valu) => {
         setMessage('')
