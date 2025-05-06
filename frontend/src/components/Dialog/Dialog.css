@@ -146,7 +146,7 @@
     color: #1c2e7b;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1665px) {
     .bot-message,
     .second-bot-message {
         margin-left: 5%;

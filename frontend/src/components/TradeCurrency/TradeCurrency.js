@@ -10,7 +10,7 @@ export default function TradeCurrency() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const currencies = ['RUB', 'EUR', 'CNY', 'TRY', 'KZT', 'HKD', 'CHF'];
+    const currencies = ['RUB', 'EUR', 'CNY', 'TRY', 'KZT', 'HKD', 'CHF','USD','GBP','XAU'];
 
     const fetchExchangeRate = async (amount, currencyIn, currencyOut) => {
         setIsLoading(true);

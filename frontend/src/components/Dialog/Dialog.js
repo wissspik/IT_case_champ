@@ -13,7 +13,7 @@ import Table from "../Table/Table";
 import Vkladi from "../Vkladi/Vkladi";
 
 export default function Dialog({yourmessage}) {
-
+    const [valutauser, setValutauser] = useState('')
     const [valutate, setValutate] = useState('');
     const [money, setMoney] = useState(false);
     const [counts, setCounts] = useState(false);
@@ -37,6 +37,32 @@ export default function Dialog({yourmessage}) {
             }
         ]);
     }
+    const currencyMap = {
+        "Узбекский сом": "UZS",
+        "Киргизский сом": "KGS",
+        "Белорусский рубль": "BYN",
+        "Таджикский сомони": "TJS",
+        "Российский рубль": "RUB",
+        "Армянский драм": "AMD",
+        "Казахский тенге": "KZT",
+        "Азербайджанский манат": "AZN",
+        "Китайский юань": "CNY",
+        "Вьетнамский донг": "VND",
+        "Иранский риал": "IRR",
+        "Сербский динар": "RSD",
+        "Дирхам ОАЭ": "AED",
+        "Новый израильский шекель": "ILS",
+        "Грузинский лари": "GEL",
+        "Евро": "EUR",
+        "Южнокорейская вона": "KRW",
+        "Турецкая лира": "TRY",
+        "Монгольский тугрик": "MNT",
+        "Молдавский лей": "MDL",
+        "Тайский бат": "THB",
+        "Индонезийская рупия": "IDR",
+        "Индийская рупия": "INR",
+        "Филиппинское песо": "PHP"
+    };
     const paymentMethods = {
         "KoronPay": "KoronPay",
         "Unistream": "unistream",
@@ -98,7 +124,9 @@ export default function Dialog({yourmessage}) {
         ]);
     }, []);
     const countries = (valu) => {
-        setValutate(valu);
+        setMessage('')
+        setValutauser(valu)
+        setValutate(currencyMap[valu]);
         setMessages(prev => [
             ...prev,
             {sender: 'user-message', text: valu},
@@ -242,19 +270,47 @@ export default function Dialog({yourmessage}) {
         ])
         if (money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: '🤙 Вам подходит категория: Premium'},])
+                {
+                    sender: 'bot-message', component: (<>
+                            <p>🤙 Вам подходит категория: Premium <br/> Полная информация 👉 <a
+                                href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
+                        </>
+
+                    )
+                },])
         }
         if (!money && !counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: '🤙 Вам подходит категория: Накопительный счет'},])
+                {
+                    sender: 'bot-message', component: (<>
+                            <p>🤙 Вам подходит категория: Накопительный счет <br/> Полная информация 👉 <a
+                                href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
+                        </>
+
+                    )
+                },])
         }
         if (counts && sms === 'Максимальная') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: '🤙 Вам подходит категория: Ежедневный процент'},])
+                {
+                    sender: 'bot-message', component: (<>
+                            <p>🤙 Вам подходит категория: Ежедневный процент <br/> Полная информация 👉 <a
+                                href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
+                        </>
+
+                    )
+                },])
         }
         if (sms === 'Простые условия') {
             setMessages(prev => [...prev,
-                {sender: 'bot-message', text: '🤙 Вам подходит категория: Простой процент'},])
+                {
+                    sender: 'bot-message', component: (<>
+                            <p>🤙 Вам подходит категория: Простой процент <br/> Полная информация 👉 <a
+                                href="https://www.gazprombank.ru/personal/accounts/">Здесь</a></p>
+                        </>
+
+                    )
+                },])
         }
         setMessages(prev => [...prev,
             {
@@ -308,8 +364,8 @@ export default function Dialog({yourmessage}) {
                         </div>
                         <Buttoniany
                             first={''}
-                            buttons={['🎯 Помочь выбрать вклад', '📌 Категории', '✨ Преимущества','🔙 Назад']}
-                            onClickHandler={[helpchoosevklad, categories, privileges,vkladiandscheta]}
+                            buttons={['🎯 Помочь выбрать вклад', '📌 Категории', '✨ Преимущества', '🔙 Назад']}
+                            onClickHandler={[helpchoosevklad, categories, privileges, vkladiandscheta]}
                         />
                     </>
 
@@ -459,11 +515,11 @@ export default function Dialog({yourmessage}) {
                         {user_itog.map((key, itogi) => (
                             <>
                                 <p>🤝 Тебе подходят такие вклады как: {key}</p>
-                                {key === 'Копить'?<Vkladi choose={5} /> :null}
-                                {key === 'Расширяй возможности'?<Vkladi choose={4} /> :null}
-                                {key === 'Новые деньги'?<Vkladi choose={3} /> :null}
-                                {key === 'В балансе'?<Vkladi choose={2} /> :null}
-                                {key === 'В плюсе'?<Vkladi choose={1} /> :null}
+                                {key === 'Копить' ? <Vkladi choose={5}/> : null}
+                                {key === 'Расширяй возможности' ? <Vkladi choose={4}/> : null}
+                                {key === 'Новые деньги' ? <Vkladi choose={3}/> : null}
+                                {key === 'В балансе' ? <Vkladi choose={2}/> : null}
+                                {key === 'В плюсе' ? <Vkladi choose={1}/> : null}
                             </>
                         ))
                         }
@@ -567,6 +623,7 @@ export default function Dialog({yourmessage}) {
 
     const Sendtoback = async (data) => {
         console.log(data.method)
+        console.log(valutate, data.currency)
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/commission/сommision_calculation",
@@ -597,7 +654,6 @@ export default function Dialog({yourmessage}) {
                             buttons={['💸 Комиссия', '💱 Обмен валюты', '🏦 Вклады и счета']}
                             onClickHandler={[comissia, trade_valuta, vkladiandscheta]}
                         />
-
                     )
                 }
             ]);
@@ -607,7 +663,16 @@ export default function Dialog({yourmessage}) {
             setMessages(prev => [...prev,
                 {
                     sender: 'second-bot-message',
-                    text: `Ошибка при расчете комиссии`
+                    text: `🚨 Ошибка при расчете комиссии`
+                },
+                {
+                    sender: 'second-bot-message', component: (
+                        <>
+                            <p>💱 Выбери валюту</p>
+                            <Export func={countries} choose={2}/>
+                        </>
+
+                    )
                 }
             ]);
         }
@@ -636,7 +701,7 @@ export default function Dialog({yourmessage}) {
                 component: (
                     <>
                         <h3>✅ Информация о переводе</h3>
-                        <p>💵 Валюта: {valutate}</p>
+                        <p>💵 Валюта: {valutauser}</p>
                         <p>🌍 Страна: {country}</p>
                         <p>💰 Сумма: {summa}</p>
                         <p> 🏦 Метод: {bankik}</p>
@@ -678,7 +743,7 @@ export default function Dialog({yourmessage}) {
         setMessages(prev => [...prev, {sender: 'user-message', text: trimmed}]);
         if (valutate && !message) {
             const msg = trimmed;
-            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 0 &&Number(msg) < 1000000000 && country) {
+            if (!isNaN(msg) && isFinite(msg) && Number(msg) > 10 && Number(msg) < 1000000000 && country && msg[0] !== '0') {
                 if (valutate && !message) {
                     setMessage(msg);
                     bankers(msg)
@@ -686,7 +751,7 @@ export default function Dialog({yourmessage}) {
             } else {
                 setMessages(prev => [
                     ...prev,
-                    {sender: 'bot-message', text: '😞 Ты ввел неверное число'},
+                    {sender: 'bot-message', text: '😞 Ты ввел неверное число, попробуй еще раз'},
                 ]);
             }
         } else {

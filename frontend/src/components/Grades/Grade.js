@@ -29,7 +29,7 @@ const Grade = ({question, options, onVote}) => {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        sendToBackend({selected, input});
+        sendToBackend({score:Number(selected), comments:input});
         setInput('');
         setCommentSent(true);
     };
