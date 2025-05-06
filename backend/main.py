@@ -8,7 +8,6 @@ from backend.routers.commission import app as commission
 from backend.routers.db import app as base
 from backend.routers.countries import app as countries
 from backend.routers.service_windows import app as service_windows
-from backend.service.background_task.background_tast_launch import main
 import os
 
 load_dotenv()
@@ -29,17 +28,6 @@ async def lifespan(app: FastAPI):
             id='update_data_job',
             replace_existing=True,
         )
-
-
-    if not scheduler.get_job('main_task_job'):
-        scheduler.add_job(
-            main,
-            'interval',
-            seconds=300000,
-            id='main_task_job',
-            replace_existing=True,
-        )
-
 
     if not scheduler.running:
         scheduler.start()
