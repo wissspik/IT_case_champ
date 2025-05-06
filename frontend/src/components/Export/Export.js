@@ -91,6 +91,7 @@ export default function Show({func, choose, val2}) {
     const valutes = {
         "array_currencies": [
             "UZS",
+            "USD",
             "KGS",
             "BYN",
             "TJS",
@@ -117,6 +118,7 @@ export default function Show({func, choose, val2}) {
             "PHP"
         ], "currency_names": [
             "Узбекский сом",
+            "Американский доллар",
             "Киргизский сом",
             "Белорусский рубль",
             "Таджикский сомони",

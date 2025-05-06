@@ -7,15 +7,15 @@ const TransferTable = ({data}) => {
       <table className="styled-table">
         <thead>
           <tr>
-            <th>🏦 Банк</th>
-            <th>🌍 Страна</th>
-            <th>🔁 Способ</th>
-            <th>💱 Валюта</th>
-            <th>💰 Комиссия</th>
-            <th>⬇️ Мин.</th>
-            <th>⬆️ Макс.</th>
-            <th>📝 Комментарий</th>
-            <th>📦 Сумма</th>
+            <th>Банк</th>
+            <th>Страна</th>
+            <th>Способ</th>
+            <th>Валюта</th>
+            <th>Комиссия</th>
+            <th>Мин.</th>
+            <th>Макс.</th>
+            <th>Комментарий</th>
+            <th>Сумма</th>
           </tr>
         </thead>
         <tbody>
